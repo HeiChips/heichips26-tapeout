@@ -31,7 +31,7 @@ module fabric_wrapper #(
     // I/Os South
     input  [FABRIC_NUM_IO_SOUTH-1:0]      io_south_in_i,
     output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_out_o,
-    output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_oe_o,
+    output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_oe_o
 
 );
 
