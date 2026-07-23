@@ -37,10 +37,12 @@ EXTRA_PLIBS_PATH 	 = -extra-plib ../../../../ip/fabulous-tiles/primitives/FABULO
 
 ifeq ($(FABRIC),classic_fabric_heichips26)
 EXTRA_PLIBS_PATH 	+= -extra-plib ../../../../ip/fabulous-tiles/primitives/TT_PROJECT/yosys/primitives/TT_PROJECT.v \
+   			   -extra-plib ../../../../ip/fabulous-tiles/primitives/TT_PROJECT_MUX/yosys/primitives/TT_PROJECT_MUX.v \
+   			   -extra-plib ../../../../ip/fabulous-tiles/primitives/TT_PROJECT_LARGE/yosys/primitives/TT_PROJECT_LARGE.v \
    			   -extra-plib ../../../../ip/fabulous-tiles/primitives/IHP_SRAM_1024x32_1RW/yosys/primitives/IHP_SRAM_1024x32_1RW.v
 endif
 
-EXTRA_MAPS_PATH		 = -extra-map ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/techmap/lut_map.v \
+EXTRA_MAPS_PATH		 = -extra-map ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/techmap/cells_map.v \
 			   -extra-map ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/techmap/ff_map.v \
 			   -extra-map ../../../../ip/fabulous-tiles/primitives/IOBUF/yosys/techmap/IOBUF_map.v \
 			   -extra-map ../../../../ip/fabulous-tiles/primitives/IHP_SRAM_1024x32_1RW/yosys/techmap/IHP_SRAM_1024x32_1RW_map.v

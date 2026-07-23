@@ -4,7 +4,7 @@
 `default_nettype none
 
 module tt_project_mux #(
-    parameter NUM_TT_PROJECT = 14
+    parameter NUM_TT_PROJECT = 11
 )(
     input  wire       clk1,
     input  wire       rst,

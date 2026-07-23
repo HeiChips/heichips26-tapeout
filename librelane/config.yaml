@@ -291,15 +291,15 @@ NON_DEFAULT_RULES:
     spacing: ["0.2"]
     via: ["Via1_DC1B", "Via2_DC1B", "Via3_DC1B", "TopVia1EWNS"]
 
-DRT_ASSIGN_NDR:
-  # Analog traces for internal project
-  "^internal_analog_pin0_PADRES$": NDR_0p4
-  "^internal_analog_pin1_PADRES$": NDR_0p4
-  "^internal_analog_pin2_PADRES$": NDR_0p4
-  "^pudding_i_in_PADRES$": NDR_pudding_in
-  "^pudding_i_out_PADBARE$": NDR_pudding_out
-  "^ethernet_dp_PADBARE$": NDR_0p4
-  "^ethernet_dn_PADBARE$": NDR_0p4
+#DRT_ASSIGN_NDR:
+#  # Analog traces for internal project
+#  "^internal_analog_pin0_PADRES$": NDR_0p4
+#  "^internal_analog_pin1_PADRES$": NDR_0p4
+#  "^internal_analog_pin2_PADRES$": NDR_0p4
+#  "^pudding_i_in_PADRES$": NDR_pudding_in
+#  "^pudding_i_out_PADBARE$": NDR_pudding_out
+#  "^ethernet_dp_PADBARE$": NDR_0p4
+#  "^ethernet_dn_PADBARE$": NDR_0p4
 
 RSZ_DONT_TOUCH_LIST:
   # Analog traces for internal project
