@@ -10,6 +10,10 @@ module fabric_wrapper #(
     parameter FABRIC_NUM_IO_NORTH = 16,
     parameter FABRIC_NUM_IO_SOUTH = 16
 )(
+    `ifdef USE_POWER_PINS
+    inout wire VPWR,
+    inout wire VGND,
+    `endif
 
     // Configuration
     input  logic [(FrameBitsPerRow*NumRows)-1:0]    FrameData_i,
@@ -29,34 +33,6 @@ module fabric_wrapper #(
     output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_out_o,
     output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_oe_o,
 
-    // User I/O
-    output usb_dn_en_o,
-    input  usb_dn_rx_i,
-    output usb_dn_tx_o,
-    output usb_dp_en_o,
-    input  usb_dp_rx_i,
-    output usb_dp_tx_o,
-    output usb_dp_up_o,
-    
-    output tmds_b,
-    output tmds_g,
-    output tmds_r,
-    output tmds_clk,
-    
-    inout icelab_analog_pin0,
-    inout icelab_analog_pin1,
-    inout icelab_analog_pin2,
-    inout icelab_analog_pin3,
-    
-    inout internal_analog_pin0,
-    inout internal_analog_pin1,
-    inout internal_analog_pin2,
-    
-    inout pudding_i_in,
-    inout pudding_i_out,
-    
-    output ethernet_dp,
-    output ethernet_dn
 );
 
     // TT_PROJECT 0 (X0Y2)
@@ -1221,6 +1197,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_0_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_large_0_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_0_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_large_0_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_0_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_small heichips26_example_small_0 (
             .clk        (tt_project_1_clk),
             .rst_n      (tt_project_1_rst_n),
@@ -1230,6 +1224,24 @@ module fabric_wrapper #(
             .uo_out     (tt_project_1_uo_out),
             .uio_out    (tt_project_1_uio_out),
             .uio_oe     (tt_project_1_uio_oe)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_0_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_1_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_0_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_1_enable_power && configured_i)
     );
 
     (* keep *) heichips26_example_small heichips26_example_small_1 (
@@ -1243,6 +1255,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_2_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_small_1_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_2_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_1_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_2_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_small heichips26_example_small_2 (
             .clk        (tt_project_3_clk),
             .rst_n      (tt_project_3_rst_n),
@@ -1252,6 +1282,24 @@ module fabric_wrapper #(
             .uo_out     (tt_project_3_uo_out),
             .uio_out    (tt_project_3_uio_out),
             .uio_oe     (tt_project_3_uio_oe)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_2_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_3_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_2_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_3_enable_power && configured_i)
     );
 
     (* keep *) heichips26_example_small heichips26_example_small_3 (
@@ -1265,6 +1313,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_4_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_small_3_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_4_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_3_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_4_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_small heichips26_example_small_4 (
             .clk        (tt_project_5_clk),
             .rst_n      (tt_project_5_rst_n),
@@ -1274,6 +1340,24 @@ module fabric_wrapper #(
             .uo_out     (tt_project_5_uo_out),
             .uio_out    (tt_project_5_uio_out),
             .uio_oe     (tt_project_5_uio_oe)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_4_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_5_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_4_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_5_enable_power && configured_i)
     );
 
     (* keep *) heichips26_example_large heichips26_example_large_1 (
@@ -1287,6 +1371,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_6_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_large_1_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_6_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_large_1_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_6_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_small heichips26_example_small_5 (
             .clk        (tt_project_7_clk),
             .rst_n      (tt_project_7_rst_n),
@@ -1298,6 +1400,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_7_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_small_5_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_7_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_5_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_7_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_small heichips26_example_small_6 (
             .clk        (tt_project_8_clk),
             .rst_n      (tt_project_8_rst_n),
@@ -1307,6 +1427,24 @@ module fabric_wrapper #(
             .uo_out     (tt_project_8_uo_out),
             .uio_out    (tt_project_8_uio_out),
             .uio_oe     (tt_project_8_uio_oe)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_6_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_8_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_6_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_8_enable_power && configured_i)
     );
 
     logic [7:0] tt_project_9_0_uo_out;
@@ -1332,6 +1470,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_9_0_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_tiny_7_0_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_9_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_tiny_7_0_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_9_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_tiny heichips26_example_tiny_7_1 (
             .clk        (tt_project_9_clk),
             .rst_n      (tt_project_9_rst_n),
@@ -1341,6 +1497,24 @@ module fabric_wrapper #(
             .uo_out     (tt_project_9_1_uo_out),
             .uio_out    (tt_project_9_1_uio_out),
             .uio_oe     (tt_project_9_1_uio_oe)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_tiny_7_1_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_9_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_tiny_7_1_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_9_enable_power && configured_i)
     );
 
     (* keep *) heichips26_example_small heichips26_example_small_8 (
@@ -1354,6 +1528,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_10_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_small_8_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_10_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_8_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_10_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_small heichips26_example_small_9 (
             .clk        (tt_project_11_clk),
             .rst_n      (tt_project_11_rst_n),
@@ -1363,6 +1555,24 @@ module fabric_wrapper #(
             .uo_out     (tt_project_11_uo_out),
             .uio_out    (tt_project_11_uio_out),
             .uio_oe     (tt_project_11_uio_oe)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_9_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_11_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_9_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_11_enable_power && configured_i)
     );
 
     (* keep *) heichips26_example_small heichips26_example_small_10 (
@@ -1376,6 +1586,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_12_uio_oe)
     );
 
+    (* keep *) lv_power_gate_small heichips26_example_small_10_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_12_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_10_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_12_enable_power && configured_i)
+    );
+
     (* keep *) heichips26_example_small heichips26_example_small_11 (
             .clk        (tt_project_13_clk),
             .rst_n      (tt_project_13_rst_n),
@@ -1385,6 +1613,24 @@ module fabric_wrapper #(
             .uo_out     (tt_project_13_uo_out),
             .uio_out    (tt_project_13_uio_out),
             .uio_oe     (tt_project_13_uio_oe)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_11_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_13_enable_power && configured_i)
+    );
+
+    (* keep *) lv_power_gate_small heichips26_example_small_11_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            .VPWR_SW (),
+            `endif
+            .ena (tt_project_13_enable_power && configured_i)
     );
 
     // SRAM 0 instances
@@ -1450,16 +1696,5 @@ module fabric_wrapper #(
         .A_BIST_DIN     ({32{fabric_sram0_tie_low_o}}),
         .A_BIST_BM      ({32{fabric_sram0_tie_low_o}})
     );
-    assign usb_dn_en_o = '0;
-    assign usb_dn_tx_o = '0;
-    assign usb_dp_en_o = '0;
-    assign usb_dp_tx_o = '0;
-    assign usb_dp_up_o = '0;
-    assign tmds_b = '0;
-    assign tmds_g = '0;
-    assign tmds_r = '0;
-    assign tmds_clk = '0;
-    assign ethernet_dp = '0;
-    assign ethernet_dn = '0;
 
 endmodule

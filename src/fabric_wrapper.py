@@ -51,7 +51,11 @@ module fabric_wrapper #(
     
     parameter FABRIC_NUM_IO_NORTH = 16,
     parameter FABRIC_NUM_IO_SOUTH = 16
-)(\n""")
+)(""")
+        print("    `ifdef USE_POWER_PINS")
+        print("    inout wire VPWR,")
+        print("    inout wire VGND,")
+        print("    `endif\n")
 
         print(f'    // Configuration')
         print("""    input  logic [(FrameBitsPerRow*NumRows)-1:0]    FrameData_i,""")
@@ -72,35 +76,7 @@ module fabric_wrapper #(
     output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_out_o,
     output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_oe_o,\n""")
 
-        print("""    // User I/O
-    output usb_dn_en_o,
-    input  usb_dn_rx_i,
-    output usb_dn_tx_o,
-    output usb_dp_en_o,
-    input  usb_dp_rx_i,
-    output usb_dp_tx_o,
-    output usb_dp_up_o,
-    
-    output tmds_b,
-    output tmds_g,
-    output tmds_r,
-    output tmds_clk,
-    
-    inout icelab_analog_pin0,
-    inout icelab_analog_pin1,
-    inout icelab_analog_pin2,
-    inout icelab_analog_pin3,
-    
-    inout internal_analog_pin0,
-    inout internal_analog_pin1,
-    inout internal_analog_pin2,
-    
-    inout pudding_i_in,
-    inout pudding_i_out,
-    
-    output ethernet_dp,
-    output ethernet_dn
-);\n""")
+        print(");\n")
 
         for i, (coords, projects) in enumerate(tt_projects.items()):
             print(f'    // TT_PROJECT {i} ({coords})')
@@ -245,6 +221,25 @@ module fabric_wrapper #(
             .uio_out    (tt_project_{i}_uio_out),
             .uio_oe     (tt_project_{i}_uio_oe)""")
                     print(f"""    );\n""")
+                    
+                    print(f"""    (* keep *) lv_power_gate_small {instance}_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            //.VPWR_SW (),
+            `endif
+            .ena (tt_project_{i}_enable_power && configured_i)""")
+                    print(f"""    );\n""")
+                    
+                    print(f"""    (* keep *) lv_power_gate_small {instance}_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            //.VPWR_SW (),
+            `endif
+            .ena (tt_project_{i}_enable_power && configured_i)""")
+                    print(f"""    );\n""")
+                    
             # Two "tiny" user projects
             else:
                     module, instance = projects[0]
@@ -273,6 +268,24 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_{i}_0_uio_oe)""")
                     print(f"""    );\n""")
 
+                    print(f"""    (* keep *) lv_power_gate_small {instance}_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            //.VPWR_SW (),
+            `endif
+            .ena (tt_project_{i}_enable_power && configured_i)""")
+                    print(f"""    );\n""")
+                    
+                    print(f"""    (* keep *) lv_power_gate_small {instance}_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            //.VPWR_SW (),
+            `endif
+            .ena (tt_project_{i}_enable_power && configured_i)""")
+                    print(f"""    );\n""")
+
                     module, instance = projects[1]
             
                     print(f"""    (* keep *) {module} {instance} (
@@ -286,6 +299,23 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_{i}_1_uio_oe)""")
                     print(f"""    );\n""")
 
+                    print(f"""    (* keep *) lv_power_gate_small {instance}_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            //.VPWR_SW (),
+            `endif
+            .ena (tt_project_{i}_enable_power && configured_i)""")
+                    print(f"""    );\n""")
+                    
+                    print(f"""    (* keep *) lv_power_gate_small {instance}_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .VGND  (VGND),
+            //.VPWR_SW (),
+            `endif
+            .ena (tt_project_{i}_enable_power && configured_i)""")
+                    print(f"""    );\n""")
 
         for i in range(NUM_SRAM):
 
@@ -352,18 +382,5 @@ module fabric_wrapper #(
         .A_BIST_DIN     ({{32{{fabric_sram{i}_tie_low_o}}}}),
         .A_BIST_BM      ({{32{{fabric_sram{i}_tie_low_o}}}})
     );""")
-
-
-        print("""    assign usb_dn_en_o = '0;
-    assign usb_dn_tx_o = '0;
-    assign usb_dp_en_o = '0;
-    assign usb_dp_tx_o = '0;
-    assign usb_dp_up_o = '0;
-    assign tmds_b = '0;
-    assign tmds_g = '0;
-    assign tmds_r = '0;
-    assign tmds_clk = '0;
-    assign ethernet_dp = '0;
-    assign ethernet_dn = '0;""")
 
         print("\nendmodule")

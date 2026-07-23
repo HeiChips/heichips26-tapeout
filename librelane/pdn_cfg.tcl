@@ -211,16 +211,20 @@ add_pdn_connect \
 
 # Add stripes for switched power
 
-add_pdn_stripe \
-    -grid stdcell_grid \
-    -layer $::env(PDN_HORIZONTAL_LAYER) \
-    -width $::env(PDN_HWIDTH) \
-    -pitch 15 \
-    -offset 1500.0 \
-    -spacing $::env(PDN_HSPACING) \
-    -starts_with POWER \
-    -nets "VPWR_SW_TEST_0"
-    #-number_of_straps 10
+#add_pdn_stripe \
+#    -grid stdcell_grid \
+#    -layer $::env(PDN_HORIZONTAL_LAYER) \
+#    -width $::env(PDN_HWIDTH) \
+#    -pitch 15 \
+#    -offset 1500.0 \
+#    -spacing $::env(PDN_HSPACING) \
+#    -starts_with POWER \
+#    -nets "VPWR_SW_TEST_0"
+#    #-number_of_straps 10
+
+
+# --- Tests ---
+
 
 #define_pdn_grid \
 #    -macro \

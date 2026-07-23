@@ -534,6 +534,11 @@ module heichips26_top #(
 
     // Core
     heichips26_core heichips26_core (
+        `ifdef USE_POWER_PINS
+        .VDD  (VDD),
+        .VSS  (VSS),
+        `endif
+    
         // FPGA
         .fpga_clk_i     (fpga_clk_PAD2CORE),
         .fpga_rst_ni    (fpga_rst_n_PAD2CORE),
@@ -563,37 +568,20 @@ module heichips26_top #(
         // I/Os FPGA
         .fabric_io_in_i     (fpga_io_PAD2CORE),
         .fabric_io_out_o    (fpga_io_CORE2PAD),
-        .fabric_io_oe_o     (fpga_io_CORE2PAD_EN),
+        .fabric_io_oe_o     (fpga_io_CORE2PAD_EN)
 
         // User I/Os
-        .usb_dn_en_o    (user_usb_dn_CORE2PAD_EN),
-        .usb_dn_rx_i    (user_usb_dn_PAD2CORE),
-        .usb_dn_tx_o    (user_usb_dn_CORE2PAD),
-        .usb_dp_en_o    (user_usb_dp_CORE2PAD_EN),
-        .usb_dp_rx_i    (user_usb_dp_PAD2CORE),
-        .usb_dp_tx_o    (user_usb_dp_CORE2PAD),
-        .usb_dp_up_o    (user_usb_dp_up_CORE2PAD),
-        
-        .tmds_b         (user_tmds_b_CORE2PAD),
-        .tmds_g         (user_tmds_g_CORE2PAD),
-        .tmds_r         (user_tmds_r_CORE2PAD),
-        .tmds_clk       (user_tmds_clk_CORE2PAD),
-        
-        .icelab_analog_pin0   (icelab_analog_pin0_PADRES),
-        .icelab_analog_pin1   (icelab_analog_pin1_PADRES),
-        .icelab_analog_pin2   (icelab_analog_pin2_PADRES),
-        .icelab_analog_pin3   (icelab_analog_pin3_PADRES),
- 
-        .internal_analog_pin0 (internal_analog_pin0_PADRES),
-        .internal_analog_pin1 (internal_analog_pin1_PADRES),
-        .internal_analog_pin2  (internal_analog_pin2_PADRES),
-        
-        .pudding_i_in    (pudding_i_in_PADRES),
-        .pudding_i_out   (pudding_i_out_PADBARE),
-
-        .ethernet_dp    (ethernet_dp_PADBARE),
-        .ethernet_dn    (ethernet_dn_PADBARE)
     );
+    
+    assign user_usb_dn_CORE2PAD = '0;
+    assign user_usb_dn_CORE2PAD_EN = '0;
+    assign user_usb_dp_CORE2PAD = '0;
+    assign user_usb_dp_CORE2PAD_EN = '0;
+    assign user_usb_dp_up_CORE2PAD = '0;
+    assign user_tmds_b_CORE2PAD = '0;
+    assign user_tmds_g_CORE2PAD = '0;
+    assign user_tmds_r_CORE2PAD = '0;
+    assign user_tmds_clk_CORE2PAD = '0;
 
     // Alignment marks for bonding
     (* keep *) alignment_mark alignment_mark_0 ();
@@ -605,40 +593,5 @@ module heichips26_top #(
     (* keep *) logo_heichips logo_heichips ();
     (* keep *) logo_fabulous logo_fabulous ();
     (* keep *) logo_credits logo_credits ();
-
-
-    wire VPWR_SW_TEST_0;
-    wire VPWR_SW_TEST_1;
-    wire VPWR_SW_TEST_2;
-
-    // Power gate test
-    (* keep *) lv_power_gate_small lv_power_gate_small_0 (
-        `ifdef USE_POWER_PINS
-        .VPWR  (VDD),
-        .VGND  (VSS),
-        .VPWR_SW (VPWR_SW_TEST_0),
-        `endif
-        .ena (1'b1)
-    );
-
-    // Power gate test
-    (* keep *) lv_power_gate_small lv_power_gate_small_1 (
-        `ifdef USE_POWER_PINS
-        .VPWR  (VDD),
-        .VGND  (VSS),
-        .VPWR_SW (VPWR_SW_TEST_1),
-        `endif
-        .ena (1'b1)
-    );
-
-    // Power gate test
-    (* keep *) lv_power_gate_small lv_power_gate_small_2 (
-        `ifdef USE_POWER_PINS
-        .VPWR  (VDD),
-        .VGND  (VSS),
-        .VPWR_SW (VPWR_SW_TEST_2),
-        `endif
-        .ena (1'b1)
-    );
 
 endmodule

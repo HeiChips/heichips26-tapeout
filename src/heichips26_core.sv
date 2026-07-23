@@ -2,6 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 module heichips26_core (
+    `ifdef USE_POWER_PINS
+    inout wire VDD,
+    inout wire VSS,
+    `endif
+
     // FPGA
     input  logic fpga_clk_i,
     input  logic fpga_rst_ni,
@@ -34,36 +39,9 @@ module heichips26_core (
     // I/Os FPGA
     input  wire [32-1:0] fabric_io_in_i,
     output wire [32-1:0] fabric_io_out_o,
-    output wire [32-1:0] fabric_io_oe_o,
+    output wire [32-1:0] fabric_io_oe_o
     
     // User I/O
-    output usb_dn_en_o,
-    input  usb_dn_rx_i,
-    output usb_dn_tx_o,
-    output usb_dp_en_o,
-    input  usb_dp_rx_i,
-    output usb_dp_tx_o,
-    output usb_dp_up_o,
-
-    output tmds_b,
-    output tmds_g,
-    output tmds_r,
-    output tmds_clk,
-    
-    inout icelab_analog_pin0,
-    inout icelab_analog_pin1,
-    inout icelab_analog_pin2,
-    inout icelab_analog_pin3,
-    
-    inout internal_analog_pin0,
-    inout internal_analog_pin1,
-    inout internal_analog_pin2,
-    
-    inout pudding_i_in,
-    inout pudding_i_out,
-    
-    output ethernet_dp,
-    output ethernet_dn
 );
     
     // Fabric parameters
@@ -323,7 +301,12 @@ module heichips26_core (
         .FrameStrobe_o      (FrameStrobe)
     );
     
-    fabric_wrapper fabric_wrapper (        
+    fabric_wrapper fabric_wrapper (
+        `ifdef USE_POWER_PINS
+        .VPWR (VDD),
+        .VGND (VSS),
+        `endif
+    
         // Configuration
         .FrameData_i    (FrameData),
         .FrameStrobe_i  (FrameStrobe),
@@ -340,46 +323,7 @@ module heichips26_core (
         // I/Os South
         .io_south_in_i  (fabric_io_south_in_i),
         .io_south_out_o (fabric_io_south_out_o),
-        .io_south_oe_o  (fabric_io_south_oe_o),
-        
-        // heichips25-usb_cdc
-        .usb_dn_en_o    (usb_dn_en_o),
-        .usb_dn_rx_i    (usb_dn_rx_i),
-        .usb_dn_tx_o    (usb_dn_tx_o),
-        .usb_dp_en_o    (usb_dp_en_o),
-        .usb_dp_rx_i    (usb_dp_rx_i),
-        .usb_dp_tx_o    (usb_dp_tx_o),
-        .usb_dp_up_o    (usb_dp_up_o),
-        
-        // heichips25_bagel
-        .tmds_b         (tmds_b),
-        .tmds_g         (tmds_g),
-        .tmds_r         (tmds_r),
-        .tmds_clk       (tmds_clk),
-        
-        // heichips25-pudding
-        // 2 analog pins
-        .pudding_i_in  (pudding_i_in),
-        .pudding_i_out (pudding_i_out),
-        
-        // heichips25-fg
-        // 4 analog pins
-        .icelab_analog_pin0 (icelab_analog_pin0),
-        .icelab_analog_pin1 (icelab_analog_pin1),
-        .icelab_analog_pin2 (icelab_analog_pin2),
-        .icelab_analog_pin3 (icelab_analog_pin3),
-        
-        // heichips25-ethernet
-        // 2 analog pins
-        .ethernet_dp  (ethernet_dp),
-        .ethernet_dn  (ethernet_dn),
-        
-        // heichips25-internal
-        // 3 analog pins
-        .internal_analog_pin0 (internal_analog_pin0),
-        .internal_analog_pin1 (internal_analog_pin1),
-        .internal_analog_pin2 (internal_analog_pin2)
-        
+        .io_south_oe_o  (fabric_io_south_oe_o)
     );
     
     //$assert(fabric_wrapper.FrameBitsPerRow ...)
