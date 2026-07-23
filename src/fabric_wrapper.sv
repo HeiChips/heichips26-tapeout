@@ -1201,7 +1201,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_0_enable_power && configured_i)
     );
@@ -1210,7 +1210,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_0_enable_power && configured_i)
     );
@@ -1230,7 +1230,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_1_enable_power && configured_i)
     );
@@ -1239,7 +1239,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_1_enable_power && configured_i)
     );
@@ -1259,7 +1259,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_2_enable_power && configured_i)
     );
@@ -1268,7 +1268,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_2_enable_power && configured_i)
     );
@@ -1288,7 +1288,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_3_enable_power && configured_i)
     );
@@ -1297,7 +1297,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_3_enable_power && configured_i)
     );
@@ -1317,7 +1317,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_4_enable_power && configured_i)
     );
@@ -1326,7 +1326,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_4_enable_power && configured_i)
     );
@@ -1346,7 +1346,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_5_enable_power && configured_i)
     );
@@ -1355,7 +1355,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_5_enable_power && configured_i)
     );
@@ -1375,7 +1375,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_6_enable_power && configured_i)
     );
@@ -1384,7 +1384,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_6_enable_power && configured_i)
     );
@@ -1404,7 +1404,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_7_enable_power && configured_i)
     );
@@ -1413,7 +1413,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_7_enable_power && configured_i)
     );
@@ -1433,7 +1433,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_8_enable_power && configured_i)
     );
@@ -1442,7 +1442,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_8_enable_power && configured_i)
     );
@@ -1474,7 +1474,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_9_enable_power && configured_i)
     );
@@ -1483,7 +1483,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_9_enable_power && configured_i)
     );
@@ -1503,7 +1503,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_9_enable_power && configured_i)
     );
@@ -1512,7 +1512,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_9_enable_power && configured_i)
     );
@@ -1532,7 +1532,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_10_enable_power && configured_i)
     );
@@ -1541,7 +1541,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_10_enable_power && configured_i)
     );
@@ -1561,7 +1561,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_11_enable_power && configured_i)
     );
@@ -1570,7 +1570,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_11_enable_power && configured_i)
     );
@@ -1590,7 +1590,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_12_enable_power && configured_i)
     );
@@ -1599,7 +1599,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_12_enable_power && configured_i)
     );
@@ -1619,7 +1619,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_13_enable_power && configured_i)
     );
@@ -1628,7 +1628,7 @@ module fabric_wrapper #(
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .VGND  (VGND),
-            .VPWR_SW (),
+            .VPWR_SW (VPWR),
             `endif
             .ena (tt_project_13_enable_power && configured_i)
     );
