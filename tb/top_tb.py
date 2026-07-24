@@ -739,6 +739,9 @@ if __name__ == "__main__":
     # Blackbox user projects
     sources.append(proj_path / '../ip/user_projects/bb_user_projects.v')
     
+    # Power gate
+    sources.append(proj_path / '../ip/lv_power_gate_small/vh/lv_power_gate_small.vh')
+    
     # Bondpads
     sources.append(proj_path / '../ip/bondpad_70x70_novias/vh/bondpad_70x70_novias.v')
     
