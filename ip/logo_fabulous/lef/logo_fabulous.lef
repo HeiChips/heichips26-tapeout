@@ -1,0 +1,18 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO logo_fabulous
+  CLASS BLOCK ;
+  FOREIGN logo_fabulous ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 79.80 BY 79.80 ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 79.80 79.80 ;
+      LAYER Metal4 ;
+        RECT 0.0 0.0 79.80 79.80 ;
+  END
+END logo_fabulous
+END LIBRARY
+

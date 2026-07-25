@@ -1,0 +1,22 @@
+VERSION 5.8 ;
+
+MACRO alignment_mark
+  CLASS BLOCK ;
+  ORIGIN 0 0 ;
+  FOREIGN alignment_mark 0 0 ;
+  SIZE 70.0 BY 70.0 ;
+  SYMMETRY X Y R90 ;
+
+  OBS
+    LAYER Metal1 ;
+      RECT 0 0 70.0 70.0 ;
+    LAYER Metal2 ;
+      RECT 0 0 70.0 70.0 ;
+    LAYER Metal3 ;
+      RECT 0 0 70.0 70.0 ;
+    LAYER Metal4 ;
+      RECT 0 0 70.0 70.0 ;
+    LAYER TopMetal1 ;
+      RECT 0 0 70.0 70.0 ;
+  END
+END alignment_mark

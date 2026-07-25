@@ -1,0 +1,3 @@
+[submodule "ip/fabulous-tiles"]
+	path = ip/fabulous-tiles
+	url = ../../mole99/fabulous-tiles.git

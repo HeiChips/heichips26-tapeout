@@ -1,0 +1,18 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO logo_heichips
+  CLASS BLOCK ;
+  FOREIGN logo_heichips ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 168.00 BY 75.6 ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 168.00 75.6 ;
+      LAYER Metal5 ;
+        RECT 0.0 0.0 168.00 75.6 ;
+  END
+END logo_heichips
+END LIBRARY
+

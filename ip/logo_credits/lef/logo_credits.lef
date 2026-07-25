@@ -1,0 +1,18 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO logo_credits
+  CLASS BLOCK ;
+  FOREIGN logo_credits ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 79.80 BY 79.80 ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 79.80 79.80 ;
+      LAYER Metal5 ;
+        RECT 0.0 0.0 79.80 79.80 ;
+  END
+END logo_credits
+END LIBRARY
+

@@ -1,0 +1,216 @@
+# All I/Os
+
+set_io all[0] X1Y10/A
+set_io all[1] X1Y10/B
+set_io all[2] X1Y10/C
+set_io all[3] X1Y10/D
+set_io all[4] X2Y10/A
+set_io all[5] X2Y10/B
+set_io all[6] X2Y10/C
+set_io all[7] X2Y10/D
+set_io all[8] X3Y10/A
+set_io all[9] X3Y10/B
+set_io all[10] X3Y10/C
+set_io all[11] X3Y10/D
+set_io all[12] X4Y10/A
+set_io all[13] X4Y10/B
+set_io all[14] X4Y10/C
+set_io all[15] X4Y10/D
+
+set_io all[16] X1Y0/A
+set_io all[17] X1Y0/B
+set_io all[18] X1Y0/C
+set_io all[19] X1Y0/D
+set_io all[20] X2Y0/A
+set_io all[21] X2Y0/B
+set_io all[22] X2Y0/C
+set_io all[23] X2Y0/D
+set_io all[24] X3Y0/A
+set_io all[25] X3Y0/B
+set_io all[26] X3Y0/C
+set_io all[27] X3Y0/D
+set_io all[28] X4Y0/A
+set_io all[29] X4Y0/B
+set_io all[30] X4Y0/C
+set_io all[31] X4Y0/D
+
+# For general tests
+
+set_io clk1 X1Y10/A
+set_io clk2 X1Y10/B
+set_io ena  X1Y10/C
+set_io rst  X1Y10/D
+
+set_io e[0] X2Y10/A
+set_io e[1] X2Y10/B
+set_io e[2] X2Y10/C
+set_io e[3] X2Y10/D
+
+set_io a[0] X3Y10/A
+set_io a[1] X3Y10/B
+set_io a[2] X3Y10/C
+set_io a[3] X3Y10/D
+
+set_io a[4] X4Y10/A
+set_io a[5] X4Y10/B
+
+set_io b[0] X4Y10/C
+set_io b[1] X4Y10/D
+
+set_io b[2] X1Y0/A
+set_io b[3] X1Y0/B
+set_io b[4] X1Y0/C
+set_io b[5] X1Y0/D
+
+set_io c[0] X2Y0/A
+set_io c[1] X2Y0/B
+set_io c[2] X2Y0/C
+set_io c[3] X2Y0/D
+set_io c[4] X3Y0/A
+set_io c[5] X3Y0/B
+set_io c[6] X3Y0/C
+set_io c[7] X3Y0/D
+
+# For the register_file test
+
+set_io addr_a[0] X2Y10/A
+set_io addr_a[1] X2Y10/B
+set_io addr_a[2] X2Y10/C
+set_io addr_a[3] X2Y10/D
+set_io addr_a[4] X3Y10/A
+
+set_io addr_b[0] X3Y10/B
+set_io addr_b[1] X3Y10/C
+set_io addr_b[2] X3Y10/D
+set_io addr_b[3] X4Y10/A
+set_io addr_b[4] X4Y10/B
+
+set_io addr_c[0] X4Y10/C
+set_io addr_c[1] X4Y10/D
+
+set_io word_a[0] X1Y0/A
+set_io word_a[1] X1Y0/B
+set_io word_a[2] X1Y0/C
+set_io word_a[3] X1Y0/D
+
+set_io word_b[0] X2Y0/A
+set_io word_b[1] X2Y0/B
+set_io word_b[2] X2Y0/C
+set_io word_b[3] X2Y0/D
+
+set_io word_c[0] X3Y0/A
+set_io word_c[1] X3Y0/B
+set_io word_c[2] X3Y0/C
+set_io word_c[3] X3Y0/D
+
+# For the macc_8x8_20 test
+
+set_io product[0] X2Y0/A
+set_io product[1] X2Y0/B
+set_io product[2] X2Y0/C
+set_io product[3] X2Y0/D
+set_io product[4] X3Y0/A
+set_io product[5] X3Y0/B
+set_io product[6] X3Y0/C
+set_io product[7] X3Y0/D
+set_io product[8] X2Y10/A
+set_io product[9] X2Y10/B
+set_io product[10] X2Y10/C
+set_io product[11] X2Y10/D
+
+# For the ihp_sram_1024x32_1rw test
+
+set_io ram_wen  X1Y10/B
+set_io ram_men  X1Y10/C
+set_io ram_ren  X1Y10/D
+
+set_io ram_byte_sel[0]   X2Y10/A
+set_io ram_byte_sel[1]   X2Y10/B
+set_io ram_addr[0] X2Y10/C
+set_io ram_addr[1] X2Y10/D
+
+set_io ram_addr[2] X3Y10/A
+set_io ram_addr[3] X3Y10/B
+set_io ram_addr[4] X3Y10/C
+set_io ram_addr[5] X3Y10/D
+
+set_io ram_addr[6] X4Y10/A
+set_io ram_addr[7] X4Y10/B
+set_io ram_addr[8] X4Y10/C
+set_io ram_addr[9] X4Y10/D
+
+set_io ram_din_byte[0] X1Y0/A
+set_io ram_din_byte[1] X1Y0/B
+set_io ram_din_byte[2] X1Y0/C
+set_io ram_din_byte[3] X1Y0/D
+
+set_io ram_din_byte[4] X2Y0/A
+set_io ram_din_byte[5] X2Y0/B
+set_io ram_din_byte[6] X2Y0/C
+set_io ram_din_byte[7] X2Y0/D
+
+set_io ram_dout_byte[0] X3Y0/A
+set_io ram_dout_byte[1] X3Y0/B
+set_io ram_dout_byte[2] X3Y0/C
+set_io ram_dout_byte[3] X3Y0/D
+
+set_io ram_dout_byte[4] X4Y0/A
+set_io ram_dout_byte[5] X4Y0/B
+set_io ram_dout_byte[6] X4Y0/C
+set_io ram_dout_byte[7] X4Y0/D
+
+# For the tt_project test
+
+set_io ui[0] X3Y10/A
+set_io ui[1] X3Y10/B
+set_io ui[2] X3Y10/C
+set_io ui[3] X3Y10/D
+set_io ui[4] X4Y10/A
+set_io ui[5] X4Y10/B
+set_io ui[6] X4Y10/C
+set_io ui[7] X4Y10/D
+
+set_io uo[0] X1Y0/A
+set_io uo[1] X1Y0/B
+set_io uo[2] X1Y0/C
+set_io uo[3] X1Y0/D
+set_io uo[4] X2Y0/A
+set_io uo[5] X2Y0/B
+set_io uo[6] X2Y0/C
+set_io uo[7] X2Y0/D
+
+set_io uio[0] X3Y0/A
+set_io uio[1] X3Y0/B
+set_io uio[2] X3Y0/C
+set_io uio[3] X3Y0/D
+set_io uio[4] X4Y0/A
+set_io uio[5] X4Y0/B
+set_io uio[6] X4Y0/C
+set_io uio[7] X4Y0/D
+
+# For FazyRV-ExoTiny CCX
+
+set_io fazyrv_clk_i         X1Y10/A
+set_io fazyrv_en_i          X1Y10/C
+set_io fazyrv_rst_in        X1Y10/D
+
+set_io fazyrv_qspi_sdio[0]  X3Y10/A
+set_io fazyrv_qspi_sdio[1]  X3Y10/B
+set_io fazyrv_qspi_sdio[2]  X3Y10/C
+set_io fazyrv_qspi_sdio[3]  X3Y10/D
+set_io fazyrv_qspi_sck_o    X4Y10/A
+set_io fazyrv_qspi_cs_rom_o X4Y10/B
+set_io fazyrv_qspi_cs_ram_o X4Y10/C
+
+set_io fazyrv_spi_sdi_i     X1Y0/A
+set_io fazyrv_spi_sdo_o     X1Y0/B
+set_io fazyrv_spi_sck_o     X1Y0/C
+
+set_io fazyrv_gpi_i[0]      X3Y0/A
+set_io fazyrv_gpi_i[1]      X3Y0/B
+set_io fazyrv_gpi_i[2]      X3Y0/C
+set_io fazyrv_gpi_i[3]      X3Y0/D
+set_io fazyrv_gpi_i[4]      X4Y0/A
+set_io fazyrv_gpi_i[5]      X4Y0/B
+
+set_io fazyrv_gpo_o         X4Y0/C

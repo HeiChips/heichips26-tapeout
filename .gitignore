@@ -1,0 +1,45 @@
+sim_build/
+*.vvp
+*.fst
+*.a
+*.o
+*.elf
+*.bin
+*.hex
+*.gtkw
+
+# Virtual environment
+*.venv
+
+# Python
+*.egg-info/
+__pycache__/
+
+# LibreOffice
+.~lock.*
+
+extract_script.tcl
+extraction/
+feedback.txt
+
+lvs_script.tcl
+netgen_lvs.json
+netgen_lvs.rpt
+out.def
+
+!bitStreamSpec.bin
+
+# PDK
+IHP-Open-PDK/
+*.lyrdb
+
+# LibreLane builds
+runs/
+macro/
+final/
+
+# explicitly allow nextpnr model
+!user_designs/fabrics/*/macro/
+
+# DRC
+drc_run_*/

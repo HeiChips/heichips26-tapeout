@@ -1,0 +1,13 @@
+diff --git a/src/drt/src/global.h b/src/drt/src/global.h
+index fbc5f64b4b..7706ed1d5a 100644
+--- a/src/drt/src/global.h
++++ b/src/drt/src/global.h
+@@ -72,7 +72,7 @@ struct RouterConfiguration
+   int NDR_NETS_RIPUP_HARDINESS = 3;  // max ripup avoids
+   int CLOCK_NETS_TRUNK_RIPUP_HARDINESS = 100;
+   int CLOCK_NETS_LEAF_RIPUP_HARDINESS = 10;
+-  bool AUTO_TAPER_NDR_NETS = true;
++  bool AUTO_TAPER_NDR_NETS = false;
+   int TAPERBOX_RADIUS = 3;
+   int NDR_NETS_ABS_PRIORITY = 2;
+   int CLOCK_NETS_ABS_PRIORITY = 4;
