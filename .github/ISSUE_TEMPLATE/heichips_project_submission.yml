@@ -23,11 +23,14 @@ body:
     validations:
       required: true
 
-  - type: textarea
-    id: location
+  - type: checkboxes
+    id: license
     attributes:
-      label: Preferred project location?
-      description: Do you have a preferred project location? For example, on the left or right side of the chip, or a fixed project coordinate e.g. X0Y1. If not, just leave empty.
+      label: Project License
+      description: The project is licensed under a compatible open-source license. For example, [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0.html).
+      options:
+        - label:  I confirm
+          required: true
 
   - type: textarea
     id: pcb-requirements
@@ -46,4 +49,4 @@ body:
       value: |
         ## User Project Bitstream
 
-        While this is not mandatory to provide by the time of the submission deadline, please also consider adding an example bitstream for your project at some point in time. This allows you, us and everyone else to test your design once we get the chips back. You can find instructions on how to generate a bitstream [here](https://github.com/HeiChips/heichips26-tapeout/tree/main/ip/fabric/user_designs).
+        Please consider adding a user design for the eFPGA to generate the bitstream for your project. This allows you and everyone else to test your design once we get the chips back. You can find instructions on how to generate a bitstream [here](https://github.com/HeiChips/heichips26-tapeout/tree/main/ip/fabric/user_designs). You can simply open a PR to add your user design to the folder.
