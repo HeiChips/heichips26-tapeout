@@ -33,7 +33,7 @@ The following user projects are included:
 
 | Project       | Size          | Location      | Description   | Link |
 |---------------|---------------|---------------|---------------|------|
-|               |               |               |               |      |
+| Event-Driven Motion SNN | large |               | A packetized event-camera filter and time-multiplexed 16-neuron SNN for low-power motion classification. | [Link](https://github.com/HeiChips/heichips26-aiaccel) |
 |               |               |               |               |      |
 |               |               |               |               |      |
 |               |               |               |               |      |

@@ -1186,7 +1186,7 @@ module fabric_wrapper #(
         .Tile_X5Y6_CONFIGURED_top(configured_i)
     );
 
-    (* keep *) heichips26_example_large heichips26_example_large_0 (
+    (* keep *) heichips26_event_snn heichips26_example_large_0 (
             .clk        (tt_project_0_clk),
             .rst_n      (tt_project_0_rst_n),
             .ena        (tt_project_0_ena),

@@ -1,3 +1,6 @@
 [submodule "ip/fabulous-tiles"]
 	path = ip/fabulous-tiles
 	url = ../../mole99/fabulous-tiles.git
+[submodule "ip/user_projects/heichips26-aiaccel"]
+	path = ip/user_projects/heichips26-aiaccel
+	url = ../../HeiChips/heichips26-aiaccel.git

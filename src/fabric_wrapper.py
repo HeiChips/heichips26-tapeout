@@ -13,7 +13,7 @@ SRAM_WIDTH = 32
 tt_projects = {
     # left side
     #'X0Y1'
-    'X0Y2': [('heichips26_example_large', 'heichips26_example_large_0')],
+    'X0Y2': [('heichips26_event_snn', 'heichips26_example_large_0')],
     'X0Y3': [('heichips26_example_small', 'heichips26_example_small_0')],
     'X0Y4': [('heichips26_example_small', 'heichips26_example_small_1')],
     'X0Y5': [('heichips26_example_small', 'heichips26_example_small_2')],

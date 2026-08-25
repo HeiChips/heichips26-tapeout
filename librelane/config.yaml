@@ -538,6 +538,18 @@ MACROS:
         location: [expr::((0.48 * 873) - 36), expr::((1333*0.42) + ((512*0)*0.42))]
         orientation: FN
 
+  heichips26_event_snn:
+    gds:
+      - dir::../ip/user_projects/heichips26-aiaccel/macros/heichips26_event_snn/final/gds/heichips26_event_snn.gds
+    lef:
+      - dir::../ip/user_projects/heichips26-aiaccel/macros/heichips26_event_snn/final/lef/heichips26_event_snn.lef
+    vh:
+      - dir::../ip/user_projects/heichips26-aiaccel/macros/heichips26_event_snn/final/vh/heichips26_event_snn.vh
+    instances:
+      heichips26_core.fabric_wrapper.heichips26_example_large_0:
+        location: [expr::(0.48 * 873), expr::((1333*0.42) + ((512*7)*0.42))]
+        orientation: FN
+
   heichips26_example_large:
     gds:
       - dir::../ip/user_projects/heichips26_example_large/macro/gds/heichips26_example_large.gds
@@ -546,9 +558,6 @@ MACROS:
     vh:
       - dir::../ip/user_projects/heichips26_example_large/macro/vh/heichips26_example_large.vh
     instances:
-      heichips26_core.fabric_wrapper.heichips26_example_large_0:
-        location: [expr::(0.48 * 873), expr::((1333*0.42) + ((512*7)*0.42))]
-        orientation: FN
       heichips26_core.fabric_wrapper.heichips26_example_large_1:
         location: [expr::(0.48 * 873), expr::((1333*0.42) + ((512*0)*0.42))]
         orientation: FN
