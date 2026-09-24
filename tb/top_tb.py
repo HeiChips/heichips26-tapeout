@@ -5,7 +5,9 @@
 import os
 import re
 import sys
+import glob
 import math
+import yaml
 import random
 from pathlib import Path
 import cocotb
@@ -722,7 +724,7 @@ if __name__ == "__main__":
     sources.append(Path(pdk_root) / pdk / "libs.ref" / scl / "verilog" / f"sg13cmos5l_udp.v")
     
     # SRAM models
-    sources.append(Path(pdk_root) / pdk / "libs.ref" / "sg13cmos5l_sram" / "verilog" / "RM_IHPSG13_1P_512x32_c2_bm_bist.v")
+    sources.append(Path(pdk_root) / pdk / "libs.ref" / "sg13cmos5l_sram" / "verilog" / "RM_IHPSG13_1P_1024x32_c2_bm_bist.v")
     sources.append(Path(pdk_root) / pdk / "libs.ref" / "sg13cmos5l_sram" / "verilog" / "RM_IHPSG13_1P_core_behavioral_bm_bist.v")
 
     # IO models
@@ -736,11 +738,32 @@ if __name__ == "__main__":
     sources.append(proj_path / '../ip/logo_heichips/vh/logo_heichips.v')
     sources.append(proj_path / '../ip/logo_credits/vh/logo_credits.v')
 
-    # Blackbox user projects
-    sources.append(proj_path / '../ip/user_projects/bb_user_projects.v')
+    # Add the blackbox/verilog-headers for the template projects
+    sources.append(proj_path / '../ip/user_projects/heichips26_example_tiny/macro/vh/heichips26_example_tiny.vh')
+    sources.append(proj_path / '../ip/user_projects/heichips26_example_small/macro/vh/heichips26_example_small.vh')
+    sources.append(proj_path / '../ip/user_projects/heichips26_example_large/macro/vh/heichips26_example_large.vh')
+
+    # Add the blackbox/verilog-headers for the user projects
+    def get_user_vh():
+        verilog_headers = []
+        for config_path in glob.glob(os.path.join(proj_path, "../ip/user_projects/*/submission.yaml")):
+            print(f"Reading: {config_path}")
+            
+            with open(config_path) as ifile:
+                config = yaml.safe_load(ifile)
+            
+            header = list(Path(config_path).parent.glob(config["header-path"]))
+            if len(header) > 1:
+                print(f"'header-path' can only refer to a single header. ({header})")
+                sys.exit(1)
+            verilog_headers.append(header[0])
+        return verilog_headers
     
-    # Power gate
-    sources.append(proj_path / '../ip/lv_power_gate_small/vh/lv_power_gate_small.vh')
+    sources.extend(get_user_vh())
+    
+    # Power gates
+    sources.append(proj_path / '../ip/hm_pg/vh/hm_pg_lv_17x200.vh')
+    sources.append(proj_path / '../ip/hm_pg/vh/hm_pg_lv_17x415.vh')
     
     # Bondpads
     sources.append(proj_path / '../ip/bondpad_70x70_novias/vh/bondpad_70x70_novias.v')

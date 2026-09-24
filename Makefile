@@ -5,12 +5,13 @@ TOP = heichips26_top
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/IHP-Open-PDK
 PDK ?= ihp-sg13cmos5l
+PDK_HASH ?= 22f43352dd8219f9007eb659e422e0d5fe28c5fb
 
-PDK_REPO_IHP ?= https://github.com/IHP-GmbH/IHP-Open-PDK
-PDK_COMMIT_IHP ?= 22f2a25f1734796de3debbbf29cf697cbbc54081
+#PDK_REPO_IHP ?= https://github.com/IHP-GmbH/IHP-Open-PDK
+#PDK_COMMIT_IHP ?= 22f2a25f1734796de3debbbf29cf697cbbc54081
 
-PDK_REPO ?= https://github.com/IHP-GmbH/ihp-sg13cmos5l
-PDK_COMMIT ?= e8a87d708b8977e7c07684b033658a0f80af59a0
+#PDK_REPO ?= https://github.com/IHP-GmbH/ihp-sg13cmos5l
+#PDK_COMMIT ?= e8a87d708b8977e7c07684b033658a0f80af59a0
 #PDK_BRANCH ?= heichips25
 
 SCL ?= sg13cmos5l_stdcell
@@ -18,11 +19,11 @@ SCL ?= sg13cmos5l_stdcell
 .DEFAULT_GOAL := help
 
 $(PDK_ROOT)/$(PDK):
-	#ciel enable $(PDK_COMMIT) --pdk-root $(PDK_ROOT) --pdk-family $(PDK)
-	mkdir -p $(PDK_ROOT)
+	ciel enable $(PDK_HASH) --pdk-root $(PDK_ROOT) --pdk $(PDK)
+	#mkdir -p $(PDK_ROOT)
 	#git clone $(PDK_REPO) --recurse-submodules --depth=1 --single-branch -b $(PDK_BRANCH) $(PDK_ROOT)
-	git clone $(PDK_REPO_IHP) --recurse-submodules --depth=1 --revision $(PDK_COMMIT_IHP) $(PDK_ROOT)
-	git clone $(PDK_REPO) --recurse-submodules --depth=1 --revision $(PDK_COMMIT) $(PDK_ROOT)/$(PDK)
+	#git clone $(PDK_REPO_IHP) --recurse-submodules --depth=1 --revision $(PDK_COMMIT_IHP) $(PDK_ROOT)
+	#git clone $(PDK_REPO) --recurse-submodules --depth=1 --revision $(PDK_COMMIT) $(PDK_ROOT)/$(PDK)
 
 # Get the fabric names
 FABRICS :=  $(patsubst fabrics/%,%,$(wildcard fabrics/*)) 
@@ -91,7 +92,23 @@ logos: $(PDK_ROOT)/$(PDK) ## Run LibreLane
 	cd ip/logo_credits/; PDK=${PDK} PDK_ROOT=${PDK_ROOT} make all
 .PHONY: logos
 
-librelane: $(PDK_ROOT)/$(PDK) ## Run LibreLane
+chip: $(PDK_ROOT)/$(PDK) ## Run LibreLane
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py
+.PHONY: chip
+
+chip-nodrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane without DRC checks
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --nodrc
+.PHONY: chip-nodrc
+
+chip-openroad: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in OpenROAD GUI
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui openroad
+.PHONY: chip-openroad
+
+chip-klayout: $(PDK_ROOT)/$(PDK) ## Run LibreLane
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui klayout
+.PHONY: chip-klayout
+
+librelane: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in KLayout
 	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --scl ${SCL} --save-views-to final/
 .PHONY: librelane
 

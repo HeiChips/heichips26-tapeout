@@ -9,9 +9,9 @@
   };
 
   inputs = {
-    librelane.url = "github:librelane/librelane/leo/klayout-drc-options";
+    librelane.url = "github:librelane/librelane/dev";
     librelane_plugin_fabulous = {
-      url = "github:mole99/librelane_plugin_fabulous/1.13.1";
+      url = "github:mole99/librelane_plugin_fabulous/1.14.1";
       inputs.librelane.follows = "librelane";
     };
   };
@@ -47,6 +47,7 @@
             in
             {
               cocotbext-spi = callPythonPackage ./nix/cocotbext-spi.nix { };
+              librelane-plugin-heichips = callPythonPackage ./default.nix { };
             }
           ))
           #(final: prev: {
@@ -70,7 +71,10 @@
         in
         {
           default = pkgs.librelane-shell.override ({
-            librelane-plugins = ps: with ps; [librelane-plugin-fabulous];
+            librelane-plugins = ps: with ps; [
+              librelane-plugin-fabulous
+              librelane-plugin-heichips
+            ];
             extra-packages = with pkgs; [
               # Utilities
               gnumake

@@ -75,7 +75,7 @@ if { $::env(PDN_MULTILAYER) == 1 } {
         -offset $::env(PDN_VOFFSET) \
         -spacing $::env(PDN_VSPACING) \
         -starts_with POWER \
-        -nets "$::env(VDD_NET) $::env(GND_NET)" \
+        -nets "$::env(VDD_NET) $::env(GND_NET) VDDA" \
         {*}$arg_list
 
     add_pdn_stripe \
@@ -86,7 +86,7 @@ if { $::env(PDN_MULTILAYER) == 1 } {
         -offset $::env(PDN_HOFFSET) \
         -spacing $::env(PDN_HSPACING) \
         -starts_with POWER \
-        -nets "$::env(VDD_NET) $::env(GND_NET)" \
+        -nets "$::env(VDD_NET) $::env(GND_NET) VDDA" \
         {*}$arg_list
 
     add_pdn_connect \
@@ -159,7 +159,7 @@ if { $::env(PDN_CORE_RING) == 1 } {
             -widths "$::env(PDN_CORE_RING_VWIDTH) $::env(PDN_CORE_RING_HWIDTH)" \
             -spacings "$::env(PDN_CORE_RING_VSPACING) $::env(PDN_CORE_RING_HSPACING)" \
             -core_offset "$::env(PDN_CORE_RING_VOFFSET) $::env(PDN_CORE_RING_HOFFSET)" \
-            -nets "$::env(VDD_NET) $::env(GND_NET)" \
+            -nets "$::env(VDD_NET) $::env(GND_NET) VDDA" \
             {*}$arg_list
 
         if { [info exists ::env(PDN_CORE_VERTICAL_LAYER)] } {
@@ -197,17 +197,17 @@ add_pdn_connect \
     -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
 
 # sram grid
-define_pdn_grid \
-    -macro \
-    -instances "\
-heichips26_core.fabric_wrapper.sram0_0 \
-heichips26_core.fabric_wrapper.sram0_1" \
-    -name sram \
-    -starts_with POWER
+#define_pdn_grid \
+#    -macro \
+#    -instances "\
+#heichips26_core.fabric_wrapper.sram0_0 \
+#heichips26_core.fabric_wrapper.sram0_1" \
+#    -name sram \
+#    -starts_with POWER
 
-add_pdn_connect \
-    -grid sram \
-    -layers "Metal4 $::env(FP_PDN_HORIZONTAL_LAYER)"
+#add_pdn_connect \
+#    -grid sram \
+#    -layers "Metal4 $::env(FP_PDN_HORIZONTAL_LAYER)"
 
 # Add stripes for switched power
 
