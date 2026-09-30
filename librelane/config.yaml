@@ -248,8 +248,8 @@ PDN_CFG: dir::pdn_cfg.tcl
 PDN_CORE_RING: True
 
 # Maximum metal width without slotting: 30um
-PDN_CORE_RING_VWIDTH: 15
-PDN_CORE_RING_HWIDTH: 15
+PDN_CORE_RING_VWIDTH: 10 #15
+PDN_CORE_RING_HWIDTH: 10 #15
 # Ensure minimum spacing for long metals
 PDN_CORE_RING_VSPACING: 5
 PDN_CORE_RING_HSPACING: 5

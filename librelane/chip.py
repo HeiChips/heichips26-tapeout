@@ -79,7 +79,7 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
     target_flow = target_flow.Substitute([("OpenROAD.IRDropReport", None)])
 
     # Apply custom PDN script before general PDN generation
-    #TODO target_flow = target_flow.Substitute([("+Odb.AddPDNObstructions", "Odb.CustomPDN")])
+    target_flow = target_flow.Substitute([("+Odb.AddPDNObstructions", "Odb.CustomPDN")])
 
     # Use Magic filler generation instead of KLayout
     target_flow = target_flow.Substitute([("KLayout.Filler", "Magic.Filler")])
