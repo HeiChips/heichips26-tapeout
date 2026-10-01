@@ -40,31 +40,6 @@ BELS_PER_IO_TILE = ['A', 'B', 'C', 'D']
 NUM_SRAM = 1
 SRAM_WIDTH = 32
 
-# coord: (module, instance)
-slot_map = {
-    # left side
-    'X0Y1': None,
-    'X0Y2': [('heichips26_event_snn', 'heichips26_instance_large_0')],
-    'X0Y3': [('heichips26_example_small', 'heichips26_instance_small_0')],
-    'X0Y4': [('heichips26_example_small', 'heichips26_instance_small_1')],
-    'X0Y5': [('heichips26_example_small', 'heichips26_instance_small_2')],
-    'X0Y6': [('heichips26_example_small', 'heichips26_instance_small_3')],
-    'X0Y7': [('heichips26_example_small', 'heichips26_instance_small_4')],
-    'X0Y8': None,
-    'X0Y9': [('heichips26_example_large', 'heichips26_instance_large_1')],
-
-    # right side
-    'X5Y1': [('heichips26_example_tiny', 'heichips26_instance_tiny_0_0'), ('heichips26_example_tiny', 'heichips26_instance_tiny_0_1')],
-    'X5Y2': [('heichips26_example_small', 'heichips26_instance_small_5')],
-    'X5Y3': [('heichips26_example_small', 'heichips26_instance_small_6')],
-    'X5Y4': [('heichips26_example_small', 'heichips26_instance_small_7')],
-    'X5Y5': None,
-    'X5Y6': [("RM_IHPSG13_1P_1024x32_c2_bm_bist", "heichips26_instance_sram_0")],
-    'X5Y7': [('heichips26_example_small', 'heichips26_instance_small_8')],
-    'X5Y8': [('heichips26_example_small', 'heichips26_instance_small_9')],
-    'X5Y9': [('heichips26_example_small', 'heichips26_instance_small_10')],
-}
-
 def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
     target_flow = Flow.factory.get("Chip")
 
@@ -106,13 +81,17 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
     # Run the flow
     config = yaml.safe_load(open(common_config_path))
     
-    config["DRT_OPT_ITERS"] = 10 # TODO
+    #config["DRT_OPT_ITERS"] = 10 # TODO
+    
+    print(config["HEICHIPS_SLOTS"])
+    
+    slot_map = config["HEICHIPS_SLOTS"]
     
     add_user_projects(config)
     
-    instantiate_user_projects(config)
+    instantiate_user_projects(config, slot_map)
     
-    generate_rtl_wrapper(os.path.join(__dir__, "../src/fabric_wrapper.sv"))
+    generate_rtl_wrapper(os.path.join(__dir__, "../src/fabric_wrapper.sv"), slot_map)
 
     design_dir = os.path.join(__dir__)
     print(f"design_dir: {design_dir}")
@@ -179,7 +158,7 @@ def add_user_projects(config):
                 "instances": {},
             }
 
-def instantiate_user_projects(config):
+def instantiate_user_projects(config, slot_map):
     
     # Instantiate the user projects
     for i, (coords, project_tuple) in enumerate(slot_map.items()):
@@ -208,8 +187,8 @@ def instantiate_user_projects(config):
         
         elif "small" in instance:
         
-            instance_x = Decimal(0.48 * 873 if coords_x == 0 else 0.48 * 4340)
-            instance_y = Decimal(1333*0.42 + 512*coords_y*0.42)
+            instance_x = Decimal(0.48) * 873 if coords_x == 0 else Decimal(0.48) * 4340
+            instance_y = Decimal(1333)*Decimal(0.42) + Decimal(512)*Decimal(coords_y)*Decimal(0.42)
             instance_width = Decimal(500)
             instance_height = Decimal(200)
         
@@ -230,7 +209,7 @@ def instantiate_user_projects(config):
                 "orientation": "FN" if coords_x == 0 else "N",
             }
 
-            config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VDD VSS VPWR VGND")
+            config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VSS VSS VGND VGND")
             
             for metal in ["Metal4", "TopMetal1"]:
                 config["ROUTING_OBSTRUCTIONS"].append([metal, instance_x, instance_y, instance_x + instance_width, instance_y + instance_height])
@@ -262,7 +241,7 @@ def instantiate_user_projects(config):
                 "orientation": "FN" if coords_x == 0 else "N",
             }
 
-            config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VDD VSS VPWR VGND")
+            config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VSS VSS VGND VGND")
             
             for metal in ["Metal4", "TopMetal1"]:
                 config["ROUTING_OBSTRUCTIONS"].append([metal, instance_x, instance_y, instance_x + instance_width, instance_y + instance_height])
@@ -274,8 +253,8 @@ def instantiate_user_projects(config):
         
             module_2, instance_2 = project_tuple[1]
 
-            instance_x = Decimal(0.48 * 873 if coords_x == 0 else 0.48 * 4340)
-            instance_y = Decimal(1333*0.42 + 512*coords_y*0.42)
+            instance_x = Decimal(0.48) * 873 if coords_x == 0 else Decimal(0.48) * 4340
+            instance_y = Decimal(1333)*Decimal(0.42) + Decimal(512)*Decimal(coords_y)*Decimal(0.42)
             instance_width = Decimal(200)
             instance_height = Decimal(200)
 
@@ -321,7 +300,7 @@ def instantiate_user_projects(config):
                 "orientation": "FN" if coords_x == 0 else "N",
             }
 
-            config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance_2} VDD VSS VPWR VGND")
+            config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance_2} VSS VSS VGND VGND")
 
             for metal in ["Metal4", "TopMetal1"]:
                 config["ROUTING_OBSTRUCTIONS"].append([metal, instance_x + 300, instance_y, instance_x + instance_width + 300, instance_y + instance_height])
@@ -333,7 +312,7 @@ def instantiate_user_projects(config):
             return 1
 
 
-def generate_rtl_wrapper(file):
+def generate_rtl_wrapper(file, slot_map):
     
     with open(file, 'w') as f:
         with redirect_stdout(f):
@@ -353,6 +332,7 @@ def generate_rtl_wrapper(file):
             print("    `ifdef USE_POWER_PINS")
             print("    inout wire VPWR,")
             print("    inout wire VGND,")
+            print("    inout wire VAPWR,")
             print("    `endif\n")
 
             print(f'    // Configuration')
@@ -551,16 +531,16 @@ def generate_rtl_wrapper(file):
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .GND  (VGND),
-            .GPWR (VPWR),
+            .GPWR (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR  (VAPWR),
             .GND  (VGND),
-            .GPWR (VPWR),
+            .GPWR (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
                             print(f"""    );\n""")
@@ -597,16 +577,16 @@ def generate_rtl_wrapper(file):
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .GND  (VGND),
-            .GPWR  (VPWR),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR  (VAPWR),
             .GND  (VGND),
-            .GPWR  (VPWR),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
                             print(f"""    );\n""")
@@ -628,16 +608,16 @@ def generate_rtl_wrapper(file):
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
             .GND  (VGND),
-            .GPWR  (VPWR),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR  (VAPWR),
             .GND  (VGND),
-            .GPWR  (VPWR),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
                             print(f"""    );\n""")

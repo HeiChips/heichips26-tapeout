@@ -54,9 +54,28 @@ class CustomPDN(OdbpyStep):
     id = "Odb.CustomPDN"
     name = "Custom PDN"
     long_name = "Create a custom Power Distribution Network"
+    
+    config_vars = Variable(
+            "HEICHIPS_SLOTS",
+            Dict[str, List[Tuple[str,str]]|None],
+            """
+            The HeiChips slot assignment.
+            """,
+        ),
 
     def get_script_path(self):
         return os.path.join(os.path.dirname(__file__), "scripts", "custom_pdn.py")
+
+    def get_command(self) -> List[str]:
+        args = []
+        
+        for coord, entry in self.config["HEICHIPS_SLOTS"].items():
+            if entry:
+                for module, instance in entry:
+                    print(f"{module} {instance}")
+                    args += ["--instance", instance]
+
+        return super().get_command() + args
 
 @Step.factory.register()
 class ConvertOASIS(KLayoutStep):

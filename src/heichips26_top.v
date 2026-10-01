@@ -67,6 +67,11 @@ module heichips26_top #(
     inout  wire         ethernet_dp_PAD,
     inout  wire         ethernet_dn_PAD
 );
+
+    `ifdef USE_POWER_PINS
+    wire VDDA;
+    `endif
+
     // FPGA
     wire fpga_clk_PAD2CORE;
     wire fpga_rst_n_PAD2CORE;
@@ -537,6 +542,7 @@ module heichips26_top #(
         `ifdef USE_POWER_PINS
         .VDD  (VDD),
         .VSS  (VSS),
+        .VDDA (VDDA),
         `endif
     
         // FPGA
