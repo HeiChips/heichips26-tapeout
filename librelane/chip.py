@@ -62,10 +62,12 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
     # Write OASIS
     target_flow = target_flow.Substitute([("+Magic.Filler", "KLayout.ConvertOASIS")])
     
+    # Always disable Magic.DRC
+    target_flow = target_flow.Substitute([("Magic.DRC", None)])
+    
     # Disable DRC checks
     if nodrc:
         target_flow = target_flow.Substitute([("KLayout.DRC", None)])
-        target_flow = target_flow.Substitute([("Magic.DRC", None)])
         target_flow = target_flow.Substitute([("KLayout.Antenna", None)])
         target_flow = target_flow.Substitute([("KLayout.Density", None)])
 
@@ -81,7 +83,7 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
     # Run the flow
     config = yaml.safe_load(open(common_config_path))
     
-    #config["DRT_OPT_ITERS"] = 10 # TODO
+    config["DRT_OPT_ITERS"] = 10 # TODO
     
     print(config["HEICHIPS_SLOTS"])
     

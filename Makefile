@@ -92,48 +92,20 @@ logos: $(PDK_ROOT)/$(PDK) ## Run LibreLane
 	cd ip/logo_credits/; PDK=${PDK} PDK_ROOT=${PDK_ROOT} make all
 .PHONY: logos
 
-chip: $(PDK_ROOT)/$(PDK) ## Run LibreLane
+librelane: $(PDK_ROOT)/$(PDK) ## Run LibreLane
 	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py
-.PHONY: chip
-
-chip-nodrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane without DRC checks
-	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --nodrc
-.PHONY: chip-nodrc
-
-chip-openroad: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in OpenROAD GUI
-	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui openroad
-.PHONY: chip-openroad
-
-chip-klayout: $(PDK_ROOT)/$(PDK) ## Run LibreLane
-	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui klayout
-.PHONY: chip-klayout
-
-librelane: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in KLayout
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --scl ${SCL} --save-views-to final/
 .PHONY: librelane
 
 librelane-nodrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane without DRC checks
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --save-views-to final/ --skip KLayout.DRC --skip Magic.DRC --skip KLayout.Antenna --skip KLayout.Density
-.PHONY: librelane-nodrc
-
-librelane-onlyfill: $(PDK_ROOT)/$(PDK) ## Run LibreLane onyl for filler generation and density checks
-	RUN=$$(ls librelane/runs/ | tail -n 1) && librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --with-initial-state librelane/runs/$$RUN/62-magic-filler/state_in.json --from Magic.Filler --to KLayout.Density
-.PHONY: librelane-onlyfill
-
-librelane-magicdrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane with only Magic DRC checks
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --save-views-to final/ --skip KLayout.DRC
-.PHONY: librelane-magicdrc
-
-librelane-klayoutdrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane with only KLayout DRC checks
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --save-views-to final/ --skip Magic.DRC
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --nodrc
 .PHONY: librelane-nodrc
 
 librelane-openroad: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in OpenROAD GUI
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui openroad
 .PHONY: librelane-openroad
 
-librelane-klayout: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in KLayout
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInKLayout
+librelane-klayout: $(PDK_ROOT)/$(PDK) ## Run LibreLane
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui klayout
 .PHONY: librelane-klayout
 
 sim-fabric: ## Runfabric  RTL simulation with cocotb
