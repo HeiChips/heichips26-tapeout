@@ -5,12 +5,13 @@ TOP = heichips26_top
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/IHP-Open-PDK
 PDK ?= ihp-sg13cmos5l
+PDK_HASH ?= 22f43352dd8219f9007eb659e422e0d5fe28c5fb
 
-PDK_REPO_IHP ?= https://github.com/IHP-GmbH/IHP-Open-PDK
-PDK_COMMIT_IHP ?= 22f2a25f1734796de3debbbf29cf697cbbc54081
+#PDK_REPO_IHP ?= https://github.com/IHP-GmbH/IHP-Open-PDK
+#PDK_COMMIT_IHP ?= 22f2a25f1734796de3debbbf29cf697cbbc54081
 
-PDK_REPO ?= https://github.com/IHP-GmbH/ihp-sg13cmos5l
-PDK_COMMIT ?= e8a87d708b8977e7c07684b033658a0f80af59a0
+#PDK_REPO ?= https://github.com/IHP-GmbH/ihp-sg13cmos5l
+#PDK_COMMIT ?= e8a87d708b8977e7c07684b033658a0f80af59a0
 #PDK_BRANCH ?= heichips25
 
 SCL ?= sg13cmos5l_stdcell
@@ -18,11 +19,11 @@ SCL ?= sg13cmos5l_stdcell
 .DEFAULT_GOAL := help
 
 $(PDK_ROOT)/$(PDK):
-	#ciel enable $(PDK_COMMIT) --pdk-root $(PDK_ROOT) --pdk-family $(PDK)
-	mkdir -p $(PDK_ROOT)
+	ciel enable $(PDK_HASH) --pdk-root $(PDK_ROOT) --pdk $(PDK)
+	#mkdir -p $(PDK_ROOT)
 	#git clone $(PDK_REPO) --recurse-submodules --depth=1 --single-branch -b $(PDK_BRANCH) $(PDK_ROOT)
-	git clone $(PDK_REPO_IHP) --recurse-submodules --depth=1 --revision $(PDK_COMMIT_IHP) $(PDK_ROOT)
-	git clone $(PDK_REPO) --recurse-submodules --depth=1 --revision $(PDK_COMMIT) $(PDK_ROOT)/$(PDK)
+	#git clone $(PDK_REPO_IHP) --recurse-submodules --depth=1 --revision $(PDK_COMMIT_IHP) $(PDK_ROOT)
+	#git clone $(PDK_REPO) --recurse-submodules --depth=1 --revision $(PDK_COMMIT) $(PDK_ROOT)/$(PDK)
 
 # Get the fabric names
 FABRICS :=  $(patsubst fabrics/%,%,$(wildcard fabrics/*)) 
@@ -92,31 +93,19 @@ logos: $(PDK_ROOT)/$(PDK) ## Run LibreLane
 .PHONY: logos
 
 librelane: $(PDK_ROOT)/$(PDK) ## Run LibreLane
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --scl ${SCL} --save-views-to final/
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py
 .PHONY: librelane
 
 librelane-nodrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane without DRC checks
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --save-views-to final/ --skip KLayout.DRC --skip Magic.DRC --skip KLayout.Antenna --skip KLayout.Density
-.PHONY: librelane-nodrc
-
-librelane-onlyfill: $(PDK_ROOT)/$(PDK) ## Run LibreLane onyl for filler generation and density checks
-	RUN=$$(ls librelane/runs/ | tail -n 1) && librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --with-initial-state librelane/runs/$$RUN/62-magic-filler/state_in.json --from Magic.Filler --to KLayout.Density
-.PHONY: librelane-onlyfill
-
-librelane-magicdrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane with only Magic DRC checks
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --save-views-to final/ --skip KLayout.DRC
-.PHONY: librelane-magicdrc
-
-librelane-klayoutdrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane with only KLayout DRC checks
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --save-views-to final/ --skip Magic.DRC
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --nodrc
 .PHONY: librelane-nodrc
 
 librelane-openroad: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in OpenROAD GUI
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui openroad
 .PHONY: librelane-openroad
 
-librelane-klayout: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in KLayout
-	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInKLayout
+librelane-klayout: $(PDK_ROOT)/$(PDK) ## Run LibreLane
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --gui klayout
 .PHONY: librelane-klayout
 
 sim-fabric: ## Runfabric  RTL simulation with cocotb

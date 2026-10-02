@@ -7,3 +7,6 @@
 [submodule "ip/hm-openpdk-library"]
 	path = ip/hm-openpdk-library
 	url = ../../hm-aemy/hm-openpdk-library.git
+[submodule "ip/user_projects/heichips26-on-off"]
+	path = ip/user_projects/heichips26-on-off
+	url = ../../HeiChips/heichips26-on-off.git

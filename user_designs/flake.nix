@@ -9,7 +9,7 @@
   };
 
   inputs = {
-    nix-eda.url = "github:fossi-foundation/nix-eda/6.0.2";
+    nix-eda.url = "github:fossi-foundation/nix-eda/7.8.0";
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
   };
@@ -40,34 +40,22 @@
           ))
           (final: prev: {
             nextpnr = prev.nextpnr.overrideAttrs {
-              version = "ca74f47c";
+              version = "3e53a0bf";
               src = prev.fetchFromGitHub {
                 owner = "YosysHQ";
                 repo = "nextpnr";
-                rev = "ca74f47c3f0f0d3f22b7a7e9920dafa589cc2f3e";
-                hash = "sha256-ybZiFL/c4W6OtXnAQhRbNtOQAHUJ+u3xcZYBmYYeWjA=";
+                rev = "3e53a0bf44d13c0de603dd089a323ea85d67d4ef";
+                hash = "sha256-zxdd0D2/YamP9djRsb613ktPofxbBUNS0jK0iZdtPhU=";
                 fetchSubmodules = true;
               };
               cmakeFlags = [
-                "-DCURRENT_GIT_VERSION=nextpnr-0e66c0ce"
+                "-DCURRENT_GIT_VERSION=nextpnr-3e53a0bf"
                 "-DARCH=generic"
                 "-DBUILD_TESTS=ON"
                 "-DUSE_OPENMP=ON"
                 # `Compatibility with CMake < 3.5 has been removed from CMake.`
                 "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
               ];
-            };
-          })
-          (final: prev: {
-            yosys = prev.yosys.overrideAttrs {
-              version = "2231c860";
-              src = prev.fetchGitHubSnapshot {
-                owner = "mole99";
-                repo = "yosys";
-                rev = "2231c860ec7afd8eef9ba97231c3a10950469e95";
-                hash = "sha256-OwLoMsdEmTvlrD7q7yU/rkLzX6h4GGB98OKzfRFFW/0=";
-                add-gitcommit = true;
-              };
             };
           })
         ];

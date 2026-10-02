@@ -5,6 +5,7 @@ module heichips26_core (
     `ifdef USE_POWER_PINS
     inout wire VDD,
     inout wire VSS,
+    inout wire VDDA,
     `endif
 
     // FPGA
@@ -303,8 +304,9 @@ module heichips26_core (
     
     fabric_wrapper fabric_wrapper (
         `ifdef USE_POWER_PINS
-        .VPWR (VDD),
-        .VGND (VSS),
+        .VPWR  (VDD),
+        .VGND  (VSS),
+        .VAPWR (VDDA),
         `endif
     
         // Configuration
