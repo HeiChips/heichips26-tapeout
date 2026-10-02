@@ -18,9 +18,9 @@ $(info $(PDK))
 $(info $(FABRIC))
 $(info $(TILE_LIBRARY))
 
-#ifeq ($(TILE_LIBRARY),classic)
-#MULTIPLIER_MAP_PATH 	 = -multiplier-map ../../../../ip/fabulous-tiles/primitives/MACC_8x8_20/yosys/techmap/MACC_8x8_20_map.v
-#endif
+CELLS_MAP		 = -cells-map ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/techmap/cells_map.v
+
+ARITH_MAP		 = -arith-map ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/techmap/arith_map.v
 
 EXTRA_PLIBS_PATH 	 = -extra-plib ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/primitives/prims.v \
 			   -extra-plib ../../../../ip/fabulous-tiles/primitives/IOBUF/yosys/primitives/IOBUF.v \
@@ -28,36 +28,18 @@ EXTRA_PLIBS_PATH 	 = -extra-plib ../../../../ip/fabulous-tiles/primitives/FABULO
 			   -extra-plib ../../../../ip/fabulous-tiles/primitives/OBUF/yosys/primitives/OBUF.v \
 			   -extra-plib ../../../../ip/fabulous-tiles/primitives/TBUF/yosys/primitives/TBUF.v \
 			   -extra-plib ../../../../ip/fabulous-tiles/primitives/GBUF/yosys/primitives/GBUF.v \
-   			   -extra-plib ../../../../ip/fabulous-tiles/primitives/SYS_RESET/yosys/primitives/SYS_RESET.v
-
-#ifeq ($(TILE_LIBRARY),classic)
-#EXTRA_PLIBS_PATH 	+= -extra-plib ../../../../ip/fabulous-tiles/primitives/RAM_32x4_2R_1W/yosys/primitives/RAM_32x4_2R_1W.v \
-#   			   -extra-plib ../../../../ip/fabulous-tiles/primitives/MACC_8x8_20/yosys/primitives/MACC_8x8_20.v
-#endif
-
-ifeq ($(FABRIC),classic_fabric_heichips26)
-EXTRA_PLIBS_PATH 	+= -extra-plib ../../../../ip/fabulous-tiles/primitives/TT_PROJECT/yosys/primitives/TT_PROJECT.v \
+   			   -extra-plib ../../../../ip/fabulous-tiles/primitives/SYS_RESET/yosys/primitives/SYS_RESET.v \
+   			   -extra-plib ../../../../ip/fabulous-tiles/primitives/TT_PROJECT/yosys/primitives/TT_PROJECT.v \
    			   -extra-plib ../../../../ip/fabulous-tiles/primitives/TT_PROJECT_MUX/yosys/primitives/TT_PROJECT_MUX.v \
    			   -extra-plib ../../../../ip/fabulous-tiles/primitives/TT_PROJECT_LARGE/yosys/primitives/TT_PROJECT_LARGE.v \
    			   -extra-plib ../../../../ip/fabulous-tiles/primitives/IHP_SRAM_1024x32_1RW/yosys/primitives/IHP_SRAM_1024x32_1RW.v
-endif
 
 EXTRA_MAPS_PATH		 = -extra-map ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/techmap/cells_map.v \
 			   -extra-map ../../../../ip/fabulous-tiles/primitives/FABULOUS_LC/yosys/techmap/ff_map.v \
 			   -extra-map ../../../../ip/fabulous-tiles/primitives/IOBUF/yosys/techmap/IOBUF_map.v \
 			   -extra-map ../../../../ip/fabulous-tiles/primitives/IHP_SRAM_1024x32_1RW/yosys/techmap/IHP_SRAM_1024x32_1RW_map.v
 
-#ifeq ($(TILE_LIBRARY),classic)
-#EXTRA_MAPS_PATH		+= -extra-map ../../../../ip/fabulous-tiles/primitives/RAM_32x4_2R_1W/yosys/techmap/RAM_32x4_2R_1W_map.v
-#endif
-
-#ifeq ($(TILE_LIBRARY),classic)
-#EXTRA_MLIBMAPS_PATH	 = -extra-mlibmap ../../../../ip/fabulous-tiles/primitives/RAM_32x4_2R_1W/yosys/memlib/RAM_32x4_2R_1W_lib.txt
-#endif
-
-ifeq ($(FABRIC),classic_fabric_heichips26)
 EXTRA_MLIBMAPS_PATH	 = -extra-mlibmap ../../../../ip/fabulous-tiles/primitives/IHP_SRAM_1024x32_1RW/yosys/memlib/IHP_SRAM_1024x32_1RW_lib.txt
-endif
 
 CLKBUF_MAP_PATH		 = -clkbuf-map ../../../../ip/fabulous-tiles/primitives/GBUF/yosys/techmap/GBUF_map.v
 
@@ -73,8 +55,9 @@ synth:
 	-top $(TOP) \
 	-lut 4 \
 	-carry ha \
-	-complex-dff \
 	$(FFS) \
+	$(CELLS_MAP) \
+	$(ARITH_MAP) \
 	$(MULTIPLIER_MAP_PATH) \
 	$(EXTRA_PLIBS_PATH) \
 	$(EXTRA_MAPS_PATH) \
