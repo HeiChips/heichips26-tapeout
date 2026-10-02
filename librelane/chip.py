@@ -206,7 +206,7 @@ def instantiate_user_projects(config, slot_map):
             }
             
             # HV power gate
-            config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"] = {
+            config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"] = {
                 "location": (instance_x - 36 if coords_x == 0 else instance_x + 519, instance_y),
                 "orientation": "FN" if coords_x == 0 else "N",
             }
@@ -238,7 +238,7 @@ def instantiate_user_projects(config, slot_map):
             }
             
             # HV power gate
-            config["MACROS"]["hm_pg_lv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"] = {
+            config["MACROS"]["hm_pg_hv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"] = {
                 "location": (instance_x - 36 if coords_x == 0 else instance_x + 519, instance_y),
                 "orientation": "FN" if coords_x == 0 else "N",
             }
@@ -272,7 +272,7 @@ def instantiate_user_projects(config, slot_map):
             }
             
             # HV power gate
-            config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"] = {
+            config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"] = {
                 "location": (instance_x - 35 if coords_x == 0 else instance_x + 219, instance_y),
                 "orientation": "FN" if coords_x == 0 else "N",
             }
@@ -297,7 +297,7 @@ def instantiate_user_projects(config, slot_map):
             }
             
             # HV power gate
-            config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_hv"] = {
+            config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_hv"] = {
                 "location": (instance_x + 250 - 35 if coords_x == 0 else instance_x + 250 + 269, instance_y),
                 "orientation": "FN" if coords_x == 0 else "N",
             }
@@ -503,7 +503,7 @@ def generate_rtl_wrapper(file, slot_map):
 
                     # Default small height
                     pg_lv = "hm_pg_lv_17x200"
-                    pg_hv = "hm_pg_lv_17x200"
+                    pg_hv = "hm_pg_hv_17x200"
                 
                     # A single "large" or "small" user project
                     if len(projects) == 1:
@@ -516,7 +516,7 @@ def generate_rtl_wrapper(file, slot_map):
 
                             if "heichips26_instance_large" in instance:
                                 pg_lv = "hm_pg_lv_17x415"
-                                pg_hv = "hm_pg_lv_17x415"
+                                pg_hv = "hm_pg_hv_17x415"
 
                             print(f"""    (* keep *) {module} {instance} (
             .clk        (tt_project_{i}_clk),
@@ -531,7 +531,7 @@ def generate_rtl_wrapper(file, slot_map):
                             
                             print(f"""    (* keep *) {pg_lv} {instance}_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
@@ -540,9 +540,10 @@ def generate_rtl_wrapper(file, slot_map):
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
                             print(f"""    );\n""")
@@ -578,7 +579,7 @@ def generate_rtl_wrapper(file, slot_map):
                             print(f"""    (* keep *) {pg_lv} {instance}_pg_lv (
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
-            .GND  (VGND),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
@@ -586,8 +587,9 @@ def generate_rtl_wrapper(file, slot_map):
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
@@ -609,7 +611,7 @@ def generate_rtl_wrapper(file, slot_map):
                             print(f"""    (* keep *) {pg_lv} {instance}_pg_lv (
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
-            .GND  (VGND),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")
@@ -617,8 +619,9 @@ def generate_rtl_wrapper(file, slot_map):
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_{i}_enable_power && configured_i)""")

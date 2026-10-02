@@ -1200,23 +1200,24 @@
 
     (* keep *) hm_pg_lv_17x415 heichips26_instance_large_0_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_1_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x415 heichips26_instance_large_0_pg_hv (
+    (* keep *) hm_pg_hv_17x415 heichips26_instance_large_0_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_1_enable_power && configured_i)
     );
 
-    (* keep *) heichips26_example_small heichips26_instance_small_0 (
+    (* keep *) heichips26_ook_top heichips26_instance_small_0 (
             .clk        (tt_project_2_clk),
             .rst_n      (tt_project_2_rst_n),
             .ena        (tt_project_2_ena),
@@ -1229,18 +1230,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_0_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_2_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_0_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_0_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_2_enable_power && configured_i)
     );
@@ -1258,18 +1260,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_1_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_3_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_1_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_1_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_3_enable_power && configured_i)
     );
@@ -1287,18 +1290,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_2_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_4_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_2_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_2_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_4_enable_power && configured_i)
     );
@@ -1316,18 +1320,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_3_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_5_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_3_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_3_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_5_enable_power && configured_i)
     );
@@ -1345,18 +1350,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_4_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_6_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_4_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_4_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_6_enable_power && configured_i)
     );
@@ -1374,18 +1380,19 @@
 
     (* keep *) hm_pg_lv_17x415 heichips26_instance_large_1_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_8_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x415 heichips26_instance_large_1_pg_hv (
+    (* keep *) hm_pg_hv_17x415 heichips26_instance_large_1_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_8_enable_power && configured_i)
     );
@@ -1416,16 +1423,17 @@
     (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_0_0_pg_lv (
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
-            .GND  (VGND),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_9_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_0_0_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_0_0_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_9_enable_power && configured_i)
@@ -1445,16 +1453,17 @@
     (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_0_1_pg_lv (
             `ifdef USE_POWER_PINS
             .VPWR  (VPWR),
-            .GND  (VGND),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_9_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_0_1_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_0_1_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
             .GPWR  (),
             `endif
             .CTRL (tt_project_9_enable_power && configured_i)
@@ -1473,18 +1482,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_5_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_10_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_5_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_5_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_10_enable_power && configured_i)
     );
@@ -1502,18 +1512,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_6_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_11_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_6_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_6_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_11_enable_power && configured_i)
     );
@@ -1531,18 +1542,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_7_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_12_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_7_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_7_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_12_enable_power && configured_i)
     );
@@ -1584,18 +1596,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_8_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_15_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_8_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_8_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_15_enable_power && configured_i)
     );
@@ -1613,18 +1626,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_9_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_16_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_9_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_9_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_16_enable_power && configured_i)
     );
@@ -1642,18 +1656,19 @@
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_10_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
+            .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
             .CTRL (tt_project_17_enable_power && configured_i)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_10_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_10_pg_hv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VAPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
             .CTRL (tt_project_17_enable_power && configured_i)
     );

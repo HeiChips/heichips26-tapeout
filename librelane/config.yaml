@@ -64,7 +64,7 @@ HEICHIPS_SLOTS:
     # left side
     'X0Y1': null
     'X0Y2': [['heichips26_event_snn', 'heichips26_instance_large_0']]
-    'X0Y3': [['heichips26_example_small', 'heichips26_instance_small_0']]
+    'X0Y3': [['heichips26_ook_top', 'heichips26_instance_small_0']]
     'X0Y4': [['heichips26_example_small', 'heichips26_instance_small_1']]
     'X0Y5': [['heichips26_example_small', 'heichips26_instance_small_2']]
     'X0Y6': [['heichips26_example_small', 'heichips26_instance_small_3']]
@@ -449,19 +449,12 @@ MACROS:
         - pdk_dir::libs.ref/sg13cmos5l_sram/lib/RM_IHPSG13_1P_1024x32_c2_bm_bist_slow_1p08V_125C.lib
     instances: {}
 
-  #lv_power_gate_small:
   hm_pg_lv_17x200:
     gds:
-      #- dir::../ip/lv_power_gate_small/gds/lv_power_gate_small.gds
-      #- dir::../ip/hm_pg/gds/hm_pg_lv_17x200.gds
       - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/gds/hm_pg_lv_17x200.gds
     lef:
-      #- dir::../ip/lv_power_gate_small/lef/lv_power_gate_small.lef
-      #- dir::../ip/hm_pg/lef/hm_pg_lv_17x200.lef
       - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/lef/hm_pg_lv_17x200.lef
     vh:
-      #- dir::../ip/lv_power_gate_small/vh/lv_power_gate_small.vh
-      #- dir::../ip/hm_pg/vh/hm_pg_lv_17x200.vh
       - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_lv_17x200.vh
     instances: {}
 
@@ -472,6 +465,24 @@ MACROS:
       - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/lef/hm_pg_lv_17x415.lef
     vh:
       - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_lv_17x415.vh
+    instances: {}
+
+  hm_pg_hv_17x200:
+    gds:
+      - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/gds/hm_pg_hv_17x200.gds
+    lef:
+      - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/lef/hm_pg_hv_17x200.lef
+    vh:
+      - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_hv_17x200.vh
+    instances: {}
+
+  hm_pg_hv_17x415:
+    gds:
+      - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/gds/hm_pg_hv_17x415.gds
+    lef:
+      - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/lef/hm_pg_hv_17x415.lef
+    vh:
+      - dir::../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_hv_17x415.vh
     instances: {}
 
   heichips26_example_large:

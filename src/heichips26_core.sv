@@ -304,8 +304,8 @@ module heichips26_core (
     
     fabric_wrapper fabric_wrapper (
         `ifdef USE_POWER_PINS
-        .VPWR (VDD),
-        .VGND (VSS),
+        .VPWR  (VDD),
+        .VGND  (VSS),
         .VAPWR (VDDA),
         `endif
     
