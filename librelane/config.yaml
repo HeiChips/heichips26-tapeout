@@ -65,23 +65,23 @@ HEICHIPS_SLOTS:
     'X0Y1': null
     'X0Y2': [['heichips26_event_snn', 'heichips26_instance_large_0']]
     'X0Y3': [['heichips26_ook_top', 'heichips26_instance_small_0']]
-    'X0Y4': [['heichips26_example_small', 'heichips26_instance_small_1']]
-    'X0Y5': [['heichips26_example_small', 'heichips26_instance_small_2']]
-    'X0Y6': [['heichips26_example_small', 'heichips26_instance_small_3']]
-    'X0Y7': [['heichips26_example_small', 'heichips26_instance_small_4']]
+    'X0Y4': [['heichips26_vcr', 'heichips26_instance_small_1']]
+    'X0Y5': [['heichips26_noise_gen', 'heichips26_instance_small_2']]
+    'X0Y6': null
+    'X0Y7': [['heichips26_e2spike', 'heichips26_instance_large_1']]
     'X0Y8': null
-    'X0Y9': [['heichips26_example_large', 'heichips26_instance_large_1']]
+    'X0Y9': [['heichips26_RiMaX', 'heichips26_instance_large_2']]
 
     # right side
-    'X5Y1': [['heichips26_example_tiny', 'heichips26_instance_tiny_0_0'], ['heichips26_example_tiny', 'heichips26_instance_tiny_0_1']]
-    'X5Y2': [['heichips26_example_small', 'heichips26_instance_small_5']]
-    'X5Y3': [['heichips26_example_small', 'heichips26_instance_small_6']]
-    'X5Y4': [['heichips26_example_small', 'heichips26_instance_small_7']]
+    'X5Y1': [['heichips26_dram_replica', 'heichips26_instance_tiny_0_0'], ['heichips26_minimal_multicore_processor', 'heichips26_instance_tiny_0_1']]
+    'X5Y2': [['heichips26_ballmer_peak_detector', 'heichips26_instance_small_3']]
+    'X5Y3': [['heichips26_dna_sequencer', 'heichips26_instance_small_4']]
+    'X5Y4': [['heichips26_example_small', 'heichips26_instance_small_5']]
     'X5Y5': null
     'X5Y6': [["RM_IHPSG13_1P_1024x32_c2_bm_bist", "heichips26_instance_sram_0"]]
-    'X5Y7': [['heichips26_example_small', 'heichips26_instance_small_8']]
-    'X5Y8': [['heichips26_example_small', 'heichips26_instance_small_9']]
-    'X5Y9': [['heichips26_example_small', 'heichips26_instance_small_10']]
+    'X5Y7': [['heichips26_example_small', 'heichips26_instance_small_6']]
+    'X5Y8': [['heichips26_daftASIC', 'heichips26_instance_small_7']]
+    'X5Y9': [['heichips26_example_small', 'heichips26_instance_small_8']]
 
 PAD_SOUTH: [
     "fpga_ios\\[0\\].fpga_io",

@@ -649,7 +649,7 @@ def generate_rtl_wrapper(file, slot_map):
         .A_BIST_MEN     (fabric_sram_{i}_tie_low_o),
         .A_BIST_WEN     (fabric_sram_{i}_tie_low_o),
         .A_BIST_REN     (fabric_sram_{i}_tie_low_o),
-        .A_BIST_ADDR    ({{9{{fabric_sram_{i}_tie_low_o}}}}),
+        .A_BIST_ADDR    ({{10{{fabric_sram_{i}_tie_low_o}}}}),
         .A_BIST_DIN     ({{32{{fabric_sram_{i}_tie_low_o}}}}),
         .A_BIST_BM      ({{32{{fabric_sram_{i}_tie_low_o}}}})
     );

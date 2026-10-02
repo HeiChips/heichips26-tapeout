@@ -10,3 +10,30 @@
 [submodule "ip/user_projects/heichips26-on-off"]
 	path = ip/user_projects/heichips26-on-off
 	url = ../../HeiChips/heichips26-on-off.git
+[submodule "ip/user_projects/heichips26-voltage-controlled-resistor"]
+	path = ip/user_projects/heichips26-voltage-controlled-resistor
+	url = ../../HeiChips/heichips26-voltage-controlled-resistor.git
+[submodule "ip/user_projects/heichips26_noise_gen"]
+	path = ip/user_projects/heichips26_noise_gen
+	url = ../../HeiChips/heichips26_noise_gen.git
+[submodule "ip/user_projects/heichips26-daftasic"]
+	path = ip/user_projects/heichips26-daftasic
+	url = ../../HeiChips/heichips26-daftasic.git
+[submodule "ip/user_projects/heichips26-rimax"]
+	path = ip/user_projects/heichips26-rimax
+	url = ../../HeiChips/heichips26-rimax.git
+[submodule "ip/user_projects/heichips26_dram_replica"]
+	path = ip/user_projects/heichips26_dram_replica
+	url = ../../HeiChips/heichips26_dram_replica.git
+[submodule "ip/user_projects/heichips26-minimal-processor"]
+	path = ip/user_projects/heichips26-minimal-processor
+	url = ../../HeiChips/heichips26-minimal-processor.git
+[submodule "ip/user_projects/heichips26-ballmer-peak-detector"]
+	path = ip/user_projects/heichips26-ballmer-peak-detector
+	url = ../../HeiChips/heichips26-ballmer-peak-detector.git
+[submodule "ip/user_projects/heichips26-DNA_sequencer"]
+	path = ip/user_projects/heichips26-DNA_sequencer
+	url = ../../HeiChips/heichips26-DNA_sequencer.git
+[submodule "ip/user_projects/heichips26-e2spike"]
+	path = ip/user_projects/heichips26-e2spike
+	url = ../../HeiChips/heichips26-e2spike.git
