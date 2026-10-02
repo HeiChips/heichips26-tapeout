@@ -306,13 +306,12 @@ def custom_pdn(instances, reader):
                 "VPWR_GATED"  : 19_000,
                 "VAPWR_GATED" : 19_000 + 6_000,
             }
-            stripe_pitch = int(215.04/6*1_000) # TODO use PDN_HPITCH
+            stripe_pitch = round(215.04/6*1_000) # TODO use PDN_HPITCH
             stripe_width = 4_000
             
             pg_extension = 36_000
         
-            for i in range(stripe_offset[power_domain], y_max - y_min - 43, stripe_pitch):
-                print(i)
+            for i in range(stripe_offset[power_domain], y_max - y_min - stripe_width, stripe_pitch):
 
                 stripe_rect = odb.Rect(
                     x_min,
@@ -320,6 +319,11 @@ def custom_pdn(instances, reader):
                     x_max,
                     y_min + i + stripe_width
                 )
+
+                assert(stripe_rect.xMin() % 5 == 0)
+                assert(stripe_rect.yMin() % 5 == 0)
+                assert(stripe_rect.xMax() % 5 == 0)
+                assert(stripe_rect.yMax() % 5 == 0)
                 
                 # Stripe
                 odb.createSBoxes(sw, tech.findLayer("TopMetal1"), [stripe_rect], "STRIPE")
