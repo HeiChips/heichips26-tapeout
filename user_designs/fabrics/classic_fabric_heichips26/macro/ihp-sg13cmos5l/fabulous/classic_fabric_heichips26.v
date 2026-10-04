@@ -77,6 +77,7 @@ module classic_fabric_heichips26
         input  Tile_X5Y1_UIO_OE_TT_PROJECT6, //EXTERNAL
         input  Tile_X5Y1_UIO_OE_TT_PROJECT7, //EXTERNAL
         output  Tile_X5Y1_ENABLE_POWER_TT_PROJECT, //EXTERNAL
+        output  Tile_X5Y1_SELECT_SLOT_TT_PROJECT, //EXTERNAL
         output  Tile_X5Y1_UI_IN_TT_PROJECT0, //EXTERNAL
         output  Tile_X5Y1_UI_IN_TT_PROJECT1, //EXTERNAL
         output  Tile_X5Y1_UI_IN_TT_PROJECT2, //EXTERNAL
@@ -293,7 +294,6 @@ module classic_fabric_heichips26
         input  Tile_X5Y3_UIO_OE_TT_PROJECT6, //EXTERNAL
         input  Tile_X5Y3_UIO_OE_TT_PROJECT7, //EXTERNAL
         output  Tile_X5Y3_ENABLE_POWER_TT_PROJECT, //EXTERNAL
-        output  Tile_X5Y3_SELECT_SLOT_TT_PROJECT, //EXTERNAL
         output  Tile_X5Y3_UI_IN_TT_PROJECT0, //EXTERNAL
         output  Tile_X5Y3_UI_IN_TT_PROJECT1, //EXTERNAL
         output  Tile_X5Y3_UI_IN_TT_PROJECT2, //EXTERNAL
@@ -382,6 +382,7 @@ module classic_fabric_heichips26
         input  Tile_X5Y4_UIO_OE_TT_PROJECT6, //EXTERNAL
         input  Tile_X5Y4_UIO_OE_TT_PROJECT7, //EXTERNAL
         output  Tile_X5Y4_ENABLE_POWER_TT_PROJECT, //EXTERNAL
+        output  Tile_X5Y4_SELECT_SLOT_TT_PROJECT, //EXTERNAL
         output  Tile_X5Y4_UI_IN_TT_PROJECT0, //EXTERNAL
         output  Tile_X5Y4_UI_IN_TT_PROJECT1, //EXTERNAL
         output  Tile_X5Y4_UI_IN_TT_PROJECT2, //EXTERNAL
@@ -445,50 +446,6 @@ module classic_fabric_heichips26
         output  Tile_X0Y5_ENA_TT_PROJECT, //EXTERNAL
         output  Tile_X0Y5_CLK_TT_PROJECT, //EXTERNAL
         output  Tile_X0Y5_RST_N_TT_PROJECT, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT0, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT1, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT2, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT3, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT4, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT5, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT6, //EXTERNAL
-        input  Tile_X0Y6_UO_OUT_TT_PROJECT7, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT0, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT1, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT2, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT3, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT4, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT5, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT6, //EXTERNAL
-        input  Tile_X0Y6_UIO_OUT_TT_PROJECT7, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT0, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT1, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT2, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT3, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT4, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT5, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT6, //EXTERNAL
-        input  Tile_X0Y6_UIO_OE_TT_PROJECT7, //EXTERNAL
-        output  Tile_X0Y6_ENABLE_POWER_TT_PROJECT, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT0, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT1, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT2, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT3, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT4, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT5, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT6, //EXTERNAL
-        output  Tile_X0Y6_UI_IN_TT_PROJECT7, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT0, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT1, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT2, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT3, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT4, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT5, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT6, //EXTERNAL
-        output  Tile_X0Y6_UIO_IN_TT_PROJECT7, //EXTERNAL
-        output  Tile_X0Y6_ENA_TT_PROJECT, //EXTERNAL
-        output  Tile_X0Y6_CLK_TT_PROJECT, //EXTERNAL
-        output  Tile_X0Y6_RST_N_TT_PROJECT, //EXTERNAL
         input  Tile_X5Y6_DOUT_SRAM0, //EXTERNAL
         input  Tile_X5Y6_DOUT_SRAM1, //EXTERNAL
         input  Tile_X5Y6_DOUT_SRAM2, //EXTERNAL
@@ -610,6 +567,14 @@ module classic_fabric_heichips26
         input  Tile_X0Y7_UO_OUT_TT_PROJECT5, //EXTERNAL
         input  Tile_X0Y7_UO_OUT_TT_PROJECT6, //EXTERNAL
         input  Tile_X0Y7_UO_OUT_TT_PROJECT7, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT8, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT9, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT10, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT11, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT12, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT13, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT14, //EXTERNAL
+        input  Tile_X0Y7_UO_OUT_TT_PROJECT15, //EXTERNAL
         input  Tile_X0Y7_UIO_OUT_TT_PROJECT0, //EXTERNAL
         input  Tile_X0Y7_UIO_OUT_TT_PROJECT1, //EXTERNAL
         input  Tile_X0Y7_UIO_OUT_TT_PROJECT2, //EXTERNAL
@@ -618,6 +583,14 @@ module classic_fabric_heichips26
         input  Tile_X0Y7_UIO_OUT_TT_PROJECT5, //EXTERNAL
         input  Tile_X0Y7_UIO_OUT_TT_PROJECT6, //EXTERNAL
         input  Tile_X0Y7_UIO_OUT_TT_PROJECT7, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT8, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT9, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT10, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT11, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT12, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT13, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT14, //EXTERNAL
+        input  Tile_X0Y7_UIO_OUT_TT_PROJECT15, //EXTERNAL
         input  Tile_X0Y7_UIO_OE_TT_PROJECT0, //EXTERNAL
         input  Tile_X0Y7_UIO_OE_TT_PROJECT1, //EXTERNAL
         input  Tile_X0Y7_UIO_OE_TT_PROJECT2, //EXTERNAL
@@ -626,6 +599,14 @@ module classic_fabric_heichips26
         input  Tile_X0Y7_UIO_OE_TT_PROJECT5, //EXTERNAL
         input  Tile_X0Y7_UIO_OE_TT_PROJECT6, //EXTERNAL
         input  Tile_X0Y7_UIO_OE_TT_PROJECT7, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT8, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT9, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT10, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT11, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT12, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT13, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT14, //EXTERNAL
+        input  Tile_X0Y7_UIO_OE_TT_PROJECT15, //EXTERNAL
         output  Tile_X0Y7_ENABLE_POWER_TT_PROJECT, //EXTERNAL
         output  Tile_X0Y7_UI_IN_TT_PROJECT0, //EXTERNAL
         output  Tile_X0Y7_UI_IN_TT_PROJECT1, //EXTERNAL
@@ -635,6 +616,14 @@ module classic_fabric_heichips26
         output  Tile_X0Y7_UI_IN_TT_PROJECT5, //EXTERNAL
         output  Tile_X0Y7_UI_IN_TT_PROJECT6, //EXTERNAL
         output  Tile_X0Y7_UI_IN_TT_PROJECT7, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT8, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT9, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT10, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT11, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT12, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT13, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT14, //EXTERNAL
+        output  Tile_X0Y7_UI_IN_TT_PROJECT15, //EXTERNAL
         output  Tile_X0Y7_UIO_IN_TT_PROJECT0, //EXTERNAL
         output  Tile_X0Y7_UIO_IN_TT_PROJECT1, //EXTERNAL
         output  Tile_X0Y7_UIO_IN_TT_PROJECT2, //EXTERNAL
@@ -643,6 +632,14 @@ module classic_fabric_heichips26
         output  Tile_X0Y7_UIO_IN_TT_PROJECT5, //EXTERNAL
         output  Tile_X0Y7_UIO_IN_TT_PROJECT6, //EXTERNAL
         output  Tile_X0Y7_UIO_IN_TT_PROJECT7, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT8, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT9, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT10, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT11, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT12, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT13, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT14, //EXTERNAL
+        output  Tile_X0Y7_UIO_IN_TT_PROJECT15, //EXTERNAL
         output  Tile_X0Y7_ENA_TT_PROJECT, //EXTERNAL
         output  Tile_X0Y7_CLK_TT_PROJECT, //EXTERNAL
         output  Tile_X0Y7_RST_N_TT_PROJECT, //EXTERNAL
@@ -1614,6 +1611,7 @@ wire[7:0] Tile_X0Y6_E2BEG;
 wire[7:0] Tile_X0Y6_E2BEGb;
 wire[15:0] Tile_X0Y6_EE4BEG;
 wire[11:0] Tile_X0Y6_E6BEG;
+wire[15:0] Tile_X0Y6_top2bot_UIO_IN;
 wire[3:0] Tile_X1Y6_N_GBUF_BEG;
 wire[3:0] Tile_X1Y6_N1BEG;
 wire[7:0] Tile_X1Y6_N2BEG;
@@ -1716,6 +1714,8 @@ wire[7:0] Tile_X0Y7_E2BEG;
 wire[7:0] Tile_X0Y7_E2BEGb;
 wire[15:0] Tile_X0Y7_EE4BEG;
 wire[11:0] Tile_X0Y7_E6BEG;
+wire[15:0] Tile_X0Y7_bot2top_UIO_OUT;
+wire[15:0] Tile_X0Y7_bot2top_UIO_OE;
 wire[3:0] Tile_X1Y7_N_GBUF_BEG;
 wire[3:0] Tile_X1Y7_N1BEG;
 wire[7:0] Tile_X1Y7_N2BEG;
@@ -2076,7 +2076,7 @@ assign Column_X5_FrameStrobe = FrameStrobe[MaxFramesPerCol*(5+1)-1:MaxFramesPerC
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-NW_term
+(* keep *) NW_term
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X0Y0_Emulate_Bitstream)
@@ -2095,7 +2095,7 @@ NW_term
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-N_IO4
+(* keep *) N_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y0_Emulate_Bitstream)
@@ -2136,7 +2136,7 @@ N_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-N_IO4
+(* keep *) N_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y0_Emulate_Bitstream)
@@ -2177,7 +2177,7 @@ N_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-N_IO4
+(* keep *) N_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y0_Emulate_Bitstream)
@@ -2218,7 +2218,7 @@ N_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-N_IO4
+(* keep *) N_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y0_Emulate_Bitstream)
@@ -2259,7 +2259,7 @@ N_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-NE_term
+(* keep *) NE_term
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y0_Emulate_Bitstream)
@@ -2277,7 +2277,7 @@ NE_term
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-W_TT_IF2
+(* keep *) W_TT_IF2
 `ifdef EMULATION
     #(
     .Tile_X0Y0_Emulate_Bitstream(`Tile_X0Y1_Emulate_Bitstream),
@@ -2405,7 +2405,7 @@ W_TT_IF2
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y1_Emulate_Bitstream)
@@ -2466,7 +2466,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y1_Emulate_Bitstream)
@@ -2527,7 +2527,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y1_Emulate_Bitstream)
@@ -2588,7 +2588,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y1_Emulate_Bitstream)
@@ -2649,13 +2649,13 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_TT_IF
+(* keep *) E_TT_IF_MUX
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y1_Emulate_Bitstream)
     )
 `endif
-    Tile_X5Y1_E_TT_IF
+    Tile_X5Y1_E_TT_IF_MUX
     (
     .N_GBUF_END(Tile_X5Y2_N_GBUF_BEG),
     .E1END(Tile_X4Y1_E1BEG),
@@ -2694,6 +2694,7 @@ E_TT_IF
     .UIO_OE_TT_PROJECT6(Tile_X5Y1_UIO_OE_TT_PROJECT6),
     .UIO_OE_TT_PROJECT7(Tile_X5Y1_UIO_OE_TT_PROJECT7),
     .ENABLE_POWER_TT_PROJECT(Tile_X5Y1_ENABLE_POWER_TT_PROJECT),
+    .SELECT_SLOT_TT_PROJECT(Tile_X5Y1_SELECT_SLOT_TT_PROJECT),
     .UI_IN_TT_PROJECT0(Tile_X5Y1_UI_IN_TT_PROJECT0),
     .UI_IN_TT_PROJECT1(Tile_X5Y1_UI_IN_TT_PROJECT1),
     .UI_IN_TT_PROJECT2(Tile_X5Y1_UI_IN_TT_PROJECT2),
@@ -2722,7 +2723,7 @@ E_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y2_Emulate_Bitstream)
@@ -2783,7 +2784,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y2_Emulate_Bitstream)
@@ -2844,7 +2845,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y2_Emulate_Bitstream)
@@ -2905,7 +2906,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y2_Emulate_Bitstream)
@@ -2966,7 +2967,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_TT_IF
+(* keep *) E_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y2_Emulate_Bitstream)
@@ -3039,7 +3040,7 @@ E_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-W_TT_IF
+(* keep *) W_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X0Y3_Emulate_Bitstream)
@@ -3114,7 +3115,7 @@ W_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y3_Emulate_Bitstream)
@@ -3175,7 +3176,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y3_Emulate_Bitstream)
@@ -3236,7 +3237,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y3_Emulate_Bitstream)
@@ -3297,7 +3298,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y3_Emulate_Bitstream)
@@ -3358,13 +3359,13 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_TT_IF_MUX
+(* keep *) E_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y3_Emulate_Bitstream)
     )
 `endif
-    Tile_X5Y3_E_TT_IF_MUX
+    Tile_X5Y3_E_TT_IF
     (
     .N_GBUF_END(Tile_X5Y4_N_GBUF_BEG),
     .E1END(Tile_X4Y3_E1BEG),
@@ -3403,7 +3404,6 @@ E_TT_IF_MUX
     .UIO_OE_TT_PROJECT6(Tile_X5Y3_UIO_OE_TT_PROJECT6),
     .UIO_OE_TT_PROJECT7(Tile_X5Y3_UIO_OE_TT_PROJECT7),
     .ENABLE_POWER_TT_PROJECT(Tile_X5Y3_ENABLE_POWER_TT_PROJECT),
-    .SELECT_SLOT_TT_PROJECT(Tile_X5Y3_SELECT_SLOT_TT_PROJECT),
     .UI_IN_TT_PROJECT0(Tile_X5Y3_UI_IN_TT_PROJECT0),
     .UI_IN_TT_PROJECT1(Tile_X5Y3_UI_IN_TT_PROJECT1),
     .UI_IN_TT_PROJECT2(Tile_X5Y3_UI_IN_TT_PROJECT2),
@@ -3432,7 +3432,7 @@ E_TT_IF_MUX
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-W_TT_IF
+(* keep *) W_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X0Y4_Emulate_Bitstream)
@@ -3507,7 +3507,7 @@ W_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y4_Emulate_Bitstream)
@@ -3568,7 +3568,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y4_Emulate_Bitstream)
@@ -3629,7 +3629,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y4_Emulate_Bitstream)
@@ -3690,7 +3690,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y4_Emulate_Bitstream)
@@ -3751,13 +3751,13 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_TT_IF
+(* keep *) E_TT_IF_MUX
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y4_Emulate_Bitstream)
     )
 `endif
-    Tile_X5Y4_E_TT_IF
+    Tile_X5Y4_E_TT_IF_MUX
     (
     .N_GBUF_END(Tile_X5Y5_N_GBUF_BEG),
     .E1END(Tile_X4Y4_E1BEG),
@@ -3796,6 +3796,7 @@ E_TT_IF
     .UIO_OE_TT_PROJECT6(Tile_X5Y4_UIO_OE_TT_PROJECT6),
     .UIO_OE_TT_PROJECT7(Tile_X5Y4_UIO_OE_TT_PROJECT7),
     .ENABLE_POWER_TT_PROJECT(Tile_X5Y4_ENABLE_POWER_TT_PROJECT),
+    .SELECT_SLOT_TT_PROJECT(Tile_X5Y4_SELECT_SLOT_TT_PROJECT),
     .UI_IN_TT_PROJECT0(Tile_X5Y4_UI_IN_TT_PROJECT0),
     .UI_IN_TT_PROJECT1(Tile_X5Y4_UI_IN_TT_PROJECT1),
     .UI_IN_TT_PROJECT2(Tile_X5Y4_UI_IN_TT_PROJECT2),
@@ -3824,7 +3825,7 @@ E_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-W_TT_IF
+(* keep *) W_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X0Y5_Emulate_Bitstream)
@@ -3899,7 +3900,7 @@ W_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y5_Emulate_Bitstream)
@@ -3960,7 +3961,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y5_Emulate_Bitstream)
@@ -4021,7 +4022,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y5_Emulate_Bitstream)
@@ -4082,7 +4083,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y5_Emulate_Bitstream)
@@ -4143,7 +4144,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_IHP_SRAM
+(* keep *) E_IHP_SRAM
 `ifdef EMULATION
     #(
     .Tile_X0Y0_Emulate_Bitstream(`Tile_X5Y5_Emulate_Bitstream),
@@ -4298,82 +4299,135 @@ E_IHP_SRAM
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-W_TT_IF
+(* keep *) W_TT_IF2
 `ifdef EMULATION
     #(
-    .Emulate_Bitstream(`Tile_X0Y6_Emulate_Bitstream)
+    .Tile_X0Y0_Emulate_Bitstream(`Tile_X0Y6_Emulate_Bitstream),
+    .Tile_X0Y1_Emulate_Bitstream(`Tile_X0Y7_Emulate_Bitstream)
     )
 `endif
-    Tile_X0Y6_W_TT_IF
+    Tile_X0Y6_W_TT_IF2
     (
-    .N_GBUF_END(Tile_X0Y7_N_GBUF_BEG),
-    .S_GBUF_FEED_END(Tile_X0Y5_S_GBUF_FEED_BEG),
-    .W1END(Tile_X1Y6_W1BEG),
-    .W2MID(Tile_X1Y6_W2BEG),
-    .W2END(Tile_X1Y6_W2BEGb),
-    .WW4END(Tile_X1Y6_WW4BEG),
-    .W6END(Tile_X1Y6_W6BEG),
-    .S_GBUF_FEED_BEG(Tile_X0Y6_S_GBUF_FEED_BEG),
-    .N_GBUF_BEG(Tile_X0Y6_N_GBUF_BEG),
-    .E1BEG(Tile_X0Y6_E1BEG),
-    .E2BEG(Tile_X0Y6_E2BEG),
-    .E2BEGb(Tile_X0Y6_E2BEGb),
-    .EE4BEG(Tile_X0Y6_EE4BEG),
-    .E6BEG(Tile_X0Y6_E6BEG),
-    .UO_OUT_TT_PROJECT0(Tile_X0Y6_UO_OUT_TT_PROJECT0),
-    .UO_OUT_TT_PROJECT1(Tile_X0Y6_UO_OUT_TT_PROJECT1),
-    .UO_OUT_TT_PROJECT2(Tile_X0Y6_UO_OUT_TT_PROJECT2),
-    .UO_OUT_TT_PROJECT3(Tile_X0Y6_UO_OUT_TT_PROJECT3),
-    .UO_OUT_TT_PROJECT4(Tile_X0Y6_UO_OUT_TT_PROJECT4),
-    .UO_OUT_TT_PROJECT5(Tile_X0Y6_UO_OUT_TT_PROJECT5),
-    .UO_OUT_TT_PROJECT6(Tile_X0Y6_UO_OUT_TT_PROJECT6),
-    .UO_OUT_TT_PROJECT7(Tile_X0Y6_UO_OUT_TT_PROJECT7),
-    .UIO_OUT_TT_PROJECT0(Tile_X0Y6_UIO_OUT_TT_PROJECT0),
-    .UIO_OUT_TT_PROJECT1(Tile_X0Y6_UIO_OUT_TT_PROJECT1),
-    .UIO_OUT_TT_PROJECT2(Tile_X0Y6_UIO_OUT_TT_PROJECT2),
-    .UIO_OUT_TT_PROJECT3(Tile_X0Y6_UIO_OUT_TT_PROJECT3),
-    .UIO_OUT_TT_PROJECT4(Tile_X0Y6_UIO_OUT_TT_PROJECT4),
-    .UIO_OUT_TT_PROJECT5(Tile_X0Y6_UIO_OUT_TT_PROJECT5),
-    .UIO_OUT_TT_PROJECT6(Tile_X0Y6_UIO_OUT_TT_PROJECT6),
-    .UIO_OUT_TT_PROJECT7(Tile_X0Y6_UIO_OUT_TT_PROJECT7),
-    .UIO_OE_TT_PROJECT0(Tile_X0Y6_UIO_OE_TT_PROJECT0),
-    .UIO_OE_TT_PROJECT1(Tile_X0Y6_UIO_OE_TT_PROJECT1),
-    .UIO_OE_TT_PROJECT2(Tile_X0Y6_UIO_OE_TT_PROJECT2),
-    .UIO_OE_TT_PROJECT3(Tile_X0Y6_UIO_OE_TT_PROJECT3),
-    .UIO_OE_TT_PROJECT4(Tile_X0Y6_UIO_OE_TT_PROJECT4),
-    .UIO_OE_TT_PROJECT5(Tile_X0Y6_UIO_OE_TT_PROJECT5),
-    .UIO_OE_TT_PROJECT6(Tile_X0Y6_UIO_OE_TT_PROJECT6),
-    .UIO_OE_TT_PROJECT7(Tile_X0Y6_UIO_OE_TT_PROJECT7),
-    .ENABLE_POWER_TT_PROJECT(Tile_X0Y6_ENABLE_POWER_TT_PROJECT),
-    .UI_IN_TT_PROJECT0(Tile_X0Y6_UI_IN_TT_PROJECT0),
-    .UI_IN_TT_PROJECT1(Tile_X0Y6_UI_IN_TT_PROJECT1),
-    .UI_IN_TT_PROJECT2(Tile_X0Y6_UI_IN_TT_PROJECT2),
-    .UI_IN_TT_PROJECT3(Tile_X0Y6_UI_IN_TT_PROJECT3),
-    .UI_IN_TT_PROJECT4(Tile_X0Y6_UI_IN_TT_PROJECT4),
-    .UI_IN_TT_PROJECT5(Tile_X0Y6_UI_IN_TT_PROJECT5),
-    .UI_IN_TT_PROJECT6(Tile_X0Y6_UI_IN_TT_PROJECT6),
-    .UI_IN_TT_PROJECT7(Tile_X0Y6_UI_IN_TT_PROJECT7),
-    .UIO_IN_TT_PROJECT0(Tile_X0Y6_UIO_IN_TT_PROJECT0),
-    .UIO_IN_TT_PROJECT1(Tile_X0Y6_UIO_IN_TT_PROJECT1),
-    .UIO_IN_TT_PROJECT2(Tile_X0Y6_UIO_IN_TT_PROJECT2),
-    .UIO_IN_TT_PROJECT3(Tile_X0Y6_UIO_IN_TT_PROJECT3),
-    .UIO_IN_TT_PROJECT4(Tile_X0Y6_UIO_IN_TT_PROJECT4),
-    .UIO_IN_TT_PROJECT5(Tile_X0Y6_UIO_IN_TT_PROJECT5),
-    .UIO_IN_TT_PROJECT6(Tile_X0Y6_UIO_IN_TT_PROJECT6),
-    .UIO_IN_TT_PROJECT7(Tile_X0Y6_UIO_IN_TT_PROJECT7),
-    .ENA_TT_PROJECT(Tile_X0Y6_ENA_TT_PROJECT),
-    .CLK_TT_PROJECT(Tile_X0Y6_CLK_TT_PROJECT),
-    .RST_N_TT_PROJECT(Tile_X0Y6_RST_N_TT_PROJECT),
-    .FrameData(Row_Y6_FrameData),
-    .FrameData_O(Tile_X0Y6_FrameData_O),
-    .FrameStrobe(Tile_X0Y7_FrameStrobe_O),
-    .FrameStrobe_O(Tile_X0Y6_FrameStrobe_O)
+    .Tile_X0Y0_S_GBUF_FEED_END(Tile_X0Y5_S_GBUF_FEED_BEG),
+    .Tile_X0Y0_W1END(Tile_X1Y6_W1BEG),
+    .Tile_X0Y0_W2MID(Tile_X1Y6_W2BEG),
+    .Tile_X0Y0_W2END(Tile_X1Y6_W2BEGb),
+    .Tile_X0Y0_WW4END(Tile_X1Y6_WW4BEG),
+    .Tile_X0Y0_W6END(Tile_X1Y6_W6BEG),
+    .Tile_X0Y1_N_GBUF_END(Tile_X0Y8_N_GBUF_BEG),
+    .Tile_X0Y1_W1END(Tile_X1Y7_W1BEG),
+    .Tile_X0Y1_W2MID(Tile_X1Y7_W2BEG),
+    .Tile_X0Y1_W2END(Tile_X1Y7_W2BEGb),
+    .Tile_X0Y1_WW4END(Tile_X1Y7_WW4BEG),
+    .Tile_X0Y1_W6END(Tile_X1Y7_W6BEG),
+    .Tile_X0Y0_N_GBUF_BEG(Tile_X0Y6_N_GBUF_BEG),
+    .Tile_X0Y0_E1BEG(Tile_X0Y6_E1BEG),
+    .Tile_X0Y0_E2BEG(Tile_X0Y6_E2BEG),
+    .Tile_X0Y0_E2BEGb(Tile_X0Y6_E2BEGb),
+    .Tile_X0Y0_EE4BEG(Tile_X0Y6_EE4BEG),
+    .Tile_X0Y0_E6BEG(Tile_X0Y6_E6BEG),
+    .Tile_X0Y1_E1BEG(Tile_X0Y7_E1BEG),
+    .Tile_X0Y1_E2BEG(Tile_X0Y7_E2BEG),
+    .Tile_X0Y1_E2BEGb(Tile_X0Y7_E2BEGb),
+    .Tile_X0Y1_EE4BEG(Tile_X0Y7_EE4BEG),
+    .Tile_X0Y1_E6BEG(Tile_X0Y7_E6BEG),
+    .Tile_X0Y1_S_GBUF_FEED_BEG(Tile_X0Y7_S_GBUF_FEED_BEG),
+    .UO_OUT_TT_PROJECT0(Tile_X0Y7_UO_OUT_TT_PROJECT0),
+    .UO_OUT_TT_PROJECT1(Tile_X0Y7_UO_OUT_TT_PROJECT1),
+    .UO_OUT_TT_PROJECT2(Tile_X0Y7_UO_OUT_TT_PROJECT2),
+    .UO_OUT_TT_PROJECT3(Tile_X0Y7_UO_OUT_TT_PROJECT3),
+    .UO_OUT_TT_PROJECT4(Tile_X0Y7_UO_OUT_TT_PROJECT4),
+    .UO_OUT_TT_PROJECT5(Tile_X0Y7_UO_OUT_TT_PROJECT5),
+    .UO_OUT_TT_PROJECT6(Tile_X0Y7_UO_OUT_TT_PROJECT6),
+    .UO_OUT_TT_PROJECT7(Tile_X0Y7_UO_OUT_TT_PROJECT7),
+    .UO_OUT_TT_PROJECT8(Tile_X0Y7_UO_OUT_TT_PROJECT8),
+    .UO_OUT_TT_PROJECT9(Tile_X0Y7_UO_OUT_TT_PROJECT9),
+    .UO_OUT_TT_PROJECT10(Tile_X0Y7_UO_OUT_TT_PROJECT10),
+    .UO_OUT_TT_PROJECT11(Tile_X0Y7_UO_OUT_TT_PROJECT11),
+    .UO_OUT_TT_PROJECT12(Tile_X0Y7_UO_OUT_TT_PROJECT12),
+    .UO_OUT_TT_PROJECT13(Tile_X0Y7_UO_OUT_TT_PROJECT13),
+    .UO_OUT_TT_PROJECT14(Tile_X0Y7_UO_OUT_TT_PROJECT14),
+    .UO_OUT_TT_PROJECT15(Tile_X0Y7_UO_OUT_TT_PROJECT15),
+    .UIO_OUT_TT_PROJECT0(Tile_X0Y7_UIO_OUT_TT_PROJECT0),
+    .UIO_OUT_TT_PROJECT1(Tile_X0Y7_UIO_OUT_TT_PROJECT1),
+    .UIO_OUT_TT_PROJECT2(Tile_X0Y7_UIO_OUT_TT_PROJECT2),
+    .UIO_OUT_TT_PROJECT3(Tile_X0Y7_UIO_OUT_TT_PROJECT3),
+    .UIO_OUT_TT_PROJECT4(Tile_X0Y7_UIO_OUT_TT_PROJECT4),
+    .UIO_OUT_TT_PROJECT5(Tile_X0Y7_UIO_OUT_TT_PROJECT5),
+    .UIO_OUT_TT_PROJECT6(Tile_X0Y7_UIO_OUT_TT_PROJECT6),
+    .UIO_OUT_TT_PROJECT7(Tile_X0Y7_UIO_OUT_TT_PROJECT7),
+    .UIO_OUT_TT_PROJECT8(Tile_X0Y7_UIO_OUT_TT_PROJECT8),
+    .UIO_OUT_TT_PROJECT9(Tile_X0Y7_UIO_OUT_TT_PROJECT9),
+    .UIO_OUT_TT_PROJECT10(Tile_X0Y7_UIO_OUT_TT_PROJECT10),
+    .UIO_OUT_TT_PROJECT11(Tile_X0Y7_UIO_OUT_TT_PROJECT11),
+    .UIO_OUT_TT_PROJECT12(Tile_X0Y7_UIO_OUT_TT_PROJECT12),
+    .UIO_OUT_TT_PROJECT13(Tile_X0Y7_UIO_OUT_TT_PROJECT13),
+    .UIO_OUT_TT_PROJECT14(Tile_X0Y7_UIO_OUT_TT_PROJECT14),
+    .UIO_OUT_TT_PROJECT15(Tile_X0Y7_UIO_OUT_TT_PROJECT15),
+    .UIO_OE_TT_PROJECT0(Tile_X0Y7_UIO_OE_TT_PROJECT0),
+    .UIO_OE_TT_PROJECT1(Tile_X0Y7_UIO_OE_TT_PROJECT1),
+    .UIO_OE_TT_PROJECT2(Tile_X0Y7_UIO_OE_TT_PROJECT2),
+    .UIO_OE_TT_PROJECT3(Tile_X0Y7_UIO_OE_TT_PROJECT3),
+    .UIO_OE_TT_PROJECT4(Tile_X0Y7_UIO_OE_TT_PROJECT4),
+    .UIO_OE_TT_PROJECT5(Tile_X0Y7_UIO_OE_TT_PROJECT5),
+    .UIO_OE_TT_PROJECT6(Tile_X0Y7_UIO_OE_TT_PROJECT6),
+    .UIO_OE_TT_PROJECT7(Tile_X0Y7_UIO_OE_TT_PROJECT7),
+    .UIO_OE_TT_PROJECT8(Tile_X0Y7_UIO_OE_TT_PROJECT8),
+    .UIO_OE_TT_PROJECT9(Tile_X0Y7_UIO_OE_TT_PROJECT9),
+    .UIO_OE_TT_PROJECT10(Tile_X0Y7_UIO_OE_TT_PROJECT10),
+    .UIO_OE_TT_PROJECT11(Tile_X0Y7_UIO_OE_TT_PROJECT11),
+    .UIO_OE_TT_PROJECT12(Tile_X0Y7_UIO_OE_TT_PROJECT12),
+    .UIO_OE_TT_PROJECT13(Tile_X0Y7_UIO_OE_TT_PROJECT13),
+    .UIO_OE_TT_PROJECT14(Tile_X0Y7_UIO_OE_TT_PROJECT14),
+    .UIO_OE_TT_PROJECT15(Tile_X0Y7_UIO_OE_TT_PROJECT15),
+    .ENABLE_POWER_TT_PROJECT(Tile_X0Y7_ENABLE_POWER_TT_PROJECT),
+    .UI_IN_TT_PROJECT0(Tile_X0Y7_UI_IN_TT_PROJECT0),
+    .UI_IN_TT_PROJECT1(Tile_X0Y7_UI_IN_TT_PROJECT1),
+    .UI_IN_TT_PROJECT2(Tile_X0Y7_UI_IN_TT_PROJECT2),
+    .UI_IN_TT_PROJECT3(Tile_X0Y7_UI_IN_TT_PROJECT3),
+    .UI_IN_TT_PROJECT4(Tile_X0Y7_UI_IN_TT_PROJECT4),
+    .UI_IN_TT_PROJECT5(Tile_X0Y7_UI_IN_TT_PROJECT5),
+    .UI_IN_TT_PROJECT6(Tile_X0Y7_UI_IN_TT_PROJECT6),
+    .UI_IN_TT_PROJECT7(Tile_X0Y7_UI_IN_TT_PROJECT7),
+    .UI_IN_TT_PROJECT8(Tile_X0Y7_UI_IN_TT_PROJECT8),
+    .UI_IN_TT_PROJECT9(Tile_X0Y7_UI_IN_TT_PROJECT9),
+    .UI_IN_TT_PROJECT10(Tile_X0Y7_UI_IN_TT_PROJECT10),
+    .UI_IN_TT_PROJECT11(Tile_X0Y7_UI_IN_TT_PROJECT11),
+    .UI_IN_TT_PROJECT12(Tile_X0Y7_UI_IN_TT_PROJECT12),
+    .UI_IN_TT_PROJECT13(Tile_X0Y7_UI_IN_TT_PROJECT13),
+    .UI_IN_TT_PROJECT14(Tile_X0Y7_UI_IN_TT_PROJECT14),
+    .UI_IN_TT_PROJECT15(Tile_X0Y7_UI_IN_TT_PROJECT15),
+    .UIO_IN_TT_PROJECT0(Tile_X0Y7_UIO_IN_TT_PROJECT0),
+    .UIO_IN_TT_PROJECT1(Tile_X0Y7_UIO_IN_TT_PROJECT1),
+    .UIO_IN_TT_PROJECT2(Tile_X0Y7_UIO_IN_TT_PROJECT2),
+    .UIO_IN_TT_PROJECT3(Tile_X0Y7_UIO_IN_TT_PROJECT3),
+    .UIO_IN_TT_PROJECT4(Tile_X0Y7_UIO_IN_TT_PROJECT4),
+    .UIO_IN_TT_PROJECT5(Tile_X0Y7_UIO_IN_TT_PROJECT5),
+    .UIO_IN_TT_PROJECT6(Tile_X0Y7_UIO_IN_TT_PROJECT6),
+    .UIO_IN_TT_PROJECT7(Tile_X0Y7_UIO_IN_TT_PROJECT7),
+    .UIO_IN_TT_PROJECT8(Tile_X0Y7_UIO_IN_TT_PROJECT8),
+    .UIO_IN_TT_PROJECT9(Tile_X0Y7_UIO_IN_TT_PROJECT9),
+    .UIO_IN_TT_PROJECT10(Tile_X0Y7_UIO_IN_TT_PROJECT10),
+    .UIO_IN_TT_PROJECT11(Tile_X0Y7_UIO_IN_TT_PROJECT11),
+    .UIO_IN_TT_PROJECT12(Tile_X0Y7_UIO_IN_TT_PROJECT12),
+    .UIO_IN_TT_PROJECT13(Tile_X0Y7_UIO_IN_TT_PROJECT13),
+    .UIO_IN_TT_PROJECT14(Tile_X0Y7_UIO_IN_TT_PROJECT14),
+    .UIO_IN_TT_PROJECT15(Tile_X0Y7_UIO_IN_TT_PROJECT15),
+    .ENA_TT_PROJECT(Tile_X0Y7_ENA_TT_PROJECT),
+    .CLK_TT_PROJECT(Tile_X0Y7_CLK_TT_PROJECT),
+    .RST_N_TT_PROJECT(Tile_X0Y7_RST_N_TT_PROJECT),
+    .Tile_X0Y0_FrameData(Row_Y6_FrameData),
+    .Tile_X0Y0_FrameData_O(Tile_X0Y6_FrameData_O),
+    .Tile_X0Y0_FrameStrobe_O(Tile_X0Y6_FrameStrobe_O),
+    .Tile_X0Y1_FrameData(Row_Y7_FrameData),
+    .Tile_X0Y1_FrameData_O(Tile_X0Y7_FrameData_O),
+    .Tile_X0Y1_FrameStrobe(Tile_X0Y8_FrameStrobe_O)
 );
 
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y6_Emulate_Bitstream)
@@ -4434,7 +4488,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y6_Emulate_Bitstream)
@@ -4495,7 +4549,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y6_Emulate_Bitstream)
@@ -4556,7 +4610,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y6_Emulate_Bitstream)
@@ -4617,82 +4671,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-W_TT_IF
-`ifdef EMULATION
-    #(
-    .Emulate_Bitstream(`Tile_X0Y7_Emulate_Bitstream)
-    )
-`endif
-    Tile_X0Y7_W_TT_IF
-    (
-    .N_GBUF_END(Tile_X0Y8_N_GBUF_BEG),
-    .S_GBUF_FEED_END(Tile_X0Y6_S_GBUF_FEED_BEG),
-    .W1END(Tile_X1Y7_W1BEG),
-    .W2MID(Tile_X1Y7_W2BEG),
-    .W2END(Tile_X1Y7_W2BEGb),
-    .WW4END(Tile_X1Y7_WW4BEG),
-    .W6END(Tile_X1Y7_W6BEG),
-    .S_GBUF_FEED_BEG(Tile_X0Y7_S_GBUF_FEED_BEG),
-    .N_GBUF_BEG(Tile_X0Y7_N_GBUF_BEG),
-    .E1BEG(Tile_X0Y7_E1BEG),
-    .E2BEG(Tile_X0Y7_E2BEG),
-    .E2BEGb(Tile_X0Y7_E2BEGb),
-    .EE4BEG(Tile_X0Y7_EE4BEG),
-    .E6BEG(Tile_X0Y7_E6BEG),
-    .UO_OUT_TT_PROJECT0(Tile_X0Y7_UO_OUT_TT_PROJECT0),
-    .UO_OUT_TT_PROJECT1(Tile_X0Y7_UO_OUT_TT_PROJECT1),
-    .UO_OUT_TT_PROJECT2(Tile_X0Y7_UO_OUT_TT_PROJECT2),
-    .UO_OUT_TT_PROJECT3(Tile_X0Y7_UO_OUT_TT_PROJECT3),
-    .UO_OUT_TT_PROJECT4(Tile_X0Y7_UO_OUT_TT_PROJECT4),
-    .UO_OUT_TT_PROJECT5(Tile_X0Y7_UO_OUT_TT_PROJECT5),
-    .UO_OUT_TT_PROJECT6(Tile_X0Y7_UO_OUT_TT_PROJECT6),
-    .UO_OUT_TT_PROJECT7(Tile_X0Y7_UO_OUT_TT_PROJECT7),
-    .UIO_OUT_TT_PROJECT0(Tile_X0Y7_UIO_OUT_TT_PROJECT0),
-    .UIO_OUT_TT_PROJECT1(Tile_X0Y7_UIO_OUT_TT_PROJECT1),
-    .UIO_OUT_TT_PROJECT2(Tile_X0Y7_UIO_OUT_TT_PROJECT2),
-    .UIO_OUT_TT_PROJECT3(Tile_X0Y7_UIO_OUT_TT_PROJECT3),
-    .UIO_OUT_TT_PROJECT4(Tile_X0Y7_UIO_OUT_TT_PROJECT4),
-    .UIO_OUT_TT_PROJECT5(Tile_X0Y7_UIO_OUT_TT_PROJECT5),
-    .UIO_OUT_TT_PROJECT6(Tile_X0Y7_UIO_OUT_TT_PROJECT6),
-    .UIO_OUT_TT_PROJECT7(Tile_X0Y7_UIO_OUT_TT_PROJECT7),
-    .UIO_OE_TT_PROJECT0(Tile_X0Y7_UIO_OE_TT_PROJECT0),
-    .UIO_OE_TT_PROJECT1(Tile_X0Y7_UIO_OE_TT_PROJECT1),
-    .UIO_OE_TT_PROJECT2(Tile_X0Y7_UIO_OE_TT_PROJECT2),
-    .UIO_OE_TT_PROJECT3(Tile_X0Y7_UIO_OE_TT_PROJECT3),
-    .UIO_OE_TT_PROJECT4(Tile_X0Y7_UIO_OE_TT_PROJECT4),
-    .UIO_OE_TT_PROJECT5(Tile_X0Y7_UIO_OE_TT_PROJECT5),
-    .UIO_OE_TT_PROJECT6(Tile_X0Y7_UIO_OE_TT_PROJECT6),
-    .UIO_OE_TT_PROJECT7(Tile_X0Y7_UIO_OE_TT_PROJECT7),
-    .ENABLE_POWER_TT_PROJECT(Tile_X0Y7_ENABLE_POWER_TT_PROJECT),
-    .UI_IN_TT_PROJECT0(Tile_X0Y7_UI_IN_TT_PROJECT0),
-    .UI_IN_TT_PROJECT1(Tile_X0Y7_UI_IN_TT_PROJECT1),
-    .UI_IN_TT_PROJECT2(Tile_X0Y7_UI_IN_TT_PROJECT2),
-    .UI_IN_TT_PROJECT3(Tile_X0Y7_UI_IN_TT_PROJECT3),
-    .UI_IN_TT_PROJECT4(Tile_X0Y7_UI_IN_TT_PROJECT4),
-    .UI_IN_TT_PROJECT5(Tile_X0Y7_UI_IN_TT_PROJECT5),
-    .UI_IN_TT_PROJECT6(Tile_X0Y7_UI_IN_TT_PROJECT6),
-    .UI_IN_TT_PROJECT7(Tile_X0Y7_UI_IN_TT_PROJECT7),
-    .UIO_IN_TT_PROJECT0(Tile_X0Y7_UIO_IN_TT_PROJECT0),
-    .UIO_IN_TT_PROJECT1(Tile_X0Y7_UIO_IN_TT_PROJECT1),
-    .UIO_IN_TT_PROJECT2(Tile_X0Y7_UIO_IN_TT_PROJECT2),
-    .UIO_IN_TT_PROJECT3(Tile_X0Y7_UIO_IN_TT_PROJECT3),
-    .UIO_IN_TT_PROJECT4(Tile_X0Y7_UIO_IN_TT_PROJECT4),
-    .UIO_IN_TT_PROJECT5(Tile_X0Y7_UIO_IN_TT_PROJECT5),
-    .UIO_IN_TT_PROJECT6(Tile_X0Y7_UIO_IN_TT_PROJECT6),
-    .UIO_IN_TT_PROJECT7(Tile_X0Y7_UIO_IN_TT_PROJECT7),
-    .ENA_TT_PROJECT(Tile_X0Y7_ENA_TT_PROJECT),
-    .CLK_TT_PROJECT(Tile_X0Y7_CLK_TT_PROJECT),
-    .RST_N_TT_PROJECT(Tile_X0Y7_RST_N_TT_PROJECT),
-    .FrameData(Row_Y7_FrameData),
-    .FrameData_O(Tile_X0Y7_FrameData_O),
-    .FrameStrobe(Tile_X0Y8_FrameStrobe_O),
-    .FrameStrobe_O(Tile_X0Y7_FrameStrobe_O)
-);
-
-
- //tile IO port will get directly connected to top-level tile module
- (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y7_Emulate_Bitstream)
@@ -4753,7 +4732,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y7_Emulate_Bitstream)
@@ -4814,7 +4793,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y7_Emulate_Bitstream)
@@ -4875,7 +4854,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y7_Emulate_Bitstream)
@@ -4936,7 +4915,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_TT_IF
+(* keep *) E_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y7_Emulate_Bitstream)
@@ -5009,7 +4988,7 @@ E_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-W_TT_IF2
+(* keep *) W_TT_IF2
 `ifdef EMULATION
     #(
     .Tile_X0Y0_Emulate_Bitstream(`Tile_X0Y8_Emulate_Bitstream),
@@ -5137,7 +5116,7 @@ W_TT_IF2
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y8_Emulate_Bitstream)
@@ -5198,7 +5177,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y8_Emulate_Bitstream)
@@ -5259,7 +5238,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y8_Emulate_Bitstream)
@@ -5320,7 +5299,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y8_Emulate_Bitstream)
@@ -5381,7 +5360,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_TT_IF
+(* keep *) E_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y8_Emulate_Bitstream)
@@ -5454,7 +5433,7 @@ E_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y9_Emulate_Bitstream)
@@ -5515,7 +5494,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y9_Emulate_Bitstream)
@@ -5576,7 +5555,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y9_Emulate_Bitstream)
@@ -5637,7 +5616,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-LUT4x8_ha
+(* keep *) LUT4x8_ha
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y9_Emulate_Bitstream)
@@ -5698,7 +5677,7 @@ LUT4x8_ha
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-E_TT_IF
+(* keep *) E_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y9_Emulate_Bitstream)
@@ -5771,7 +5750,7 @@ E_TT_IF
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-SW_term
+(* keep *) SW_term
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X0Y10_Emulate_Bitstream)
@@ -5793,7 +5772,7 @@ SW_term
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-S_IO4
+(* keep *) S_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X1Y10_Emulate_Bitstream)
@@ -5838,7 +5817,7 @@ S_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-S_IO4
+(* keep *) S_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X2Y10_Emulate_Bitstream)
@@ -5883,7 +5862,7 @@ S_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-S_IO4
+(* keep *) S_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X3Y10_Emulate_Bitstream)
@@ -5928,7 +5907,7 @@ S_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-S_IO4
+(* keep *) S_IO4
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X4Y10_Emulate_Bitstream)
@@ -5973,7 +5952,7 @@ S_IO4
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-SE_term
+(* keep *) SE_term
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y10_Emulate_Bitstream)
