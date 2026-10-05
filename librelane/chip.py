@@ -83,7 +83,7 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
     # Run the flow
     config = yaml.safe_load(open(common_config_path))
     
-    config["DRT_OPT_ITERS"] = 10 # TODO
+    #config["DRT_OPT_ITERS"] = 10 # TODO
     
     print(config["HEICHIPS_SLOTS"])
     
