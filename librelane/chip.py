@@ -40,7 +40,7 @@ BELS_PER_IO_TILE = ['A', 'B', 'C', 'D']
 NUM_SRAM = 1
 SRAM_WIDTH = 32
 
-def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
+def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to=None):
     target_flow = Flow.factory.get("Chip")
 
     # Magic reports some overlaps which can be ignored
@@ -110,6 +110,9 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False):
     )
     
     state_out = flow.start(tag=tag, last_run=last_run)
+    
+    if save_views_to:
+        state_out.save_snapshot(save_views_to)
 
     print("Done!")
 
@@ -666,6 +669,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--gui', choices=["openroad", "klayout"])
     parser.add_argument('--nodrc', action="store_true")
+    parser.add_argument('--save-views-to', type=str)
     
     args = parser.parse_args()
     
@@ -681,5 +685,5 @@ if __name__ == "__main__":
         last_run = True
 
     # Implement the tile
-    main(gui=args.gui, nodrc=args.nodrc, pdk=pdk, pdk_root=pdk_root, scl=scl, last_run=last_run)
+    main(gui=args.gui, nodrc=args.nodrc, pdk=pdk, pdk_root=pdk_root, scl=scl, last_run=last_run, save_views_to=args.save_views_to)
 

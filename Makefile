@@ -93,11 +93,11 @@ logos: $(PDK_ROOT)/$(PDK) ## Run LibreLane
 .PHONY: logos
 
 librelane: $(PDK_ROOT)/$(PDK) ## Run LibreLane
-	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --save-views-to final/
 .PHONY: librelane
 
 librelane-nodrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane without DRC checks
-	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --nodrc
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --nodrc --save-views-to final/
 .PHONY: librelane-nodrc
 
 librelane-openroad: $(PDK_ROOT)/$(PDK) ## Open the last LibreLane run in OpenROAD GUI
