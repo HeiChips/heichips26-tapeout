@@ -185,17 +185,19 @@ nix-shell
 To implement the fabric, run:
 
 ```
-make classic_fabric_heichips25
+make classic_fabric_heichips26
 ```
 
 After the fabric has been implemented you can view it either in OpenROAD or KLayout by appending `-openroad` or `-klayout` to the fabric name.
-For example, to view `classic_fabric_heichips25` in OpenROAD, run: `make classic_fabric_heichips25-openroad`.
+For example, to view `classic_fabric_heichips26` in OpenROAD, run: `make classic_fabric_heichips26-openroad`.
 
 After the fabric has been generated, run:
 
 ```
-make copy-fabric
+make classic_fabric_heichips26-copy
 ```
+
+This copies the fabric database to `user_designs/`.
 
 ### Build The Chip
 
@@ -215,12 +217,6 @@ Or to view it in KLayout:
 
 ```console
 make librelane-klayout
-```
-
-To render an image of the chip:
-
-```
-make render-image
 ```
 
 And with this the chip is ready for tapeout. 
