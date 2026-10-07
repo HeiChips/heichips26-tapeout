@@ -762,8 +762,10 @@ if __name__ == "__main__":
     sources.extend(get_user_vh())
     
     # Power gates
-    sources.append(proj_path / '../ip/hm_pg/vh/hm_pg_lv_17x200.vh')
-    sources.append(proj_path / '../ip/hm_pg/vh/hm_pg_lv_17x415.vh')
+    sources.append(proj_path / '../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_lv_17x200.vh')
+    sources.append(proj_path / '../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_lv_17x415.vh')
+    sources.append(proj_path / '../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_hv_17x200.vh')
+    sources.append(proj_path / '../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/vh/hm_pg_hv_17x415.vh')
     
     # Bondpads
     sources.append(proj_path / '../ip/bondpad_70x70_novias/vh/bondpad_70x70_novias.v')
