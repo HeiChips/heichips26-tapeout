@@ -228,8 +228,19 @@ def update_readme(readme, user_projects_metadata, slot_map):
                     
                         module, instance = project_tuple[0]
                         
-                        if module == entries['top-cell']:
-                            project_coords = coords
+                        if len(project_tuple) > 1:
+                        
+                            module_2, instance_2 = project_tuple[1]
+                            
+                            if module == entries['top-cell']:
+                                project_coords = coords + "/0"
+                            
+                            if module_2 == entries['top-cell']:
+                                project_coords = coords + "/1"
+                            
+                        else:
+                            if module == entries['top-cell']:
+                                project_coords = coords
                 
                     ofile.write(f"| {project_name} | {entries['slot-size']} | {project_coords} | {entries['short-description'].replace('\n', '')} | [Repo](https://github.com/HeiChips/{entries['repo-name']}) |\n")
                 
