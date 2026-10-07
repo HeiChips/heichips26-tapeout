@@ -58,6 +58,12 @@ For a full description of the projects, see [User Projects](#user-projects).
 
 A packetized event-camera filter and time-multiplexed 16-neuron SNN for low-power motion classification.
 
+<p align="center">
+  <a href="img/user_projects/heichips26_event_snn.png">
+    <img src="img/user_projects/heichips26_event_snn.png" alt="Render of heichips26_event_snn" width=40%>
+  </a>
+</p>
+
 Top cell: `heichips26_event_snn`
 Slot size: large
 Analog pins: 0
@@ -97,6 +103,12 @@ backpressure-aware protocol tests.
 This project develops a compact edge AI accelerator for end-to-end spiking neural network inference and on-chip learning, supporting operators such as depthwise convolution, pointwise convolution, and fully connected layers. It also explores SDSP-based lifelong learning and always-on applications such as seizure detection and fall detection.
 
 
+<p align="center">
+  <a href="img/user_projects/heichips26_e2spike.png">
+    <img src="img/user_projects/heichips26_e2spike.png" alt="Render of heichips26_e2spike" width=40%>
+  </a>
+</p>
+
 Top cell: `heichips26_e2spike`
 Slot size: large
 Analog pins: 0
@@ -132,6 +144,12 @@ The project is open source and available on
 
 This project attempts to recreate the first ever commercially available DRAM memory, the Intel 1103.
 
+<p align="center">
+  <a href="img/user_projects/heichips26_dram_replica.png">
+    <img src="img/user_projects/heichips26_dram_replica.png" alt="Render of heichips26_dram_replica" width=40%>
+  </a>
+</p>
+
 Top cell: `heichips26_dram_replica`
 Slot size: tiny
 Analog pins: 0
@@ -164,6 +182,12 @@ The cell can be controlled via five exposed pins:
 
 This project uses a simple riscv core and is equipted with an approximate floating point multiplier
 
+<p align="center">
+  <a href="img/user_projects/heichips26_RiMaX.png">
+    <img src="img/user_projects/heichips26_RiMaX.png" alt="Render of heichips26_RiMaX" width=40%>
+  </a>
+</p>
+
 Top cell: `heichips26_RiMaX`
 Slot size: large
 Analog pins: 0
@@ -190,6 +214,12 @@ The module for the fpga and the connecting module the whole chip have been desig
 ### HeiScore
 
 A noRTL written implementation of Pong.
+
+<p align="center">
+  <a href="img/user_projects/heichips26_heiscore.png">
+    <img src="img/user_projects/heichips26_heiscore.png" alt="Render of heichips26_heiscore" width=40%>
+  </a>
+</p>
 
 Top cell: `heichips26_heiscore`
 Slot size: tiny
@@ -225,6 +255,12 @@ with a key matrix and an ILI9341 LCD.
 ### Minimal Multicore Processor
 
 A custom 3-instruction dual-core 8-Bit CPU with a memory management unit supporting atomic swap operations.
+
+<p align="center">
+  <a href="img/user_projects/heichips26_minimal_multicore_processor.png">
+    <img src="img/user_projects/heichips26_minimal_multicore_processor.png" alt="Render of heichips26_minimal_multicore_processor" width=40%>
+  </a>
+</p>
 
 Top cell: `heichips26_minimal_multicore_processor`
 Slot size: tiny
@@ -303,6 +339,12 @@ since a swap operation is performed, the address from the read operation is also
 
 ring-oscillator designs for generating power side-channel noise
 
+<p align="center">
+  <a href="img/user_projects/heichips26_noise_gen.png">
+    <img src="img/user_projects/heichips26_noise_gen.png" alt="Render of heichips26_noise_gen" width=40%>
+  </a>
+</p>
+
 Top cell: `heichips26_noise_gen`
 Slot size: small
 Analog pins: 0
@@ -322,6 +364,12 @@ Our design realizes different noisers that are built for generating power side-c
 ### DNA Sequence Aligner
 
 This is a DNA sequence alignment accelerator based on Smith-Waterman algorithm.
+
+<p align="center">
+  <a href="img/user_projects/heichips26_dna_sequencer.png">
+    <img src="img/user_projects/heichips26_dna_sequencer.png" alt="Render of heichips26_dna_sequencer" width=40%>
+  </a>
+</p>
 
 Top cell: `heichips26_dna_sequencer`
 Slot size: small
@@ -395,6 +443,12 @@ ui_in[0] is connected to the transmitter tx pin.
 uo_out[7] to [4] is connected to q3 to q0 of the receiver comparators.
 
 
+<p align="center">
+  <a href="img/user_projects/heichips26_ook_top.png">
+    <img src="img/user_projects/heichips26_ook_top.png" alt="Render of heichips26_ook_top" width=40%>
+  </a>
+</p>
+
 Top cell: `heichips26_ook_top`
 Slot size: small
 Analog pins: 3
@@ -441,6 +495,12 @@ Long description:
 
 A fully analog component with ohmic behaviour whose resistance value can be changed in accordance with an external analog control voltage.
 
+<p align="center">
+  <a href="img/user_projects/heichips26_vcr.png">
+    <img src="img/user_projects/heichips26_vcr.png" alt="Render of heichips26_vcr" width=40%>
+  </a>
+</p>
+
 Top cell: `heichips26_vcr`
 Slot size: small
 Analog pins: 3
@@ -466,6 +526,12 @@ Each implementation will be selectable via integrated analog switches. If we can
 ### daftASIC
 
 An extensively, named daftASIC, designed and expandable music synthesizer built purely in silicon, supporting both visual and audio outputs
+
+<p align="center">
+  <a href="img/user_projects/heichips26_daftASIC.png">
+    <img src="img/user_projects/heichips26_daftASIC.png" alt="Render of heichips26_daftASIC" width=40%>
+  </a>
+</p>
 
 Top cell: `heichips26_daftASIC`
 Slot size: small
@@ -499,6 +565,12 @@ of the PWM signal could make the sounds produced more pleasant for some.
 ### Ballmer-Peak-Detector
 
 Edge State Space Model Processing Element using Posit Arithmetic
+
+<p align="center">
+  <a href="img/user_projects/heichips26_ballmer_peak_detector.png">
+    <img src="img/user_projects/heichips26_ballmer_peak_detector.png" alt="Render of heichips26_ballmer_peak_detector" width=40%>
+  </a>
+</p>
 
 Top cell: `heichips26_ballmer_peak_detector`
 Slot size: small

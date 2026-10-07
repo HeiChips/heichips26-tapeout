@@ -85,14 +85,11 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
     
     #config["DRT_OPT_ITERS"] = 10 # TODO
     
-    print(config["HEICHIPS_SLOTS"])
-    
     slot_map = config["HEICHIPS_SLOTS"]
     
     # TODO cleanup: read project submission.yaml once and store in dict
     
     # Read user projects submission.yaml
-    
     user_projects_metadata = {}
     
     keys = ["project-name", "top-cell", "team-members", "slot-size", "analog-pins", "short-description", "long-description", "gds-path", "lef-path", "header-path"]
@@ -119,6 +116,40 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
                 sys.exit(1)
             project_config["gds-path"] = gds[0]
             
+            # Render GDS image
+            import klayout.lay as lay
+            import klayout.db as db
+            
+            lv = lay.LayoutView()
+
+            lv.set_config("grid-visible", "false")
+            lv.set_config("grid-show-ruler", "false")
+            lv.set_config("text-visible", "false")
+
+            lv.load_layout(project_config["gds-path"])
+            lv.max_hier()
+            
+            # Get aspect ratio
+            top_cell = lv.active_cellview().layout().top_cell()
+            top_bbox = top_cell.dbbox()
+            aspect_ratio = top_bbox.width() / top_bbox.height()
+            
+            resolution = 1024
+            oversampling = 8
+            
+            width = resolution
+            height = int(width / aspect_ratio)
+            
+            lv.load_layer_props(os.path.join(__dir__, "sg13cmos5l_render.lyp"))
+            
+            lv.set_config("background-color", "#FFFFFF")
+            lv.save_image_with_options(
+                os.path.join(__dir__, f"../img/user_projects/{project_config['top-cell']}.png"),
+                width,
+                height,
+                oversampling=oversampling,
+            )
+            
             lef = list(Path(config_path).parent.glob(project_config["lef-path"]))
             if len(lef) > 1:
                 print(f"'lef-path' can only refer to a single lef. ({lef})")
@@ -134,8 +165,6 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
             # Add remaining keys
             for key in keys:
                 user_projects_metadata[project_config["project-name"]][key] = project_config[key]
-
-    print(user_projects_metadata)
     
     update_readme(os.path.join(__dir__, "../README.md"), user_projects_metadata, slot_map)
     
@@ -221,10 +250,16 @@ def update_readme(readme, user_projects_metadata, slot_map):
                     team = "\n".join([f"- {person}" for person in entries['team-members']])
 
                     ofile.write(f"### {project_name}\n\n")
-                    
-                    ofile.write(f"""{entries['short-description']}
 
-Top cell: `{entries['top-cell']}`
+                    ofile.write(f"{entries['short-description']}\n\n")
+
+                    ofile.write(f"""<p align="center">
+  <a href="img/user_projects/{entries['top-cell']}.png">
+    <img src="img/user_projects/{entries['top-cell']}.png" alt="Render of {entries['top-cell']}" width=40%>
+  </a>
+</p>\n\n""")
+
+                    ofile.write(f"""Top cell: `{entries['top-cell']}`
 Slot size: {entries['slot-size']}
 Analog pins: {entries['analog-pins']}
 Uses VAPRW: {entries['uses-vapwr']}
