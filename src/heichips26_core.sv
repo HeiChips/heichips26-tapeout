@@ -37,12 +37,23 @@ module heichips26_core (
     input  logic [3:0]  fpga_config_slot_i,
     input  logic        fpga_config_trigger_i,
 
+    // Analog pins
+    inout wire heichips26_instance_small_0_analog_0, // heichips26_ook_top analog_0
+    inout wire heichips26_instance_small_0_analog_1, // heichips26_ook_top analog_1
+    inout wire heichips26_instance_small_0_analog_2, // heichips26_ook_top analog_2
+
+    inout wire heichips26_instance_small_1_analog_0, // heichips26_vcr analog_0
+    inout wire heichips26_instance_small_1_analog_1, // heichips26_vcr analog_1
+    inout wire heichips26_instance_small_1_analog_2, // heichips26_vcr analog_2
+
+    inout wire heichips26_instance_small_5_analog_0, // heichips26_FAIf analog_0
+    inout wire heichips26_instance_small_5_analog_1, // heichips26_FAIf analog_1
+    inout wire heichips26_instance_small_5_analog_2, // heichips26_FAIf analog_2
+
     // I/Os FPGA
     input  wire [32-1:0] fabric_io_in_i,
     output wire [32-1:0] fabric_io_out_o,
     output wire [32-1:0] fabric_io_oe_o
-    
-    // User I/O
 );
     
     // Fabric parameters
@@ -316,6 +327,18 @@ module heichips26_core (
         // Fabric is configured
         .configured_i   (fabric_config_configured),
         .sys_reset_i    (fabric_config_busy),
+
+        .heichips26_instance_small_0_analog_0 (heichips26_instance_small_0_analog_0),
+        .heichips26_instance_small_0_analog_1 (heichips26_instance_small_0_analog_1),
+        .heichips26_instance_small_0_analog_2 (heichips26_instance_small_0_analog_2),
+
+        .heichips26_instance_small_1_analog_0 (heichips26_instance_small_1_analog_0),
+        .heichips26_instance_small_1_analog_1 (heichips26_instance_small_1_analog_1),
+        .heichips26_instance_small_1_analog_2 (heichips26_instance_small_1_analog_2),
+
+        .heichips26_instance_small_5_analog_0 (heichips26_instance_small_5_analog_0),
+        .heichips26_instance_small_5_analog_1 (heichips26_instance_small_5_analog_1),
+        .heichips26_instance_small_5_analog_2 (heichips26_instance_small_5_analog_2),
 
         // I/Os North
         .io_north_in_i  (fabric_io_north_in_i),

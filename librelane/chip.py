@@ -87,13 +87,61 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
     
     slot_map = config["HEICHIPS_SLOTS"]
     
+    # Read user projects submission.yaml
+    user_projects_metadata = {}
+    
+    keys = ["project-name", "top-cell", "team-members", "slot-size", "analog-pins", "short-description", "long-description", "gds-path", "lef-path", "header-path"]
+    for config_path in glob.glob(os.path.join(__dir__, "../ip/user_projects/*/submission.yaml")):
+        print(f"Reading: {config_path}")
+        
+        with open(config_path) as ifile:
+            project_config = yaml.safe_load(ifile)
+            
+            # Collect metadate
+            user_projects_metadata[project_config["top-cell"]] = {}
+            user_projects_metadata[project_config["top-cell"]]["repo-name"] = config_path.split("user_projects/")[1].split("/")[0]
+        
+            for key in keys:
+                if not key in project_config:
+                    err(f"Config is missing a key ({key})")
+                    sys.exit(1)
+        
+                print(f"{key}: {project_config[key]}")
+            
+            gds = list(Path(config_path).parent.glob(project_config["gds-path"]))
+            if len(gds) > 1:
+                print(f"'gds-path' can only refer to a single gds. ({gds})")
+                sys.exit(1)
+            project_config["gds-path"] = gds[0]
+
+            lef = list(Path(config_path).parent.glob(project_config["lef-path"]))
+            if len(lef) > 1:
+                print(f"'lef-path' can only refer to a single lef. ({lef})")
+                sys.exit(1)
+            project_config["lef-path"] = lef[0]
+            
+            header = list(Path(config_path).parent.glob(project_config["header-path"]))
+            if len(header) > 1:
+                print(f"'header-path' can only refer to a single header. ({header})")
+                sys.exit(1)
+            project_config["header-path"] = header[0]
+            
+            # Add remaining keys
+            for key in keys:
+                user_projects_metadata[project_config["top-cell"]][key] = project_config[key]
+    
+            # Add "uses-vapwr"
+            if not "uses-vapwr" in project_config:
+                project_config["uses-vapwr"] = False
+            user_projects_metadata[project_config["top-cell"]]["uses-vapwr"] = project_config["uses-vapwr"]
+    
     # TODO cleanup: read project submission.yaml once and store in dict
     
     add_user_projects(config)
     
     instantiate_user_projects(config, slot_map)
     
-    generate_rtl_wrapper(os.path.join(__dir__, "../src/fabric_wrapper.sv"), slot_map)
+    generate_rtl_wrapper(os.path.join(__dir__, "../src/fabric_wrapper.sv"), slot_map, user_projects_metadata)
 
     design_dir = os.path.join(__dir__)
     print(f"design_dir: {design_dir}")
@@ -387,7 +435,7 @@ def instantiate_user_projects(config, slot_map):
             return 1
 
 
-def generate_rtl_wrapper(file, slot_map):
+def generate_rtl_wrapper(file, slot_map, user_projects_metadata):
     
     with open(file, 'w') as f:
         with redirect_stdout(f):
@@ -418,6 +466,18 @@ def generate_rtl_wrapper(file, slot_map):
             print("""    input                                configured_i,""")
             print("""    input                                sys_reset_i,\n""")
 
+            print(f'    // Analog pins')
+            for i, (coords, projects) in enumerate(slot_map.items()):
+                if projects is None:
+                    continue
+                
+                for module, instance in projects:
+                    if module in user_projects_metadata:
+                        if user_projects_metadata[module]["analog-pins"] > 0:
+                            for i in range(user_projects_metadata[module]["analog-pins"]):
+                                print(f"    inout wire {instance}_analog_{i}, // {module} analog_{i}")
+                            print("")
+
             # I/Os
             print(f'    // I/Os North')
             print("""    input  [FABRIC_NUM_IO_NORTH-1:0]      io_north_in_i,
@@ -427,7 +487,7 @@ def generate_rtl_wrapper(file, slot_map):
             print(f'    // I/Os South')
             print("""    input  [FABRIC_NUM_IO_SOUTH-1:0]      io_south_in_i,
     output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_out_o,
-    output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_oe_o\n""")
+    output [FABRIC_NUM_IO_SOUTH-1:0]      io_south_oe_o\n""")    
 
             print(");\n")
 
@@ -599,8 +659,17 @@ def generate_rtl_wrapper(file, slot_map):
             .uio_in     (tt_project_{i}_uio_in),
             .uo_out     (tt_project_{i}_uo_out),
             .uio_out    (tt_project_{i}_uio_out),
-            .uio_oe     (tt_project_{i}_uio_oe)""")
-                            print(f"""    );\n""")
+            .uio_oe     (tt_project_{i}_uio_oe)""", end="")
+            
+                            if module in user_projects_metadata:
+                                if user_projects_metadata[module]["analog-pins"] > 0:
+                                    print(",")
+                                    for i in range(user_projects_metadata[module]["analog-pins"]):
+                                        print(f"            .analog_{i} ({instance}_analog_{i})", end="")
+                                        if i < user_projects_metadata[module]["analog-pins"]-1:
+                                            print(",")
+            
+                            print(f"""\n    );\n""")
                             
                             print(f"""    (* keep *) {pg_lv} {instance}_pg_lv (
             `ifdef USE_POWER_PINS
@@ -646,8 +715,17 @@ def generate_rtl_wrapper(file, slot_map):
             .uio_in     (tt_project_{i}_uio_in),
             .uo_out     (tt_project_{i}_0_uo_out),
             .uio_out    (tt_project_{i}_0_uio_out),
-            .uio_oe     (tt_project_{i}_0_uio_oe)""")
-                            print(f"""    );\n""")
+            .uio_oe     (tt_project_{i}_0_uio_oe)""", end="")
+            
+                            if module in user_projects_metadata:
+                                if user_projects_metadata[module]["analog-pins"] > 0:
+                                    print(",")
+                                    for i in range(user_projects_metadata[module]["analog-pins"]):
+                                        print(f"            .analog_{i} ({instance}_analog_{i})", end="")
+                                        if i < user_projects_metadata[module]["analog-pins"]-1:
+                                            print(",")
+            
+                            print(f"""\n    );\n""")
 
                             print(f"""    (* keep *) {pg_lv} {instance}_pg_lv (
             `ifdef USE_POWER_PINS

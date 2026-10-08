@@ -118,30 +118,26 @@ PAD_EAST: [
     "vdd_pads\\[1\\].vdd_pad",
     "vss_pads\\[1\\].vss_pad",
 
-    user_usb_dp,
-    user_usb_dn,
-    user_usb_dp_up,
-
-    user_tmds_r,
-    user_tmds_g,
-    user_tmds_b,
-    user_tmds_clk,
-
-    icelab_analog_pin0,
+    "analog\\[0\\].analog_pad",
+    "analog\\[1\\].analog_pad",
+    "analog\\[2\\].analog_pad",
+    "analog\\[3\\].analog_pad",
+    "analog\\[4\\].analog_pad",
+    "analog\\[5\\].analog_pad",
+    "analog\\[6\\].analog_pad",
+    "analog\\[7\\].analog_pad",
     
     "iovdd_pads\\[2\\].iovdd_pad",
     "iovss_pads\\[2\\].iovss_pad",
     
-    icelab_analog_pin1,
-    icelab_analog_pin2,
-    icelab_analog_pin3,
-
-    ethernet_dp,
-    ethernet_dn,
-
-    internal_analog_pin0,
-    internal_analog_pin1,
-    internal_analog_pin2,
+    "analog\\[8\\].analog_pad",
+    "analog\\[9\\].analog_pad",
+    "analog\\[10\\].analog_pad",
+    "analog\\[11\\].analog_pad",
+    "analog\\[12\\].analog_pad",
+    "analog\\[13\\].analog_pad",
+    "analog\\[14\\].analog_pad",
+    "analog\\[15\\].analog_pad",
 
     "vdd_pads\\[2\\].vdd_pad",
     "vss_pads\\[2\\].vss_pad"
@@ -187,8 +183,8 @@ PAD_WEST: [
     fpga_config_busy,
     fpga_config_configured,
     
-    pudding_i_out,
-    pudding_i_in,
+    "analog\\[16\\].analog_pad",
+    "analog\\[17\\].analog_pad",
     
     fpga_rst_n,
     fpga_clk,
@@ -303,35 +299,13 @@ NON_DEFAULT_RULES:
     spacing: ["0.2"]
     via: ["Via1_DC1B", "Via2_DC1B", "Via3_DC1B", "TopVia1EWNS"]
 
-  NDR_pudding_in:
-    width: ["0.5"]
-    spacing: ["0.2"]
-    via: ["Via1_DC1B", "Via2_DC1B", "Via3_DC1B", "TopVia1EWNS"]
-
-  NDR_pudding_out:
-    width: ["0.7"]
-    spacing: ["0.2"]
-    via: ["Via1_DC1B", "Via2_DC1B", "Via3_DC1B", "TopVia1EWNS"]
-
-#DRT_ASSIGN_NDR:
-#  # Analog traces for internal project
-#  "^internal_analog_pin0_PADRES$": NDR_0p4
-#  "^internal_analog_pin1_PADRES$": NDR_0p4
-#  "^internal_analog_pin2_PADRES$": NDR_0p4
-#  "^pudding_i_in_PADRES$": NDR_pudding_in
-#  "^pudding_i_out_PADBARE$": NDR_pudding_out
-#  "^ethernet_dp_PADBARE$": NDR_0p4
-#  "^ethernet_dn_PADBARE$": NDR_0p4
-
-RSZ_DONT_TOUCH_LIST:
+DRT_ASSIGN_NDR:
   # Analog traces for internal project
-- "internal_analog_pin0_PADRES"
-- "internal_analog_pin1_PADRES"
-- "internal_analog_pin2_PADRES"
-- "pudding_i_in_PADRES"
-- "pudding_i_out_PADBARE"
-- "ethernet_dp_PADBARE"
-- "ethernet_dn_PADBARE"
+  #"^internal_analog_pin0_PADRES$": NDR_0p4
+  "analog_routing": NDR_3W_3S
+
+# Analog traces for internal project
+RSZ_DONT_TOUCH_RX: "analog_routing"
 
 CTS_APPLY_NDR: none #full
 
