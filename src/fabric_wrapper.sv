@@ -1580,7 +1580,7 @@
     );
 
     
-    (* keep *) heichips26_example_small heichips26_instance_small_5 (
+    (* keep *) heichips26_FAIf heichips26_instance_small_5 (
             .clk        (tt_project_15_clk),
             .rst_n      (tt_project_15_rst_n),
             .ena        (tt_project_15_ena),

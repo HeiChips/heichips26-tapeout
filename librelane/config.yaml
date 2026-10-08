@@ -79,7 +79,7 @@ HEICHIPS_SLOTS:
     'X5Y4': [['heichips26_heiscore', 'heichips26_instance_tiny_1_0'], ['heichips26_example_tiny', 'heichips26_instance_tiny_1_1']]
     'X5Y5': null
     'X5Y6': [["RM_IHPSG13_1P_1024x32_c2_bm_bist", "heichips26_instance_sram_0"]]
-    'X5Y7': [['heichips26_example_small', 'heichips26_instance_small_5']]
+    'X5Y7': [['heichips26_FAIf', 'heichips26_instance_small_5']]
     'X5Y8': [['heichips26_daftASIC', 'heichips26_instance_small_6']]
     'X5Y9': [['heichips26_example_small', 'heichips26_instance_small_7']]
 

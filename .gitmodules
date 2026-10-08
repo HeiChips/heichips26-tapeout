@@ -40,3 +40,6 @@
 [submodule "ip/user_projects/heichips26-heiscore"]
 	path = ip/user_projects/heichips26-heiscore
 	url = ../../HeiChips/heichips26-heiscore.git
+[submodule "ip/user_projects/heichips26-FAIfplus"]
+	path = ip/user_projects/heichips26-FAIfplus
+	url = ../../HeiChips/heichips26-FAIfplus.git

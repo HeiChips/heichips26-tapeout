@@ -34,6 +34,7 @@ The following user projects are included:
 | Project       | Size          | Location      | Description  | Link |
 |---------------|---------------|---------------|--------------|------|
 | Event-Driven Motion SNN | large | X0Y2 | A packetized event-camera filter and time-multiplexed 16-neuron SNN for low-power motion classification. | [Repo](https://github.com/HeiChips/heichips26-aiaccel) |
+| FABulous Analogue Interface | small | X5Y7 | Analogue mixed-signal peripherals | [Repo](https://github.com/HeiChips/heichips26-FAIfplus) |
 | E2Spike | large | X0Y7 | This project develops a compact edge AI accelerator for end-to-end spiking neural network inference and on-chip learning, supporting operators such as depthwise convolution, pointwise convolution, and fully connected layers. It also explores SDSP-based lifelong learning and always-on applications such as seizure detection and fall detection. | [Repo](https://github.com/HeiChips/heichips26-e2spike) |
 | Intel 1103 Replica | tiny | X5Y1/0 | This project attempts to recreate the first ever commercially available DRAM memory, the Intel 1103. | [Repo](https://github.com/HeiChips/heichips26_dram_replica) |
 | RiMaX | large | X0Y9 | This project uses a simple riscv core and is equipted with an approximate floating point multiplier | [Repo](https://github.com/HeiChips/heichips26-rimax) |
@@ -96,6 +97,45 @@ The macro uses the official 500 um x 415 um large-slot DEF, the standard
 HeiChips large digital interface, no analog pins, and the ihp-sg13cmos5l
 process. It can be tested with the included deterministic unit, wrapper, and
 backpressure-aware protocol tests.
+
+
+### FABulous Analogue Interface
+
+Analogue mixed-signal peripherals
+
+<p align="center">
+  <a href="img/user_projects/heichips26_FAIf.png">
+    <img src="img/user_projects/heichips26_FAIf.png" alt="Render of heichips26_FAIf" width=40%>
+  </a>
+</p>
+
+Top cell: `heichips26_FAIf`
+Slot size: small
+Analog pins: 3
+Uses VAPRW: False
+
+Team members:
+
+- Pascal Gesell
+- Torsten Maehne
+- Graeme Bragg
+- Benedikt Lukat
+
+Long description:
+
+HeiChips 2026 FABulous Analogue Interface
+
+This repository is the fork of the HeiChips 2026 submission template for the analogue peripherals project at the HeiChips 2026 Hackathon.
+This project is implemented as a digital-on-top design with the following peripherals:
+
+* 16-bit DAC
+* 16-bit ADC
+* DDS
+
+The project makes use of three dedicated analogue pins and uses the small tile size.
+
+**nice** *formatting* and [links](https://heichips.github.io/).
+Repository: https://github.com/heliosfa/heichips26-FAIf
 
 
 ### E2Spike
