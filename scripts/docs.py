@@ -124,6 +124,12 @@ def main():
             for key in keys:
                 user_projects_metadata[project_config["project-name"]][key] = project_config[key]
     
+            # Add "uses-vapwr"
+            if not "uses-vapwr" in project_config:
+                project_config["uses-vapwr"] = False
+            user_projects_metadata[project_config["project-name"]]["uses-vapwr"] = project_config["uses-vapwr"]
+                
+    
     update_readme(os.path.join(__dir__, "../README.md"), user_projects_metadata, slot_map)
 
 def update_readme(readme, user_projects_metadata, slot_map):
@@ -185,31 +191,24 @@ def update_readme(readme, user_projects_metadata, slot_map):
                 ofile.write("\n")
                 
                 for project_name, entries in user_projects_metadata.items():
-                
-                    if not "uses-vapwr" in entries:
-                        entries["uses-vapwr"] = False
-                
                     team = "\n".join([f"- {person}" for person in entries['team-members']])
 
                     ofile.write(f"### {project_name}\n\n")
-
                     ofile.write(f"{entries['short-description']}\n\n")
-
                     ofile.write(f"""<p align="center">
   <a href="img/user_projects/{entries['top-cell']}.png">
     <img src="img/user_projects/{entries['top-cell']}.png" alt="Render of {entries['top-cell']}" width=40%>
   </a>
 </p>\n\n""")
-
                     ofile.write(f"""Top cell: `{entries['top-cell']}`
-Slot size: {entries['slot-size']}
-Analog pins: {entries['analog-pins']}
-Uses VAPRW: {entries['uses-vapwr']}
+Slot size: `{entries['slot-size']}`
+Analog pins: `{entries['analog-pins']}`
+Uses VAPRW: `{entries['uses-vapwr']}`
 
-Team members:\n
+**Team members:**\n
 {team}\n\n""")
 
-                    ofile.write(f"Long description:\n\n")
+                    ofile.write(f"**Description:**\n\n")
                     
                     for long_line in entries['long-description'].split("\n"):
                         if len(long_line) > 0 and long_line[0] == '#':

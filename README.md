@@ -66,18 +66,18 @@ A packetized event-camera filter and time-multiplexed 16-neuron SNN for low-powe
 </p>
 
 Top cell: `heichips26_event_snn`
-Slot size: large
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `large`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Gabriela Mystkowska
 - Edvinas Patiejunas
 - Jerry Yun
 - Marco Vogel
 
-Long description:
+**Description:**
 
 Event-Driven Motion SNN accepts 32x32 event-camera coordinates, polarity,
 and timestamps through a pin-compliant 16-bit packet interface. A 32-entry
@@ -110,18 +110,18 @@ Analogue mixed-signal peripherals
 </p>
 
 Top cell: `heichips26_FAIf`
-Slot size: small
-Analog pins: 3
-Uses VAPRW: False
+Slot size: `small`
+Analog pins: `3`
+Uses VAPRW: `True`
 
-Team members:
+**Team members:**
 
 - Pascal Gesell
 - Torsten Maehne
 - Graeme Bragg
 - Benedikt Lukat
 
-Long description:
+**Description:**
 
 HeiChips 2026 FABulous Analogue Interface
 
@@ -150,11 +150,11 @@ This project develops a compact edge AI accelerator for end-to-end spiking neura
 </p>
 
 Top cell: `heichips26_e2spike`
-Slot size: large
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `large`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Yuehai Chen
 - Frank de Weers
@@ -162,7 +162,7 @@ Team members:
 - Yike Jing
 - Sebastian Kallfelz
 
-Long description:
+**Description:**
 
 E2Spike was awarded the HeiChips Best Project (Digital) this year. It is a compact
 neuromorphic accelerator supporting end-to-end Spiking Neural Network (SNN) inference
@@ -191,11 +191,11 @@ This project attempts to recreate the first ever commercially available DRAM mem
 </p>
 
 Top cell: `heichips26_dram_replica`
-Slot size: tiny
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `tiny`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Lukas Jahn
 - Jonathan Hager
@@ -203,7 +203,7 @@ Team members:
 - Abdelaziz Ider
 - Jennifer Muck
 
-Long description:
+**Description:**
 
 Featuring an 1024 bit storage array, the Intel 1103 DRAM, introduced in 1970, becaume the first widely used, commercially available semiconductor memory device.
 This project attempts to recreate one of the fundamental building blocks of that memory device, a single storage cell, capable of holding one bit.
@@ -229,18 +229,18 @@ This project uses a simple riscv core and is equipted with an approximate floati
 </p>
 
 Top cell: `heichips26_RiMaX`
-Slot size: large
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `large`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Pouria Hasani
 - Nima Amirafshar
 - Soheil Khoyooz
 - Susindhar Manivasagann
 
-Long description:
+**Description:**
 
 This project is about the suitablility of approximation in the arithmatic units for different applications.
 The CPU core is picorv32 supporting rv32i ISA. As a co-processor there is an approximate floating point multiplier
@@ -262,16 +262,16 @@ A noRTL written implementation of Pong.
 </p>
 
 Top cell: `heichips26_heiscore`
-Slot size: tiny
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `tiny`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Georg Gläser
 - Nils Stanislawski
 
-Long description:
+**Description:**
 
 HeiScore is a complete two-player Pong machine in the 200 x 200 um tiny slot:
 no CPU, no framebuffer, no external memory. Running from a 25 MHz clock, it
@@ -303,11 +303,11 @@ A custom 3-instruction dual-core 8-Bit CPU with a memory management unit support
 </p>
 
 Top cell: `heichips26_minimal_multicore_processor`
-Slot size: tiny
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `tiny`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Jakob Rinke
 - Benjamin Steeg
@@ -315,7 +315,7 @@ Team members:
 - Ekrem Altuntop
 - Simon Mönch
 
-Long description:
+**Description:**
 
 Two custom CPU cores and a custom memory management unit (MMU) in just 200µm x 200µm with a maximum clock frequency of 303MHz. 
 Almost entirely engineered in just two days at the HeiChips 2026 Summer School.
@@ -386,17 +386,17 @@ ring-oscillator designs for generating power side-channel noise
 </p>
 
 Top cell: `heichips26_noise_gen`
-Slot size: small
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `small`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Dina Hesse
 - Meinhard Kissich
 - Mehmet Uluisik
 
-Long description:
+**Description:**
 
 Our design realizes different noisers that are built for generating power side-channel noise to hide secret signals of computations on the eFPGA. The engine includes several ring-oscillator-designs and different loads that can be driven by these ring-oscillators. After tape-out we want to measure the power consumption of the chip (would be nice if there would be ports directly on the PCB for this) and evaluate the effectiveness of different configurations.
 
@@ -412,18 +412,18 @@ This is a DNA sequence alignment accelerator based on Smith-Waterman algorithm.
 </p>
 
 Top cell: `heichips26_dna_sequencer`
-Slot size: small
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `small`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Tharindu Samarakoon
 - Shangeeth Gopinathan Rajeshkumar
 - Udaya Subedi
 - Udara Mendis
 
-Long description:
+**Description:**
 
 
 #### DNA Sequence Alignment Accelerator
@@ -490,18 +490,18 @@ uo_out[7] to [4] is connected to q3 to q0 of the receiver comparators.
 </p>
 
 Top cell: `heichips26_ook_top`
-Slot size: small
-Analog pins: 3
-Uses VAPRW: False
+Slot size: `small`
+Analog pins: `3`
+Uses VAPRW: `True`
 
-Team members:
+**Team members:**
 
 - Belal Elshinnawey
 - Koh Tomita
 - Kokoro Kodama
 - Francisco Sayas
 
-Long description:
+**Description:**
 
 - Receiver design:
   - A 3 stage input amplifier
@@ -542,11 +542,11 @@ A fully analog component with ohmic behaviour whose resistance value can be chan
 </p>
 
 Top cell: `heichips26_vcr`
-Slot size: small
-Analog pins: 3
-Uses VAPRW: False
+Slot size: `small`
+Analog pins: `3`
+Uses VAPRW: `True`
 
-Team members:
+**Team members:**
 
 - Clyde
 - Santiago
@@ -554,7 +554,7 @@ Team members:
 - Sebastian
 - Noah
 
-Long description:
+**Description:**
 
 We implement three different approaches to accomplish this task.
 * bisectional opamp
@@ -574,18 +574,18 @@ An extensively, named daftASIC, designed and expandable music synthesizer built 
 </p>
 
 Top cell: `heichips26_daftASIC`
-Slot size: small
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `small`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Alexander-Odysseus Farmakis
 - Karolina Piotrowska
 - Alisa Stiballe
 - Riccardo Tedeschi
 
-Long description:
+**Description:**
 
 A music synthesizer built purely in silicon, daftASIC supports both visual and audio outputs. The music synthesizer designed supports
 PS/2 keyboard inputs, VGA output for the score and a PWM driver for the audio output. It supports multiple note durations (full, half,
@@ -613,11 +613,11 @@ Edge State Space Model Processing Element using Posit Arithmetic
 </p>
 
 Top cell: `heichips26_ballmer_peak_detector`
-Slot size: small
-Analog pins: 0
-Uses VAPRW: False
+Slot size: `small`
+Analog pins: `0`
+Uses VAPRW: `False`
 
-Team members:
+**Team members:**
 
 - Fabian Seiler
 - Felix Blenk
@@ -625,7 +625,7 @@ Team members:
 - Simon Veser
 - Tassilo Tanneberger
 
-Long description:
+**Description:**
 
 A processing element that targets edge-specific SSM layers (S-Edge). 
 - The operations are based on complex MAC operations and a scheduling unit implemented with Posit Arithmetic.
