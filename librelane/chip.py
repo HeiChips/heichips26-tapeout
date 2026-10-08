@@ -89,85 +89,6 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
     
     # TODO cleanup: read project submission.yaml once and store in dict
     
-    # Read user projects submission.yaml
-    user_projects_metadata = {}
-    
-    keys = ["project-name", "top-cell", "team-members", "slot-size", "analog-pins", "short-description", "long-description", "gds-path", "lef-path", "header-path"]
-    for config_path in glob.glob(os.path.join(__dir__, "../ip/user_projects/*/submission.yaml")):
-        print(f"Reading: {config_path}")
-        
-        with open(config_path) as ifile:
-            project_config = yaml.safe_load(ifile)
-            
-            # Collect metadate
-            user_projects_metadata[project_config["project-name"]] = {}
-            user_projects_metadata[project_config["project-name"]]["repo-name"] = config_path.split("user_projects/")[1].split("/")[0]
-        
-            for key in keys:
-                if not key in project_config:
-                    err(f"Config is missing a key ({key})")
-                    sys.exit(1)
-        
-                print(f"{key}: {project_config[key]}")
-            
-            gds = list(Path(config_path).parent.glob(project_config["gds-path"]))
-            if len(gds) > 1:
-                print(f"'gds-path' can only refer to a single gds. ({gds})")
-                sys.exit(1)
-            project_config["gds-path"] = gds[0]
-            
-            # Render GDS image
-            import klayout.lay as lay
-            import klayout.db as db
-            
-            lv = lay.LayoutView()
-
-            lv.set_config("grid-visible", "false")
-            lv.set_config("grid-show-ruler", "false")
-            lv.set_config("text-visible", "false")
-
-            lv.load_layout(project_config["gds-path"])
-            lv.max_hier()
-            
-            # Get aspect ratio
-            top_cell = lv.active_cellview().layout().top_cell()
-            top_bbox = top_cell.dbbox()
-            aspect_ratio = top_bbox.width() / top_bbox.height()
-            
-            resolution = 1024
-            oversampling = 8
-            
-            width = resolution
-            height = int(width / aspect_ratio)
-            
-            lv.load_layer_props(os.path.join(__dir__, "sg13cmos5l_render.lyp"))
-            
-            lv.set_config("background-color", "#FFFFFF")
-            lv.save_image_with_options(
-                os.path.join(__dir__, f"../img/user_projects/{project_config['top-cell']}.png"),
-                width,
-                height,
-                oversampling=oversampling,
-            )
-            
-            lef = list(Path(config_path).parent.glob(project_config["lef-path"]))
-            if len(lef) > 1:
-                print(f"'lef-path' can only refer to a single lef. ({lef})")
-                sys.exit(1)
-            project_config["lef-path"] = lef[0]
-            
-            header = list(Path(config_path).parent.glob(project_config["header-path"]))
-            if len(header) > 1:
-                print(f"'header-path' can only refer to a single header. ({header})")
-                sys.exit(1)
-            project_config["header-path"] = header[0]
-            
-            # Add remaining keys
-            for key in keys:
-                user_projects_metadata[project_config["project-name"]][key] = project_config[key]
-    
-    update_readme(os.path.join(__dir__, "../README.md"), user_projects_metadata, slot_map)
-    
     add_user_projects(config)
     
     instantiate_user_projects(config, slot_map)
@@ -194,107 +115,6 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
         state_out.save_snapshot(save_views_to)
 
     print("Done!")
-
-def update_readme(readme, user_projects_metadata, slot_map):
-
-    content = []
-
-    with open(readme, "r") as ifile:
-        while line := ifile.readline():
-            content.append(line)
-    
-    print(content)
-    
-    with open(readme, "w") as ofile:
-    
-        content_iter = iter(content)
-    
-        for line in content_iter:
-        
-            if "<!--- project_table_start -->" in line:
-                ofile.write(line)
-                ofile.write("\n")
-                ofile.write("| Project       | Size          | Location      | Description  | Link |\n")
-                ofile.write("|---------------|---------------|---------------|--------------|------|\n")
-                
-                for project_name, entries in user_projects_metadata.items():
-                
-                    project_coords = ""
-                
-                    for i, (coords, project_tuple) in enumerate(slot_map.items()):
-    
-                        if project_tuple is None:
-                            continue
-                    
-                        module, instance = project_tuple[0]
-                        
-                        if len(project_tuple) > 1:
-                        
-                            module_2, instance_2 = project_tuple[1]
-                            
-                            if module == entries['top-cell']:
-                                project_coords = coords + "/0"
-                            
-                            if module_2 == entries['top-cell']:
-                                project_coords = coords + "/1"
-                            
-                        else:
-                            if module == entries['top-cell']:
-                                project_coords = coords
-                
-                    ofile.write(f"| {project_name} | {entries['slot-size']} | {project_coords} | {entries['short-description'].replace('\n', '')} | [Repo](https://github.com/HeiChips/{entries['repo-name']}) |\n")
-                
-                while line:= next(content_iter):
-                    if "<!--- project_table_end -->" in line:
-                        ofile.write("\n")
-                        break
-
-            if "<!--- project_list_start -->" in line:
-                ofile.write(line)
-                ofile.write("\n")
-                
-                for project_name, entries in user_projects_metadata.items():
-                
-                    if not "uses-vapwr" in entries:
-                        entries["uses-vapwr"] = False
-                
-                    team = "\n".join([f"- {person}" for person in entries['team-members']])
-
-                    ofile.write(f"### {project_name}\n\n")
-
-                    ofile.write(f"{entries['short-description']}\n\n")
-
-                    ofile.write(f"""<p align="center">
-  <a href="img/user_projects/{entries['top-cell']}.png">
-    <img src="img/user_projects/{entries['top-cell']}.png" alt="Render of {entries['top-cell']}" width=40%>
-  </a>
-</p>\n\n""")
-
-                    ofile.write(f"""Top cell: `{entries['top-cell']}`
-Slot size: {entries['slot-size']}
-Analog pins: {entries['analog-pins']}
-Uses VAPRW: {entries['uses-vapwr']}
-
-Team members:\n
-{team}\n\n""")
-
-                    ofile.write(f"Long description:\n\n")
-                    
-                    for long_line in entries['long-description'].split("\n"):
-                        if len(long_line) > 0 and long_line[0] == '#':
-                            ofile.write("###")
-                    
-                        ofile.write(f"{long_line}\n")
-                    
-                    ofile.write("\n")
-                
-                while line:= next(content_iter):
-                    if "<!--- project_list_end -->" in line:
-                        ofile.write("\n")
-                        break
-
-            ofile.write(line)
-
 
 def add_user_projects(config):
 
@@ -358,12 +178,12 @@ def instantiate_user_projects(config, slot_map):
         
         if module == "RM_IHPSG13_1P_1024x32_c2_bm_bist":
         
-            instance_x = 0.48 * 873 + 100 if coords_x == 0 else 0.48 * 4340 + 100
-            instance_y = 1333*0.42 + 512*coords_y*0.42
+            instance_x = Decimal(0.48) * (873 + 130) if coords_x == 0 else Decimal(0.48) * (4340 + 130)
+            instance_y = Decimal(1333+110)*Decimal(0.42) + Decimal(512)*Decimal(coords_y)*Decimal(0.42)
         
             config["MACROS"][module]["instances"][f"heichips26_core.fabric_wrapper.{instance}"] = {
                 "location": (instance_x, instance_y),
-                "orientation": "FE" if coords_x == 0 else "E",
+                "orientation": "R0" if coords_x == 0 else "R0",
             }
         
             config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VDD VSS VDD! VSS!")
@@ -393,6 +213,22 @@ def instantiate_user_projects(config, slot_map):
                 "orientation": "FN" if coords_x == 0 else "N",
             }
 
+            # Workaround for long metal spacing
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][0],
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][1],
+            ])
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][0],
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][1],
+            ])
+
             config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VSS VSS VGND VGND")
             
             for metal in ["Metal4", "TopMetal1"]:
@@ -400,6 +236,9 @@ def instantiate_user_projects(config, slot_map):
 
             for metal in ["Metal4"]:
                 config["PDN_OBSTRUCTIONS"].append([metal, instance_x, instance_y, instance_x + instance_width, instance_y + instance_height])
+
+            # Workaround for long metal spacing
+            config["ROUTING_OBSTRUCTIONS"].append(["Metal3", instance_x, instance_y-1, instance_x + instance_width, instance_y])
 
         elif "large" in instance:
         
@@ -425,6 +264,22 @@ def instantiate_user_projects(config, slot_map):
                 "orientation": "FN" if coords_x == 0 else "N",
             }
 
+            # Workaround for long metal spacing
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_lv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][0],
+                config["MACROS"]["hm_pg_lv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_lv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_lv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][1],
+            ])
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_hv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][0],
+                config["MACROS"]["hm_pg_hv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_hv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_hv_17x415"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][1],
+            ])
+
             config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VSS VSS VGND VGND")
             
             for metal in ["Metal4", "TopMetal1"]:
@@ -432,6 +287,9 @@ def instantiate_user_projects(config, slot_map):
 
             for metal in ["Metal4"]:
                 config["PDN_OBSTRUCTIONS"].append([metal, instance_x, instance_y, instance_x + instance_width, instance_y + instance_height])
+
+            # Workaround for long metal spacing
+            config["ROUTING_OBSTRUCTIONS"].append(["Metal3", instance_x, instance_y-1, instance_x + instance_width, instance_y])
 
         elif "tiny" in instance:
         
@@ -459,6 +317,22 @@ def instantiate_user_projects(config, slot_map):
                 "orientation": "FN" if coords_x == 0 else "N",
             }
 
+            # Workaround for long metal spacing
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][0],
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_lv"]["location"][1],
+            ])
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][0],
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance}_pg_hv"]["location"][1],
+            ])
+
             config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance} VDD VSS VPWR VGND")
 
             for metal in ["Metal4", "TopMetal1"]:
@@ -484,6 +358,22 @@ def instantiate_user_projects(config, slot_map):
                 "orientation": "FN" if coords_x == 0 else "N",
             }
 
+            # Workaround for long metal spacing
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_lv"]["location"][0],
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_lv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_lv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_lv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_lv"]["location"][1],
+            ])
+            config["ROUTING_OBSTRUCTIONS"].append([
+                "Metal3",
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_hv"]["location"][0],
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_hv"]["location"][1] - 1,
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_hv"]["location"][0] + 17,
+                config["MACROS"]["hm_pg_hv_17x200"]["instances"][f"heichips26_core.fabric_wrapper.{instance_2}_pg_hv"]["location"][1],
+            ])
+
             config["PDN_MACRO_CONNECTIONS"].append(f"heichips26_core.fabric_wrapper.{instance_2} VSS VSS VGND VGND")
 
             for metal in ["Metal4", "TopMetal1"]:
@@ -491,6 +381,7 @@ def instantiate_user_projects(config, slot_map):
 
             for metal in ["Metal4"]:
                 config["PDN_OBSTRUCTIONS"].append([metal, instance_x + 300, instance_y, instance_x + instance_width + 300, instance_y + instance_height])
+
         else:
             print(f"Error: Couldn't match {module} {instance}")
             return 1
