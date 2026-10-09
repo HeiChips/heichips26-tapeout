@@ -716,6 +716,8 @@ if __name__ == "__main__":
     defines = {}
     test_filter = None
     
+    defines[f"PDK_{pdk.replace('-', '_')}"] = True
+    
     # TB wrapper
     sources.append(proj_path / f"heichips26_top_tb.v")
     
