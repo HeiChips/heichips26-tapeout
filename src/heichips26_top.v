@@ -43,7 +43,7 @@ module heichips26_top #(
     inout  wire [31:0]  fpga_io_PAD,
     
     // User I/Os
-    inout  wire [17:0]  analog_PAD,
+    inout  wire [17:0]  analog_PAD
 );
 
     `ifdef USE_POWER_PINS
