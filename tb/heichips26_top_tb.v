@@ -27,29 +27,7 @@ module heichips26_top_tb;
     wire [31:0]  fpga_io_PAD;
     
     // User I/Os
-    wire         user_usb_dn_PAD;
-    wire         user_usb_dp_PAD;
-    wire         user_usb_dp_up_PAD;
-    
-    wire         user_tmds_b_PAD;
-    wire         user_tmds_g_PAD;
-    wire         user_tmds_r_PAD;
-    wire         user_tmds_clk_PAD;
-    
-    wire         icelab_analog_pin0_PAD;
-    wire         icelab_analog_pin1_PAD;
-    wire         icelab_analog_pin2_PAD;
-    wire         icelab_analog_pin3_PAD;
-    
-    wire         internal_analog_pin0_PAD;
-    wire         internal_analog_pin1_PAD;
-    wire         internal_analog_pin2_PAD;
-    
-    wire         pudding_i_in_PAD;
-    wire         pudding_i_out_PAD;
-    
-    wire         ethernet_dp_PAD;
-    wire         ethernet_dn_PAD;
+    inout  wire [17:0]  analog_PAD;
     
     wire fpga_io_PAD_0;
     wire fpga_io_PAD_1;
@@ -136,29 +114,7 @@ module heichips26_top_tb;
       .fpga_io_PAD ({fpga_io_PAD_31, fpga_io_PAD_30, fpga_io_PAD_29, fpga_io_PAD_28, fpga_io_PAD_27, fpga_io_PAD_26, fpga_io_PAD_25, fpga_io_PAD_24, fpga_io_PAD_23, fpga_io_PAD_22, fpga_io_PAD_21, fpga_io_PAD_20, fpga_io_PAD_19, fpga_io_PAD_18, fpga_io_PAD_17, fpga_io_PAD_16, fpga_io_PAD_15, fpga_io_PAD_14, fpga_io_PAD_13, fpga_io_PAD_12, fpga_io_PAD_11, fpga_io_PAD_10, fpga_io_PAD_9, fpga_io_PAD_8, fpga_io_PAD_7, fpga_io_PAD_6, fpga_io_PAD_5, fpga_io_PAD_4, fpga_io_PAD_3, fpga_io_PAD_2, fpga_io_PAD_1, fpga_io_PAD_0}),
       
       // User I/Os
-      .user_usb_dn_PAD,
-      .user_usb_dp_PAD,
-      .user_usb_dp_up_PAD,
-            
-      .user_tmds_b_PAD,
-      .user_tmds_g_PAD,
-      .user_tmds_r_PAD,
-      .user_tmds_clk_PAD,
-            
-      .icelab_analog_pin0_PAD,
-      .icelab_analog_pin1_PAD,
-      .icelab_analog_pin2_PAD,
-      .icelab_analog_pin3_PAD,
-            
-      .internal_analog_pin0_PAD,
-      .internal_analog_pin1_PAD,
-      .internal_analog_pin2_PAD,
-            
-      .pudding_i_in_PAD,
-      .pudding_i_out_PAD,
-            
-      .ethernet_dp_PAD,
-      .ethernet_dn_PAD
+      .analog_PAD
   );
 
 endmodule
