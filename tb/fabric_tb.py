@@ -38,6 +38,13 @@ if __name__ == "__main__":
     defines = {}
     test_filter = None
     
+    # Define the PDK
+    defines[f"PDK_{pdk.replace('-', '_')}"] = True
+    
+    # SCL models
+    sources.append(Path(pdk_root) / pdk / "libs.ref" / scl / "verilog" / f"{scl}.v")
+    sources.append(Path(pdk_root) / pdk / "libs.ref" / scl / "verilog" / f"{pdk.replace('ihp-','')}_udp.v")
+    
     # RTL
     if not gl:
         if emulation:

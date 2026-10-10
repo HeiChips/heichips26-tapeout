@@ -716,6 +716,7 @@ if __name__ == "__main__":
     defines = {}
     test_filter = None
     
+    # Define the PDK
     defines[f"PDK_{pdk.replace('-', '_')}"] = True
     
     # TB wrapper
@@ -723,7 +724,7 @@ if __name__ == "__main__":
     
     # SCL models
     sources.append(Path(pdk_root) / pdk / "libs.ref" / scl / "verilog" / f"{scl}.v")
-    sources.append(Path(pdk_root) / pdk / "libs.ref" / scl / "verilog" / f"sg13cmos5l_udp.v")
+    sources.append(Path(pdk_root) / pdk / "libs.ref" / scl / "verilog" / f"{pdk.replace('ihp-','')}_udp.v")
     
     # SRAM models
     sources.append(Path(pdk_root) / pdk / "libs.ref" / "sg13cmos5l_sram" / "verilog" / "RM_IHPSG13_1P_1024x32_c2_bm_bist.v")
