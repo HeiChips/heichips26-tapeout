@@ -42,7 +42,7 @@ The following user projects are included:
 | Minimal Multicore Processor | tiny | X5Y1/1 | A custom 3-instruction dual-core 8-Bit CPU with a memory management unit supporting atomic swap operations. | [Repo](https://github.com/HeiChips/heichips26-minimal-processor) |
 | Noiser | small | X0Y5 | ring-oscillator designs for generating power side-channel noise | [Repo](https://github.com/HeiChips/heichips26_noise_gen) |
 | DNA Sequence Aligner | small | X5Y3 | This is a DNA sequence alignment accelerator based on Smith-Waterman algorithm. | [Repo](https://github.com/HeiChips/heichips26-DNA_sequencer) |
-| An On-Off keying Transmitter/Receiver | small | X0Y3 | ON OFF keying Transmitter+Receiver. It works by turning a carrier signal ON and OFF to transmit data.I built this because I wanted an RFIC for my first SoC design, and OOK is the simplest.How it works (bit bang mode. from the FPGA side, toggle the transmission pin with your favorite data encoding scheme, and hopefully, you receive something on the other end. I recommend start+stop bits with Manchester encoding, and a symbol duration no shorter than 6us)ui_in[0] is connected to the transmitter tx pin.uo_out[7] to [4] is connected to q3 to q0 of the receiver comparators. | [Repo](https://github.com/HeiChips/heichips26-on-off) |
+| An On-Off keying Transmitter/Receiver | small | X0Y3 | ON OFF keying Transmitter+Receiver. Very cool. | [Repo](https://github.com/HeiChips/heichips26-on-off) |
 | Voltage Controlled Resistor | small | X0Y4 | A fully analog component with ohmic behaviour whose resistance value can be changed in accordance with an external analog control voltage. | [Repo](https://github.com/HeiChips/heichips26-voltage-controlled-resistor) |
 | daftASIC | small | X5Y8 | An extensively, named daftASIC, designed and expandable music synthesizer built purely in silicon, supporting both visual and audio outputs | [Repo](https://github.com/HeiChips/heichips26-daftasic) |
 | Ballmer-Peak-Detector | small | X5Y2 | Edge State Space Model Processing Element using Posit Arithmetic | [Repo](https://github.com/HeiChips/heichips26-ballmer-peak-detector) |
@@ -524,15 +524,7 @@ engine based on the Smith-Waterman dynamic programming algorithm.
 
 ### An On-Off keying Transmitter/Receiver
 
-ON OFF keying Transmitter+Receiver. It works by turning a carrier signal ON and OFF to transmit data.
-
-I built this because I wanted an RFIC for my first SoC design, and OOK is the simplest.
-
-How it works (bit bang mode. from the FPGA side, toggle the transmission pin with your favorite data encoding scheme
-, and hopefully, you receive something on the other end. I recommend start+stop bits with Manchester encoding, and a symbol duration no shorter than 6us)
-
-ui_in[0] is connected to the transmitter tx pin.
-uo_out[7] to [4] is connected to q3 to q0 of the receiver comparators.
+ON OFF keying Transmitter+Receiver. Very cool.
 
 
 <p align="center">
