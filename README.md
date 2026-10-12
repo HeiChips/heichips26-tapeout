@@ -116,26 +116,78 @@ Uses VAPRW: `True`
 
 **Team members:**
 
+- Benedikt Lukat
 - Pascal Gesell
 - Torsten Maehne
 - Graeme Bragg
-- Benedikt Lukat
 
 **Description:**
 
-HeiChips 2026 FABulous Analogue Interface
+HeiChips 2026 FABulous Analogue Interface (FAIf)
 
-This repository is the fork of the HeiChips 2026 submission template for the analogue peripherals project at the HeiChips 2026 Hackathon.
-This project is implemented as a digital-on-top design with the following peripherals:
+Analogue peripherals for the eFPGA: two 8-bit DACs and an 8-bit SAR ADC,
+controlled through the standard digital interface. All analogue blocks
+(R-2R ladders, opamps, comparator, sample & hold, PTAT bias, level
+translators) are full-custom in a hard macro supplied by the 3.3 V analogue
+supply VAPWR; the control logic is synthesised in the 1.2 V core domain.
 
-* 16-bit DAC
-* 16-bit ADC
-* DDS
+**Analogue pins**
 
-The project makes use of three dedicated analogue pins and uses the small tile size.
+| Pin | Function |
+| --- | -------- |
+| analog_0 | DAC2 output (buffered) |
+| analog_1 | DAC1 output (buffered) |
+| analog_2 | ADC input |
 
-**nice** *formatting* and [links](https://heichips.github.io/).
-Repository: https://github.com/heliosfa/heichips26-FAIf
+**Digital interface** (all inputs sampled on the rising edge of `clk`)
+
+| Pin | Function |
+| --- | -------- |
+| `ui_in[7:0]` | DAC data / configuration data |
+| `uio_in[0]` | ADC clear |
+| `uio_in[1]` | ADC enable |
+| `uio_in[2]` | ADC start |
+| `uio_in[5]` | DAC select (0 = DAC1 byte, 1 = DAC2 byte and update) |
+| `uio_in[6]` | DAC load |
+| `uio_in[7]` | load configuration |
+| `uo_out[7:0]` | ADC result |
+| `uio_out[3]` | ADC done |
+| `uio_out[4]` | ADC tick (result valid, one clock) |
+
+**How to use it**
+
+- DACs: set `ui_in` to the DAC1 value and pulse DAC load with DAC select = 0;
+  then set `ui_in` to the DAC2 value and pulse DAC load with DAC select = 1.
+  Both outputs update together on the second load.
+- ADC: set ADC enable = 1. While the ADC is idle, the sample & hold tracks
+  analog_2. Pulse ADC start for one clock: the S&H holds, the SAR decides one
+  bit per clock (MSB first), and 9 clocks after start ADC tick marks the new
+  result on `uo_out`, which stays until the next result. ADC clear stops a
+  conversion and clears the result.
+- Configuration: pulse load configuration with the value on `ui_in`.
+  `cfg[3:0]` drives four spare 3.3 V outputs inside the macro (reserved for
+  a later trim); `cfg[7:4]` is unused.
+
+**Timing**: each SAR bit uses the comparator one clock period after the DAC
+changed, so the clock must be slow enough for DAC and comparator to settle.
+The S&H needs about 2 µs of idle (tracking) time between conversions; the
+input buffer limits a full-scale step to 7–12 µs and a full-scale sine to
+about 26 kHz.
+
+**Test and PCB needs**
+
+- VAPWR 3.3 V (analogue supply) must be present.
+- analog_2: a low-impedance source within the ADC input range, e.g. a
+  function generator or a DAC output looped back externally.
+- analog_0/analog_1: a test point or SMA connector per output for a scope or
+  multimeter; the outputs are buffered on chip but not meant to drive heavy
+  loads.
+- The clock is provided by the RP2350 and can be slowed down for the ADC.
+- opt., Self-test: loop a DAC output back to analog_2 on the PCB
+  (DAC1 on analog_1 is the neighbouring pin) and compare the
+  ADC result with the DAC code.
+
+Repository: https://github.com/ThePil0t/heichips26-FAIfplus
 
 
 ### E2Spike
