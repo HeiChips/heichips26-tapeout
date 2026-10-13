@@ -1,0 +1,17 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO logo_bmftr
+  CLASS BLOCK ;
+  FOREIGN logo_bmftr ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 174.930 BY 90.300 ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 174.930 90.300 ;
+      LAYER Metal5 ;
+        RECT 0.0 0.0 174.930 90.300 ;
+  END
+END logo_bmftr
+END LIBRARY

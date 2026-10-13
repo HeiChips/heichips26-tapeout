@@ -1,7 +1,7 @@
 MAKEFILE_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/../../IHP-Open-PDK
-PDK ?= ihp-sg13g2
+PDK ?= ihp-sg13cmos5l
 TOP ?= logo_credits
 
 PRBOUNDARY = "189/0"
@@ -13,7 +13,10 @@ all: logo drc
 .PHONY: all
 
 logo:
-	python3 script/make_gds.py image/${TOP}.png gds/${TOP}.gds --cellname ${TOP} --merge --pixel-size 0.21 --width 900 --height 900 --foreground ${METAL4} --boundary ${PRBOUNDARY} ${METAL4_NOFILL} ${TOPMETAL1_NOFILL}
+	python3 script/make_gds.py image/${TOP}.png gds/${TOP}.gds --cellname ${TOP} --merge --pixel-size 0.21 --height 430 --foreground ${METAL4} --boundary ${PRBOUNDARY} ${METAL4_NOFILL} ${TOPMETAL1_NOFILL} \
+	--lib lib/${TOP}.lib \
+	--lef lef/${TOP}.lef \
+	--vh  vh/${TOP}.vh
 .PHONY: logo
 
 drc:

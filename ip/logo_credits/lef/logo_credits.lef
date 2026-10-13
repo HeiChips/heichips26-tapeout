@@ -6,13 +6,12 @@ MACRO logo_credits
   CLASS BLOCK ;
   FOREIGN logo_credits ;
   ORIGIN 0.000 0.000 ;
-  SIZE 79.80 BY 79.80 ;
+  SIZE 223.440 BY 90.300 ;
   OBS
       LAYER TopMetal1 ;
-        RECT 0.0 0.0 79.80 79.80 ;
+        RECT 0.0 0.0 223.440 90.300 ;
       LAYER Metal5 ;
-        RECT 0.0 0.0 79.80 79.80 ;
+        RECT 0.0 0.0 223.440 90.300 ;
   END
 END logo_credits
 END LIBRARY
-

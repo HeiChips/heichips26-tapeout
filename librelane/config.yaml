@@ -339,7 +339,7 @@ MACROS:
     lef:
       - dir::../ip/alignment_mark/lef/alignment_mark.lef
     vh:
-      - dir::../ip/alignment_mark/vh/alignment_mark.v
+      - dir::../ip/alignment_mark/vh/alignment_mark.vh
     instances:
       alignment_mark_0:
         location: [55, 55]
@@ -359,7 +359,7 @@ MACROS:
     lef:
       - dir::../ip/logo_heichips/lef/logo_heichips.lef
     vh:
-      - dir::../ip/logo_heichips/vh/logo_heichips.v
+      - dir::../ip/logo_heichips/vh/logo_heichips.vh
     instances:
       logo_heichips:
         location: [160, 55]
@@ -370,22 +370,78 @@ MACROS:
     lef:
       - dir::../ip/logo_fabulous/lef/logo_fabulous.lef
     vh:
-      - dir::../ip/logo_fabulous/vh/logo_fabulous.v
+      - dir::../ip/logo_fabulous/vh/logo_fabulous.vh
     instances:
       logo_fabulous:
-        location: [60, 223]
-        orientation: N
+        location: [2867, 220]
+        orientation: R90
   logo_credits:
     gds:
       - dir::../ip/logo_credits/gds/logo_credits.gds
     lef:
       - dir::../ip/logo_credits/lef/logo_credits.lef
     vh:
-      - dir::../ip/logo_credits/vh/logo_credits.v
+      - dir::../ip/logo_credits/vh/logo_credits.vh
     instances:
       logo_credits:
-        location: [2658, 55]
+        location: [2658, 45]
         orientation: N
+  logo_chipdesigngermany:
+    gds:
+      - dir::../ip/logo_chipdesigngermany/gds/logo_chipdesigngermany.gds
+    lef:
+      - dir::../ip/logo_chipdesigngermany/lef/logo_chipdesigngermany.lef
+    vh:
+      - dir::../ip/logo_chipdesigngermany/vh/logo_chipdesigngermany.vh
+    instances:
+      logo_chipdesigngermany:
+        location: [2865, 2660]
+        orientation: R90
+  logo_ziti:
+    gds:
+      - dir::../ip/logo_ziti/gds/logo_ziti.gds
+    lef:
+      - dir::../ip/logo_ziti/lef/logo_ziti.lef
+    vh:
+      - dir::../ip/logo_ziti/vh/logo_ziti.vh
+    instances:
+      logo_ziti:
+        location: [2666, 2860]
+        orientation: R180
+  logo_heidelberg:
+    gds:
+      - dir::../ip/logo_heidelberg/gds/logo_heidelberg.gds
+    lef:
+      - dir::../ip/logo_heidelberg/lef/logo_heidelberg.lef
+    vh:
+      - dir::../ip/logo_heidelberg/vh/logo_heidelberg.vh
+    instances:
+      logo_heidelberg:
+        location: [165, 2860]
+        orientation: R180
+  logo_nct:
+    gds:
+      - dir::../ip/logo_nct/gds/logo_nct.gds
+    lef:
+      - dir::../ip/logo_nct/lef/logo_nct.lef
+    vh:
+      - dir::../ip/logo_nct/vh/logo_nct.vh
+    instances:
+      logo_nct:
+        location: [48, 145]
+        orientation: R270
+  logo_bmftr:
+    gds:
+      - dir::../ip/logo_bmftr/gds/logo_bmftr.gds
+    lef:
+      - dir::../ip/logo_bmftr/lef/logo_bmftr.lef
+    vh:
+      - dir::../ip/logo_bmftr/vh/logo_bmftr.vh
+    instances:
+      logo_bmftr:
+        location: [42.56, 2670]
+        orientation: R270
+
   classic_fabric_heichips26:
     gds:
       - dir::../fabrics/classic_fabric_heichips26/macro/ihp-sg13cmos5l/gds/classic_fabric_heichips26.gds

@@ -1,0 +1,17 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO logo_heidelberg
+  CLASS BLOCK ;
+  FOREIGN logo_heidelberg ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 141.540 BY 90.300 ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 141.540 90.300 ;
+      LAYER Metal5 ;
+        RECT 0.0 0.0 141.540 90.300 ;
+  END
+END logo_heidelberg
+END LIBRARY
