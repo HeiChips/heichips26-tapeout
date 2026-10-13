@@ -734,12 +734,17 @@ if __name__ == "__main__":
     sources.append(Path(pdk_root) / pdk / "libs.ref" / "sg13cmos5l_io" / "verilog" / "sg13cmos5l_io.v")
         
     # Alignment mark
-    sources.append(proj_path / '../ip/alignment_mark/vh/alignment_mark.v')
+    sources.append(proj_path / '../ip/alignment_mark/vh/alignment_mark.vh')
 
     # Logos
-    sources.append(proj_path / '../ip/logo_fabulous/vh/logo_fabulous.v')
-    sources.append(proj_path / '../ip/logo_heichips/vh/logo_heichips.v')
-    sources.append(proj_path / '../ip/logo_credits/vh/logo_credits.v')
+    sources.append(proj_path / '../ip/logo_fabulous/vh/logo_fabulous.vh')
+    sources.append(proj_path / '../ip/logo_heichips/vh/logo_heichips.vh')
+    sources.append(proj_path / '../ip/logo_credits/vh/logo_credits.vh')
+    sources.append(proj_path / '../ip/logo_bmftr/vh/logo_bmftr.vh')
+    sources.append(proj_path / '../ip/logo_chipdesigngermany/vh/logo_chipdesigngermany.vh')
+    sources.append(proj_path / '../ip/logo_heidelberg/vh/logo_heidelberg.vh')
+    sources.append(proj_path / '../ip/logo_nct/vh/logo_nct.vh')
+    sources.append(proj_path / '../ip/logo_ziti/vh/logo_ziti.vh')
 
     # Add the blackbox/verilog-headers for the template projects
     sources.append(proj_path / '../ip/user_projects/heichips26_example_tiny/macro/vh/heichips26_example_tiny.vh')
