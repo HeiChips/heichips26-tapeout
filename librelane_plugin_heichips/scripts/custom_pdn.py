@@ -162,7 +162,7 @@ result = [
 ]
 
 for data, result in zip(data, result):
-    print(f"data: {data} result: {result}")
+    #print(f"data: {data} result: {result}")
     assert(is_overlapping_1d(data[0], data[1]) == result)
 
 
@@ -211,7 +211,7 @@ result = [
 ]
 
 for data, result in zip(data, result):
-    print(f"data: {data} result: {result}")
+    #print(f"data: {data} result: {result}")
     assert(is_overlapping_2d(data[0], data[1]) == result)
 
 @click.option('--instance', "instances", multiple=True)
@@ -244,12 +244,6 @@ def custom_pdn(instances, reader):
     # Via library
     via_library = {}
     vg = ViaGenerator(reader, "viaTop1Array")
-    
-    #reader.block.findInst(pg_name)
-    
-    # TODO get the union over instance + pg_hv + pg_lv
-    # use that to generate the power straps
-    # then connect each instance
     
     # Find instance + both power gates
     for instance in instances:
@@ -331,7 +325,6 @@ def custom_pdn(instances, reader):
                 # Create connections to ITerms of user project
                 for iterm in project_inst.getITerms():
                     pin_name = iterm.getMTerm().getName()
-                    print(pin_name)
                     
                     # Found the right ITerm
                     if pin_name in power_domain:
@@ -362,13 +355,8 @@ def custom_pdn(instances, reader):
                                         stripe_rect.yMax()
                                     )
                                 )
-                                
-                                print(f"box1: {box1}")
-                                print(f"box2: {box2}")
                         
                                 if overlap := is_overlapping_2d(box1, box2):
-                                    print(f"overlap: {overlap}")
-                                    
                                     overlap_dx = overlap[1][0] - overlap[0][0]
                                     overlap_dy = overlap[1][1] - overlap[0][1]
 
@@ -395,7 +383,6 @@ def custom_pdn(instances, reader):
                     if power_domain == domain:
                         for iterm in pg_instance.getITerms():
                             pin_name = iterm.getMTerm().getName()
-                            print(pin_name)
                             
                             # Found the right ITerm
                             if pin_name == "GPWR":
@@ -426,13 +413,8 @@ def custom_pdn(instances, reader):
                                                 stripe_rect.yMax()
                                             )
                                         )
-                                        
-                                        print(f"box1: {box1}")
-                                        print(f"box2: {box2}")
                                 
                                         if overlap := is_overlapping_2d(box1, box2):
-                                            print(f"overlap: {overlap}")
-                                            
                                             overlap_dx = overlap[1][0] - overlap[0][0]
                                             overlap_dy = overlap[1][1] - overlap[0][1]
 
@@ -453,249 +435,6 @@ def custom_pdn(instances, reader):
                                             v = vg.get4sz_ext(overlap_dx, overlap_dy)
                                             
                                             odb.createSBoxes(sw, v, [odb.Point(via_x, via_y)], "STRIPE")
-    
-    
-    # use the slot list as the starting point
-    """
-    for blk_inst in reader.block.getInsts():
-        if "heichips26_instance_large_0" in blk_inst.getName():
-            print(blk_inst.getName())
-            
-            if "_pg_hv" in blk_inst.getName():
-                # Scan all ITerms
-                for iterm in blk_inst.getITerms():
-
-                    pin_name = iterm.getMTerm().getName()
-                    
-                    print(iterm.getName())
-                    print(pin_name)
-                    print(iterm.getAvgXY())
-                    
-                    if pin_name == "GPWR":
-                        iterm.connect(net)
-                    
-                    for mpin in iterm.getMTerm().getMPins():
-                        print(mpin.getGeometry()) #.getTechLayer()
-                        
-                        for box in mpin.getGeometry():
-                            print(box.getTechLayer().getName())
-                            print(box.getDY())
-                            print(box.getDX())
-                            print(box.xMin())
-                            print(box.yMin())
-                            print(box.xMax())
-                            print(box.yMax())
-
-            elif "_pg_lv" in blk_inst.getName():
-
-                for net_name in ["VPWR"]:
-                
-                    net = reader.block.findNet(f"heichips26_instance_large_0_{net_name}_GATED")
-                    assert(net)
-                    
-                    sw = net.getSWires()[0]
-                    assert(sw)
-                
-                    # Create VPWR stripes
-                    stripe_offset = {
-                        "VPWR"  : 20_000,
-                        "VAPWR" : 25_000
-                    }
-                    stripe_pitch = 60_000
-                    stripe_width = 4_000
-                    
-                    pg_extension = 36_000
-                
-                    for i in range(stripe_offset[net_name], blk_inst.getBBox().getDY(), stripe_pitch):
-                        print(i)
-
-                        stripe_rect = odb.Rect(
-                            blk_inst.getLocation()[0] - pg_extension, # TODO orient
-                            blk_inst.getLocation()[1] + i,
-                            blk_inst.getLocation()[0] + blk_inst.getBBox().getDX(),
-                            blk_inst.getLocation()[1] + i + stripe_width
-                        )
-                        
-                        print(dir(stripe_rect))
-                        
-                        # Scan all ITerms
-                        for iterm in blk_inst.getITerms():
-                            pin_name = iterm.getMTerm().getName()
-                            print(pin_name)
-                            
-                            # Found the right ITerm
-                            if pin_name == PDN[net.getName()]["pg"][2]:
-                                iterm.connect(net)
-
-                                for mpin in iterm.getMTerm().getMPins():
-                                    for box in mpin.getGeometry():
-                                        # user project straps
-                                        if blk_inst.getOrient() == "R0":
-                                            box1 = (
-                                                (blk_inst.getLocation()[0] + box.xMin(), blk_inst.getLocation()[1] + box.yMin()),
-                                                (blk_inst.getLocation()[0] + box.xMax(), blk_inst.getLocation()[1] + box.yMax())
-                                            )
-                                        else:
-                                            box1 = (
-                                                (blk_inst.getLocation()[0] + (blk_inst.getBBox().getDX() - box.xMax()), blk_inst.getLocation()[1] + (blk_inst.getBBox().getDY() - box.yMax())),
-                                                (blk_inst.getLocation()[0] + (blk_inst.getBBox().getDX() - box.xMin()), blk_inst.getLocation()[1] + (blk_inst.getBBox().getDY() - box.yMin()))
-                                            )
-                                
-                                        # power strap
-                                        box2 = (
-                                            (
-                                                stripe_rect.xMin(),
-                                                stripe_rect.yMin()
-                                            ),
-                                            (
-                                                stripe_rect.xMax(),
-                                                stripe_rect.yMax()
-                                            )
-                                        )
-                                        
-                                        print(f"box1: {box1}")
-                                        print(f"box2: {box2}")
-                                
-                                        if overlap := is_overlapping_2d(box1, box2):
-                                            print(f"overlap: {overlap}")
-                                            
-                                            overlap_dx = overlap[1][0] - overlap[0][0]
-                                            overlap_dy = overlap[1][1] - overlap[0][1]
-
-                                            via_x = overlap[0][0] + overlap_dx//2
-                                            via_y = overlap[0][1] + overlap_dy//2
-                                            
-                                            print(f"Creating via: w={overlap_dx} h={overlap_dy} x={via_x} y={via_y}")
-
-                                            # The minimum value for Metal4 is 0.62um
-                                            if overlap_dx < 620 or overlap_dy < 620:
-                                                continue
-                                            
-                                            # The minimum value for TopMetal1 is 1.26um
-                                            overlap_dx = max(overlap_dx, 1_260)
-                                            overlap_dy = max(overlap_dy, 1_260)
-                                            
-                                            # Via
-                                            v = vg.get4sz_ext(overlap_dx, overlap_dy)
-                                            
-                                            odb.createSBoxes(sw, v, [odb.Point(via_x, via_y)], "STRIPE")
-            
-            # Check full hierarchy with dots?
-            elif "heichips26_instance_large_0" in blk_inst.getName():
-            
-                for net_name in ["VPWR", "VAPWR"]:
-                
-                    net = reader.block.findNet(f"heichips26_instance_large_0_{net_name}_GATED")
-                    assert(net)
-                    
-                    sw = net.getSWires()[0]
-                    assert(sw)
-                
-                    # Create VPWR stripes
-                    stripe_offset = {
-                        "VPWR"  : 20_000,
-                        "VAPWR" : 25_000
-                    }
-                    stripe_pitch = 60_000
-                    stripe_width = 4_000
-                    
-                    pg_extension = 36_000
-                
-                    for i in range(stripe_offset[net_name], blk_inst.getBBox().getDY(), stripe_pitch):
-                        print(i)
-
-                        stripe_rect = odb.Rect(
-                            blk_inst.getLocation()[0] - pg_extension, # TODO orient
-                            blk_inst.getLocation()[1] + i,
-                            blk_inst.getLocation()[0] + blk_inst.getBBox().getDX(),
-                            blk_inst.getLocation()[1] + i + stripe_width
-                        )
-                        
-                        print(dir(stripe_rect))
-                        
-                        # Stripe
-                        odb.createSBoxes(sw, tech.findLayer("TopMetal1"), [stripe_rect], "STRIPE")
-            
-                        # Scan all ITerms
-                        for iterm in blk_inst.getITerms():
-                            pin_name = iterm.getMTerm().getName()
-                            print(pin_name)
-                            
-                            # Found the right ITerm
-                            if pin_name == net_name:
-                                iterm.connect(net)
-
-                                for mpin in iterm.getMTerm().getMPins():
-                                    
-                                    for box in mpin.getGeometry():
-                                        print(box.getTechLayer().getName())
-                                        print(box.getDY())
-                                        print(box.getDX())
-                                        print(box.xMin())
-                                        print(box.yMin())
-                                        print(box.xMax())
-                                        print(box.yMax())
-                                        
-                                        print(f"blk_inst.getLocation(): {blk_inst.getLocation()}")
-                                        
-                                        if blk_inst.getOrient() == "R0":
-                                        
-                                            # user project straps
-                                            box1 = (
-                                                (blk_inst.getLocation()[0] + box.xMin(), blk_inst.getLocation()[1] + box.yMin()),
-                                                (blk_inst.getLocation()[0] + box.xMax(), blk_inst.getLocation()[1] + box.yMax())
-                                            )
-                                        else:
-                                            box1 = (
-                                                (blk_inst.getLocation()[0] + (blk_inst.getBBox().getDX() - box.xMax()), blk_inst.getLocation()[1] + (blk_inst.getBBox().getDY() - box.yMax())),
-                                                (blk_inst.getLocation()[0] + (blk_inst.getBBox().getDX() - box.xMin()), blk_inst.getLocation()[1] + (blk_inst.getBBox().getDY() - box.yMin()))
-                                            )
-                                
-                                        # power strap
-                                        box2 = (
-                                            (
-                                                stripe_rect.xMin(),
-                                                stripe_rect.yMin()
-                                            ),
-                                            (
-                                                stripe_rect.xMax(),
-                                                stripe_rect.yMax()
-                                            )
-                                        )
-                                        
-                                        print(f"box1: {box1}")
-                                        print(f"box2: {box2}")
-                                
-                                        if overlap := is_overlapping_2d(box1, box2):
-                                            print(f"overlap: {overlap}")
-                                            
-                                            overlap_dx = overlap[1][0] - overlap[0][0]
-                                            overlap_dy = overlap[1][1] - overlap[0][1]
-
-                                            via_x = overlap[0][0] + overlap_dx//2
-                                            via_y = overlap[0][1] + overlap_dy//2
-                                            
-                                            print(f"Creating via: w={overlap_dx} h={overlap_dy} x={via_x} y={via_y}")
-
-                                            # The minimum value for Metal4 is 0.62um
-                                            if overlap_dx < 620 or overlap_dy < 620:
-                                                continue
-                                            
-                                            # The minimum value for TopMetal1 is 1.26um
-                                            overlap_dx = max(overlap_dx, 1_260)
-                                            overlap_dy = max(overlap_dy, 1_260)
-                                            
-                                            # Via
-                                            v = vg.get4sz_ext(overlap_dx, overlap_dy)
-                                            
-                                            odb.createSBoxes(sw, v, [odb.Point(via_x, via_y)], "STRIPE")"""
-
-    """vg = ViaGenerator(reader, "viaTop1Array")
-    
-    # Via
-    v = vg.get4sz_ext(7_000, 20_000)
-    odb.createSBoxes(sw, v, [odb.Point(383_040 + 7_000//2, 2200_000 + 20_000//2)], "STRIPE")"""
-
 
 if __name__ == "__main__":
     custom_pdn()

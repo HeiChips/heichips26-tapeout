@@ -78,6 +78,19 @@ class CustomPDN(OdbpyStep):
         return super().get_command() + args
 
 @Step.factory.register()
+class ConnectIORing(OdbpyStep):
+    """
+    Connect PDN to IO ring.
+    """
+
+    id = "Odb.ConnectIORing"
+    name = "Connect to IO Ring"
+    long_name = "Connect the PDN to the IO ring for better connectivity"
+
+    def get_script_path(self):
+        return os.path.join(os.path.dirname(__file__), "scripts", "connect_ioring.py")
+
+@Step.factory.register()
 class ConvertOASIS(KLayoutStep):
     """
     Convert GDS to OASIS.
