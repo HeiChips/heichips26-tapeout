@@ -376,5 +376,10 @@ module heichips26_top #(
     (* keep *) logo_heichips logo_heichips ();
     (* keep *) logo_fabulous logo_fabulous ();
     (* keep *) logo_credits logo_credits ();
+    (* keep *) logo_chipdesigngermany logo_chipdesigngermany ();
+    (* keep *) logo_ziti logo_ziti ();
+    (* keep *) logo_heidelberg logo_heidelberg ();
+    (* keep *) logo_nct logo_nct ();
+    (* keep *) logo_bmftr logo_bmftr ();
 
 endmodule

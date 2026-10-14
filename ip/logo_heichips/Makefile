@@ -13,7 +13,10 @@ all: logo drc
 .PHONY: all
 
 logo:
-	python3 script/make_gds.py image/${TOP}.png gds/${TOP}.gds --cellname ${TOP} --merge --pixel-size 0.21 --width 800 --height 800 --foreground --foreground ${METAL4} --boundary ${PRBOUNDARY} ${METAL4_NOFILL} ${TOPMETAL1_NOFILL}
+	python3 script/make_gds.py image/${TOP}.png gds/${TOP}.gds --cellname ${TOP} --merge --pixel-size 0.21 --width 800 --height 800 --foreground --foreground ${METAL4} --boundary ${PRBOUNDARY} ${METAL4_NOFILL} ${TOPMETAL1_NOFILL} \
+	--lib lib/${TOP}.lib \
+	--lef lef/${TOP}.lef \
+	--vh  vh/${TOP}.vh
 .PHONY: logo
 
 drc:

@@ -21,6 +21,9 @@ def convert_to_gds(
     pixel_size=6,
     foregrounds=["1/0"],
     boundaries=["0/0"],
+    lef=None,
+    lib=None,
+    vh=None,
 ):
 
     ly = db.Layout()
@@ -104,15 +107,62 @@ def convert_to_gds(
         for foreground_layer in foreground_layers:
             top.shapes(foreground_layer).insert(top_region)
 
+    layout_width = new_image_binary.width * pixel_size
+    layout_height = new_image_binary.height * pixel_size
+
     # Add the boundaries
     for boundary in boundaries:
         layer, datatype = boundary.split('/')
         boundary_layer = db.LayerInfo(int(layer), int(datatype))
-        top.shapes(boundary_layer).insert(db.DBox.new(0, 0, new_image_binary.width * pixel_size, new_image_binary.height * pixel_size))
+        top.shapes(boundary_layer).insert(db.DBox.new(0, 0, layout_width, layout_height))
 
     # Save the layout to a file
     ly.write(output_filepath)
 
+    if lef:
+        with open(lef, "w") as ofile:
+            ofile.write(f"""VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO {cellname}
+  CLASS BLOCK ;
+  FOREIGN {cellname} ;
+  ORIGIN 0.000 0.000 ;
+  SIZE {layout_width:.3f} BY {layout_height:.3f} ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 {layout_width:.3f} {layout_height:.3f} ;
+      LAYER Metal5 ;
+        RECT 0.0 0.0 {layout_width:.3f} {layout_height:.3f} ;
+  END
+END {cellname}
+END LIBRARY
+""")
+
+    if lib:
+        with open(lib, "w") as ofile:
+            ofile.write(f"""library ({cellname}) {{
+  input_threshold_pct_fall: 50.0;
+  input_threshold_pct_rise: 50.0;
+  output_threshold_pct_fall: 50.0;
+  output_threshold_pct_rise: 50.0;
+  slew_lower_threshold_pct_fall: 20.0;
+  slew_lower_threshold_pct_rise: 20.0;
+  slew_upper_threshold_pct_fall: 80.0;
+  slew_upper_threshold_pct_rise: 80.0;
+  
+  cell ({cellname}) {{
+  }}
+}}
+""")
+
+    if vh:
+        with open(vh, "w") as ofile:
+            ofile.write(f"""(* keep *)
+module {cellname};
+endmodule
+""")
 
 if __name__ == "__main__":
 
@@ -157,6 +207,22 @@ if __name__ == "__main__":
     )
     parser.add_argument("--smooth", action="store_true", help="smooth the edges")
 
+    parser.add_argument(
+        "--lef",
+        type=str,
+        help="path to generate the lef file",
+    )
+    parser.add_argument(
+        "--lib",
+        type=str,
+        help="path to generate the liberty file",
+    )
+    parser.add_argument(
+        "--vh",
+        type=str,
+        help="path to generate the verilog-header file",
+    )
+    
     args = parser.parse_args()
 
     convert_to_gds(
@@ -174,4 +240,7 @@ if __name__ == "__main__":
         pixel_size=args.pixel_size,
         foregrounds=args.foreground,
         boundaries=args.boundary,
+        lef=args.lef,
+        lib=args.lib,
+        vh=args.vh
     )

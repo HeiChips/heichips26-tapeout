@@ -1,0 +1,17 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO logo_chipdesigngermany
+  CLASS BLOCK ;
+  FOREIGN logo_chipdesigngermany ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 201.600 BY 75.600 ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 201.600 75.600 ;
+      LAYER Metal5 ;
+        RECT 0.0 0.0 201.600 75.600 ;
+  END
+END logo_chipdesigngermany
+END LIBRARY

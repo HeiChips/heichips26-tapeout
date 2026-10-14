@@ -1,0 +1,17 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO logo_ziti
+  CLASS BLOCK ;
+  FOREIGN logo_ziti ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 177.030 BY 79.800 ;
+  OBS
+      LAYER TopMetal1 ;
+        RECT 0.0 0.0 177.030 79.800 ;
+      LAYER Metal5 ;
+        RECT 0.0 0.0 177.030 79.800 ;
+  END
+END logo_ziti
+END LIBRARY
