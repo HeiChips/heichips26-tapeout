@@ -751,6 +751,10 @@ if __name__ == "__main__":
     sources.append(proj_path / '../ip/user_projects/heichips26_example_small/macro/vh/heichips26_example_small.vh')
     sources.append(proj_path / '../ip/user_projects/heichips26_example_large/macro/vh/heichips26_example_large.vh')
 
+    # Add the blackbox module for sg13cmos5l_io__iovdd_connect
+
+    sources.append(proj_path / '../ip/sg13cmos5l_io__iovdd_connect/verilog/sg13cmos5l_io__iovdd_connect.v')
+
     # Add the blackbox/verilog-headers for the user projects
     def get_user_vh():
         verilog_headers = []

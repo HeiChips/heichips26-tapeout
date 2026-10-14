@@ -1,15 +1,15 @@
 `default_nettype none
 
-    module fabric_wrapper #(
-        parameter FrameBitsPerRow = 32,
-        parameter MaxFramesPerCol = 20,
-        
-        parameter NumColumns = 6,
-        parameter NumRows = 11,
-        
-        parameter FABRIC_NUM_IO_NORTH = 16,
-        parameter FABRIC_NUM_IO_SOUTH = 16
-    )(
+module fabric_wrapper #(
+    parameter FrameBitsPerRow = 32,
+    parameter MaxFramesPerCol = 20,
+    
+    parameter NumColumns = 6,
+    parameter NumRows = 11,
+    
+    parameter FABRIC_NUM_IO_NORTH = 16,
+    parameter FABRIC_NUM_IO_SOUTH = 16
+)(
     `ifdef USE_POWER_PINS
     inout wire VPWR,
     inout wire VGND,
@@ -25,13 +25,13 @@
     input                                sys_reset_i,
 
     // Analog pins
-    inout wire heichips26_instance_small_0_analog_0, // heichips26_ook_top analog_0
-    inout wire heichips26_instance_small_0_analog_1, // heichips26_ook_top analog_1
-    inout wire heichips26_instance_small_0_analog_2, // heichips26_ook_top analog_2
+    inout wire heichips26_instance_small_3_analog_0, // heichips26_ook_top analog_0
+    inout wire heichips26_instance_small_3_analog_1, // heichips26_ook_top analog_1
+    inout wire heichips26_instance_small_3_analog_2, // heichips26_ook_top analog_2
 
-    inout wire heichips26_instance_small_1_analog_0, // heichips26_vcr analog_0
-    inout wire heichips26_instance_small_1_analog_1, // heichips26_vcr analog_1
-    inout wire heichips26_instance_small_1_analog_2, // heichips26_vcr analog_2
+    inout wire heichips26_instance_small_4_analog_0, // heichips26_vcr analog_0
+    inout wire heichips26_instance_small_4_analog_1, // heichips26_vcr analog_1
+    inout wire heichips26_instance_small_4_analog_2, // heichips26_vcr analog_2
 
     inout wire heichips26_instance_small_5_analog_0, // heichips26_FAIf analog_0
     inout wire heichips26_instance_small_5_analog_1, // heichips26_FAIf analog_1
@@ -1215,7 +1215,7 @@
             .CTRL (tt_project_1_enable_power && configured_i)
     );
 
-    (* keep *) heichips26_ook_top heichips26_instance_small_0 (
+    (* keep *) heichips26_ballmer_peak_detector heichips26_instance_small_0 (
             .clk        (tt_project_2_clk),
             .rst_n      (tt_project_2_rst_n),
             .ena        (tt_project_2_ena),
@@ -1223,10 +1223,7 @@
             .uio_in     (tt_project_2_uio_in),
             .uo_out     (tt_project_2_uo_out),
             .uio_out    (tt_project_2_uio_out),
-            .uio_oe     (tt_project_2_uio_oe),
-            .analog_0 (heichips26_instance_small_0_analog_0),
-            .analog_1 (heichips26_instance_small_0_analog_1),
-            .analog_2 (heichips26_instance_small_0_analog_2)
+            .uio_oe     (tt_project_2_uio_oe)
     );
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_0_pg_lv (
@@ -1248,7 +1245,7 @@
             .CTRL (tt_project_2_enable_power && configured_i)
     );
 
-    (* keep *) heichips26_vcr heichips26_instance_small_1 (
+    (* keep *) heichips26_dna_sequencer heichips26_instance_small_1 (
             .clk        (tt_project_3_clk),
             .rst_n      (tt_project_3_rst_n),
             .ena        (tt_project_3_ena),
@@ -1256,10 +1253,7 @@
             .uio_in     (tt_project_3_uio_in),
             .uo_out     (tt_project_3_uo_out),
             .uio_out    (tt_project_3_uio_out),
-            .uio_oe     (tt_project_3_uio_oe),
-            .analog_0 (heichips26_instance_small_1_analog_0),
-            .analog_1 (heichips26_instance_small_1_analog_1),
-            .analog_2 (heichips26_instance_small_1_analog_2)
+            .uio_oe     (tt_project_3_uio_oe)
     );
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_1_pg_lv (
@@ -1268,7 +1262,7 @@
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_3_enable_power && configured_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_1_pg_hv (
@@ -1278,7 +1272,7 @@
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_3_enable_power && configured_i)
     );
 
     (* keep *) heichips26_noise_gen heichips26_instance_small_2 (
@@ -1443,7 +1437,7 @@
             .CTRL (tt_project_9_enable_power && configured_i)
     );
 
-    (* keep *) heichips26_ballmer_peak_detector heichips26_instance_small_3 (
+    (* keep *) heichips26_ook_top heichips26_instance_small_3 (
             .clk        (tt_project_10_clk),
             .rst_n      (tt_project_10_rst_n),
             .ena        (tt_project_10_ena),
@@ -1451,7 +1445,10 @@
             .uio_in     (tt_project_10_uio_in),
             .uo_out     (tt_project_10_uo_out),
             .uio_out    (tt_project_10_uio_out),
-            .uio_oe     (tt_project_10_uio_oe)
+            .uio_oe     (tt_project_10_uio_oe),
+            .analog_0 (heichips26_instance_small_3_analog_0),
+            .analog_1 (heichips26_instance_small_3_analog_1),
+            .analog_2 (heichips26_instance_small_3_analog_2)
     );
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_3_pg_lv (
@@ -1460,7 +1457,7 @@
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_10_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_3_pg_hv (
@@ -1470,10 +1467,10 @@
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_10_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i)
     );
 
-    (* keep *) heichips26_dna_sequencer heichips26_instance_small_4 (
+    (* keep *) heichips26_vcr heichips26_instance_small_4 (
             .clk        (tt_project_11_clk),
             .rst_n      (tt_project_11_rst_n),
             .ena        (tt_project_11_ena),
@@ -1481,7 +1478,10 @@
             .uio_in     (tt_project_11_uio_in),
             .uo_out     (tt_project_11_uo_out),
             .uio_out    (tt_project_11_uio_out),
-            .uio_oe     (tt_project_11_uio_oe)
+            .uio_oe     (tt_project_11_uio_oe),
+            .analog_0 (heichips26_instance_small_4_analog_0),
+            .analog_1 (heichips26_instance_small_4_analog_1),
+            .analog_2 (heichips26_instance_small_4_analog_2)
     );
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_small_4_pg_lv (
@@ -1490,7 +1490,7 @@
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_11_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_4_pg_hv (
@@ -1500,7 +1500,7 @@
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_11_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i)
     );
 
     logic [7:0] tt_project_12_0_uo_out;

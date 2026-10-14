@@ -1,0 +1,138 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO sg13cmos5l_io__iovdd_connect
+  CLASS BLOCK ;
+  FOREIGN sg13cmos5l_io__iovdd_connect ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 5.000 BY 180.000 ;
+  PIN iovss
+    PORT
+      LAYER Metal3 ;
+        RECT 0.000 34.500 5.000 60.000 ;
+    END
+    PORT
+      LAYER Metal3 ;
+        RECT 0.000 7.000 5.000 32.500 ;
+    END
+    PORT
+      LAYER Metal3 ;
+        RECT 0.000 126.000 5.000 134.000 ;
+    END
+    PORT
+      LAYER Metal4 ;
+        RECT 0.000 34.500 5.000 60.000 ;
+    END
+    PORT
+      LAYER Metal4 ;
+        RECT 0.000 7.000 5.000 32.500 ;
+    END
+    PORT
+      LAYER TopMetal1 ;
+        RECT 0.000 34.500 5.000 60.000 ;
+    END
+    PORT
+      LAYER TopMetal1 ;
+        RECT 0.000 7.000 5.000 32.500 ;
+    END
+    PORT
+      LAYER TopMetal1 ;
+        RECT 0.000 126.000 5.000 134.000 ;
+    END
+    PORT
+      LAYER Metal1 ;
+        RECT 0.620 137.585 1.340 137.895 ;
+    END
+    PORT
+      LAYER Metal1 ;
+        RECT 0.620 113.140 1.340 113.450 ;
+    END
+    PORT
+      LAYER Metal1 ;
+        RECT 0.620 87.620 1.340 87.930 ;
+    END
+  END iovss
+  PIN iovdd
+    PORT
+      LAYER Metal3 ;
+        RECT 0.000 66.000 5.000 91.500 ;
+    END
+    PORT
+      LAYER Metal3 ;
+        RECT 0.000 93.500 5.000 119.000 ;
+    END
+    PORT
+      LAYER Metal4 ;
+        RECT 0.500 176.255 4.500 178.000 ;
+    END
+    PORT
+      LAYER Metal4 ;
+        RECT 0.000 66.000 5.000 91.500 ;
+    END
+    PORT
+      LAYER Metal4 ;
+        RECT 0.000 93.500 5.000 119.000 ;
+    END
+    PORT
+      LAYER TopMetal1 ;
+        RECT 0.000 66.000 5.000 91.500 ;
+    END
+    PORT
+      LAYER TopMetal1 ;
+        RECT 0.000 93.500 5.000 119.000 ;
+    END
+    PORT
+      LAYER Metal1 ;
+        RECT 1.870 39.700 2.940 40.510 ;
+    END
+    PORT
+      LAYER Metal1 ;
+        RECT 2.100 31.130 3.110 32.025 ;
+    END
+  END iovdd
+  PIN vss
+    PORT
+      LAYER Metal3 ;
+        RECT 0.000 140.000 5.000 158.000 ;
+    END
+    PORT
+      LAYER Metal1 ;
+        RECT 0.915 156.920 1.365 157.080 ;
+    END
+  END vss
+  PIN vdd
+    PORT
+      LAYER Metal3 ;
+        RECT 0.000 160.000 5.000 178.000 ;
+    END
+  END vdd
+  OBS
+      LAYER GatPoly ;
+        RECT 0.000 6.000 5.000 167.150 ;
+      LAYER Metal1 ;
+        RECT 0.000 157.260 5.000 167.080 ;
+        RECT 0.000 156.740 0.735 157.260 ;
+        RECT 1.545 156.740 5.000 157.260 ;
+        RECT 0.000 138.075 5.000 156.740 ;
+        RECT 0.000 137.405 0.440 138.075 ;
+        RECT 1.520 137.405 5.000 138.075 ;
+        RECT 0.000 113.630 5.000 137.405 ;
+        RECT 0.000 112.960 0.440 113.630 ;
+        RECT 1.520 112.960 5.000 113.630 ;
+        RECT 0.000 88.110 5.000 112.960 ;
+        RECT 0.000 87.440 0.440 88.110 ;
+        RECT 1.520 87.440 5.000 88.110 ;
+        RECT 0.000 40.690 5.000 87.440 ;
+        RECT 0.000 39.520 1.690 40.690 ;
+        RECT 3.120 39.520 5.000 40.690 ;
+        RECT 0.000 32.205 5.000 39.520 ;
+        RECT 0.000 30.950 1.920 32.205 ;
+        RECT 3.290 30.950 5.000 32.205 ;
+        RECT 0.000 6.000 5.000 30.950 ;
+      LAYER Metal4 ;
+        RECT 0.500 119.210 4.500 176.045 ;
+  END
+END sg13cmos5l_io__iovdd_connect
+END LIBRARY
+

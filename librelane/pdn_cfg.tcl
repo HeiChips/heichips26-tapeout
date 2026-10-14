@@ -75,7 +75,7 @@ if { $::env(PDN_MULTILAYER) == 1 } {
         -offset $::env(PDN_VOFFSET) \
         -spacing $::env(PDN_VSPACING) \
         -starts_with POWER \
-        -nets "$::env(VDD_NET) $::env(GND_NET) VDDA" \
+        -nets "$::env(VDD_NET) $::env(GND_NET) IOVDD" \
         {*}$arg_list
 
     add_pdn_stripe \
@@ -86,7 +86,7 @@ if { $::env(PDN_MULTILAYER) == 1 } {
         -offset $::env(PDN_HOFFSET) \
         -spacing $::env(PDN_HSPACING) \
         -starts_with POWER \
-        -nets "$::env(VDD_NET) $::env(GND_NET) VDDA" \
+        -nets "$::env(VDD_NET) $::env(GND_NET) IOVDD" \
         {*}$arg_list
 
     add_pdn_connect \
@@ -159,7 +159,7 @@ if { $::env(PDN_CORE_RING) == 1 } {
             -widths "$::env(PDN_CORE_RING_VWIDTH) $::env(PDN_CORE_RING_HWIDTH)" \
             -spacings "$::env(PDN_CORE_RING_VSPACING) $::env(PDN_CORE_RING_HSPACING)" \
             -core_offset "$::env(PDN_CORE_RING_VOFFSET) $::env(PDN_CORE_RING_HOFFSET)" \
-            -nets "$::env(VDD_NET) $::env(GND_NET) VDDA" \
+            -nets "$::env(VDD_NET) $::env(GND_NET) IOVDD" \
             {*}$arg_list
 
         if { [info exists ::env(PDN_CORE_VERTICAL_LAYER)] } {

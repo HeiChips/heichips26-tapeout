@@ -249,13 +249,9 @@ def custom_pdn(reader):
 
     # get VDD VSS nets
     for net_name in ["VDD", "VSS"]:
-
         net = reader.block.findNet(net_name)
         
         for sw in net.getSWires():
-            print(sw)
-            print(dir(sw))
-            
             for sbox in sw.getWires():
 
                 # Straps are 4um thick and >=2000um long
@@ -287,9 +283,6 @@ def custom_pdn(reader):
 
                     # Add via left
                     odb.createSBoxes(sw, v, [odb.Point(sbox.xMin() - strap_extension + 15_800//2, sbox.yMin() + sbox.getDY()//2)], "STRIPE")
-    
-    
-    #asdf
 
 if __name__ == "__main__":
     custom_pdn()

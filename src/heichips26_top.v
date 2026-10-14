@@ -46,10 +46,6 @@ module heichips26_top #(
     inout  wire [17:0]  analog_PAD
 );
 
-    `ifdef USE_POWER_PINS
-    wire VDDA;
-    `endif
-
     // FPGA
     wire fpga_clk_PAD2CORE;
     wire fpga_rst_n_PAD2CORE;
@@ -319,7 +315,7 @@ module heichips26_top #(
         `ifdef USE_POWER_PINS
         .VDD  (VDD),
         .VSS  (VSS),
-        .VDDA (VDDA),
+        .VDDA (IOVDD),
         `endif
     
         // FPGA
@@ -348,13 +344,13 @@ module heichips26_top #(
         .fpga_config_slot_i         (fpga_config_slot_PAD2CORE),
         .fpga_config_trigger_i      (fpga_config_trigger_PAD2CORE),
 
-        .heichips26_instance_small_0_analog_0 (analog_routing[0]),
-        .heichips26_instance_small_0_analog_1 (analog_routing[1]),
-        .heichips26_instance_small_0_analog_2 (analog_routing[2]),
+        .heichips26_instance_small_3_analog_0 (analog_routing[0]),
+        .heichips26_instance_small_3_analog_1 (analog_routing[1]),
+        .heichips26_instance_small_3_analog_2 (analog_routing[2]),
 
-        .heichips26_instance_small_1_analog_0 (analog_routing[3]),
-        .heichips26_instance_small_1_analog_1 (analog_routing[4]),
-        .heichips26_instance_small_1_analog_2 (analog_routing[5]),
+        .heichips26_instance_small_4_analog_0 (analog_routing[3]),
+        .heichips26_instance_small_4_analog_1 (analog_routing[4]),
+        .heichips26_instance_small_4_analog_2 (analog_routing[5]),
 
         .heichips26_instance_small_5_analog_0 (analog_routing[6]),
         .heichips26_instance_small_5_analog_1 (analog_routing[7]),
@@ -381,5 +377,18 @@ module heichips26_top #(
     (* keep *) logo_heidelberg logo_heidelberg ();
     (* keep *) logo_nct logo_nct ();
     (* keep *) logo_bmftr logo_bmftr ();
+
+    generate
+    for (genvar i=0; i<2; i++) begin : iovdd_connect_slices
+        (* keep *) sg13cmos5l_io__iovdd_connect iovdd_connect (
+            `ifdef USE_POWER_PINS
+            .iovdd  (IOVDD),
+            .iovss  (IOVSS),
+            .vdd    (VDD),
+            .vss    (VSS)
+            `endif
+        );
+    end
+    endgenerate
 
 endmodule

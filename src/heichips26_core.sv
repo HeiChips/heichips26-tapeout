@@ -38,13 +38,13 @@ module heichips26_core (
     input  logic        fpga_config_trigger_i,
 
     // Analog pins
-    inout wire heichips26_instance_small_0_analog_0, // heichips26_ook_top analog_0
-    inout wire heichips26_instance_small_0_analog_1, // heichips26_ook_top analog_1
-    inout wire heichips26_instance_small_0_analog_2, // heichips26_ook_top analog_2
+    inout wire heichips26_instance_small_3_analog_0, // heichips26_ook_top analog_0
+    inout wire heichips26_instance_small_3_analog_1, // heichips26_ook_top analog_1
+    inout wire heichips26_instance_small_3_analog_2, // heichips26_ook_top analog_2
 
-    inout wire heichips26_instance_small_1_analog_0, // heichips26_vcr analog_0
-    inout wire heichips26_instance_small_1_analog_1, // heichips26_vcr analog_1
-    inout wire heichips26_instance_small_1_analog_2, // heichips26_vcr analog_2
+    inout wire heichips26_instance_small_4_analog_0, // heichips26_vcr analog_0
+    inout wire heichips26_instance_small_4_analog_1, // heichips26_vcr analog_1
+    inout wire heichips26_instance_small_4_analog_2, // heichips26_vcr analog_2
 
     inout wire heichips26_instance_small_5_analog_0, // heichips26_FAIf analog_0
     inout wire heichips26_instance_small_5_analog_1, // heichips26_FAIf analog_1
@@ -328,13 +328,13 @@ module heichips26_core (
         .configured_i   (fabric_config_configured),
         .sys_reset_i    (fabric_config_busy),
 
-        .heichips26_instance_small_0_analog_0 (heichips26_instance_small_0_analog_0),
-        .heichips26_instance_small_0_analog_1 (heichips26_instance_small_0_analog_1),
-        .heichips26_instance_small_0_analog_2 (heichips26_instance_small_0_analog_2),
+        .heichips26_instance_small_3_analog_0 (heichips26_instance_small_3_analog_0),
+        .heichips26_instance_small_3_analog_1 (heichips26_instance_small_3_analog_1),
+        .heichips26_instance_small_3_analog_2 (heichips26_instance_small_3_analog_2),
 
-        .heichips26_instance_small_1_analog_0 (heichips26_instance_small_1_analog_0),
-        .heichips26_instance_small_1_analog_1 (heichips26_instance_small_1_analog_1),
-        .heichips26_instance_small_1_analog_2 (heichips26_instance_small_1_analog_2),
+        .heichips26_instance_small_4_analog_0 (heichips26_instance_small_4_analog_0),
+        .heichips26_instance_small_4_analog_1 (heichips26_instance_small_4_analog_1),
+        .heichips26_instance_small_4_analog_2 (heichips26_instance_small_4_analog_2),
 
         .heichips26_instance_small_5_analog_0 (heichips26_instance_small_5_analog_0),
         .heichips26_instance_small_5_analog_1 (heichips26_instance_small_5_analog_1),
