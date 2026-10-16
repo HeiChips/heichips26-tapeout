@@ -1,42 +1,3 @@
-meta:
-  version: 3
-  flow: Chip
-  substituting_steps:
-
-    # Magic reports some overlaps which can be ignored
-    Checker.IllegalOverlap: null
-
-    # Render the layout after sealring insertion
-    KLayout.Render: null
-    +KLayout.SealRing: KLayout.Render
-
-    # Disable KLayout DRC
-    #KLayout.DRC: null
-    #Checker.KLayoutDRC: null
-
-    # Disable magic DRC
-    #Magic.DRC: null
-    #Checker.MagicDRC: null
-
-    # Disable KLayout antenna check
-    #KLayout.Antenna: null
-    #Checker.KLayoutAntenna: null
-
-    # Disable KLayout density check
-    #KLayout.Density: null
-    #Checker.KLayoutDensity: null
-    
-    # Save time
-    #OpenROAD.IRDropReport: null
-    #KLayout.XOR: null
-    #Netgen.LVS: null
-    #Checker.LVS: null
-    
-    OpenROAD.IRDropReport: null
-    
-    # Use Magic filler generation instead
-    KLayout.Filler: Magic.Filler
-
 DESIGN_NAME: heichips26_top
 VERILOG_FILES:
 - dir::../src/heichips26_top.v
@@ -229,24 +190,32 @@ CLOCK_NET: fpga_clk/p2c
 CLOCK_PERIOD: 15 # 15ns = ~66 MHz
 
 # Add additional corners
-LIB:
+CELL_LIBS:
   "*_typ_1p20V_25C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib
   "*_fast_1p32V_m40C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib
   "*_slow_1p08V_125C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib
   "*_typ_1p50V_25C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p50V_25C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p5V_3p3V_25C.lib
   "*_fast_1p65V_m40C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p65V_m40C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p65V_3p6V_m40C.lib
   "*_slow_1p35V_125C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p35V_125C.lib
+
+PAD_LIBS:
+  "*_typ_1p20V_25C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib
+  "*_fast_1p32V_m40C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib
+  "*_slow_1p08V_125C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib
+  "*_typ_1p50V_25C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p5V_3p3V_25C.lib
+  "*_fast_1p65V_m40C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p65V_3p6V_m40C.lib
+  "*_slow_1p35V_125C":
     - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p35V_3p0V_125C.lib
 
 STA_CORNERS:
