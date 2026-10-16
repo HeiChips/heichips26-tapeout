@@ -1,42 +1,3 @@
-meta:
-  version: 3
-  flow: Chip
-  substituting_steps:
-
-    # Magic reports some overlaps which can be ignored
-    Checker.IllegalOverlap: null
-
-    # Render the layout after sealring insertion
-    KLayout.Render: null
-    +KLayout.SealRing: KLayout.Render
-
-    # Disable KLayout DRC
-    #KLayout.DRC: null
-    #Checker.KLayoutDRC: null
-
-    # Disable magic DRC
-    #Magic.DRC: null
-    #Checker.MagicDRC: null
-
-    # Disable KLayout antenna check
-    #KLayout.Antenna: null
-    #Checker.KLayoutAntenna: null
-
-    # Disable KLayout density check
-    #KLayout.Density: null
-    #Checker.KLayoutDensity: null
-    
-    # Save time
-    #OpenROAD.IRDropReport: null
-    #KLayout.XOR: null
-    #Netgen.LVS: null
-    #Checker.LVS: null
-    
-    OpenROAD.IRDropReport: null
-    
-    # Use Magic filler generation instead
-    KLayout.Filler: Magic.Filler
-
 DESIGN_NAME: heichips26_top
 VERILOG_FILES:
 - dir::../src/heichips26_top.v
@@ -64,8 +25,8 @@ HEICHIPS_SLOTS:
     # left side
     'X0Y1': null
     'X0Y2': [['heichips26_event_snn', 'heichips26_instance_large_0']]
-    'X0Y3': [['heichips26_ook_top', 'heichips26_instance_small_0']]
-    'X0Y4': [['heichips26_vcr', 'heichips26_instance_small_1']]
+    'X0Y3': [['heichips26_ballmer_peak_detector', 'heichips26_instance_small_0']]
+    'X0Y4': [['heichips26_dna_sequencer', 'heichips26_instance_small_1']]
     'X0Y5': [['heichips26_noise_gen', 'heichips26_instance_small_2']]
     'X0Y6': null
     'X0Y7': [['heichips26_e2spike', 'heichips26_instance_large_1']]
@@ -74,14 +35,16 @@ HEICHIPS_SLOTS:
 
     # right side
     'X5Y1': [['heichips26_dram_replica', 'heichips26_instance_tiny_0_0'], ['heichips26_minimal_multicore_processor', 'heichips26_instance_tiny_0_1']]
-    'X5Y2': [['heichips26_ballmer_peak_detector', 'heichips26_instance_small_3']]
-    'X5Y3': [['heichips26_dna_sequencer', 'heichips26_instance_small_4']]
+    'X5Y2': [['heichips26_ook_top', 'heichips26_instance_small_3']]
+    'X5Y3': [['heichips26_vcr', 'heichips26_instance_small_4']]
     'X5Y4': [['heichips26_heiscore', 'heichips26_instance_tiny_1_0'], ['heichips26_example_tiny', 'heichips26_instance_tiny_1_1']]
     'X5Y5': null
     'X5Y6': [["RM_IHPSG13_1P_1024x32_c2_bm_bist", "heichips26_instance_sram_0"]]
     'X5Y7': [['heichips26_FAIf', 'heichips26_instance_small_5']]
     'X5Y8': [['heichips26_daftASIC', 'heichips26_instance_small_6']]
     'X5Y9': [['heichips26_example_small', 'heichips26_instance_small_7']]
+
+PAD_CFG: dir::pad_cfg.tcl
 
 PAD_SOUTH: [
     "fpga_ios\\[0\\].fpga_io",
@@ -212,12 +175,14 @@ FALLBACK_SDC: dir::chip_top.sdc
 
 VDD_NETS:
 - VDD
-- VDDA
+- IOVDD
 
 GND_NETS:
 - VSS
 
 GRT_ALLOW_CONGESTION: true
+
+#DRT_ANTENNA_REPAIR_ITERS: 0
 
 # Clock
 CLOCK_PORT: fpga_clk_PAD
@@ -225,24 +190,32 @@ CLOCK_NET: fpga_clk/p2c
 CLOCK_PERIOD: 15 # 15ns = ~66 MHz
 
 # Add additional corners
-LIB:
+CELL_LIBS:
   "*_typ_1p20V_25C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p20V_25C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib
   "*_fast_1p32V_m40C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p32V_m40C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib
   "*_slow_1p08V_125C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p08V_125C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib
   "*_typ_1p50V_25C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_typ_1p50V_25C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p5V_3p3V_25C.lib
   "*_fast_1p65V_m40C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_fast_1p65V_m40C.lib
-    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p65V_3p6V_m40C.lib
   "*_slow_1p35V_125C":
     - pdk_dir::libs.ref/sg13cmos5l_stdcell/lib/sg13cmos5l_stdcell_slow_1p35V_125C.lib
+
+PAD_LIBS:
+  "*_typ_1p20V_25C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p2V_3p3V_25C.lib
+  "*_fast_1p32V_m40C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p32V_3p6V_m40C.lib
+  "*_slow_1p08V_125C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p08V_3p0V_125C.lib
+  "*_typ_1p50V_25C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_typ_1p5V_3p3V_25C.lib
+  "*_fast_1p65V_m40C":
+    - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_fast_1p65V_3p6V_m40C.lib
+  "*_slow_1p35V_125C":
     - pdk_dir::libs.ref/sg13cmos5l_io/lib/sg13cmos5l_io_slow_1p35V_3p0V_125C.lib
 
 STA_CORNERS:
@@ -287,6 +260,9 @@ PDN_VWIDTH: 4
 PDN_VSPACING: 2
 PDN_VPITCH: 60
 
+# We have a custom script to connect to the I/O ring
+PDN_CORE_RING_CONNECT_TO_PADS: False
+
 NON_DEFAULT_RULES:
   # 3 times the width and spacing
   NDR_3W_3S:
@@ -317,9 +293,14 @@ PAD_BONDPAD_NAME: bondpad_70x70_novias
 # Bondpad is not yet included in the PDK
 EXTRA_GDS:
 - dir::../ip/bondpad_70x70_novias/gds/bondpad_70x70_novias.gds
+- dir::../ip/sg13cmos5l_io__iovdd_connect/gds/sg13cmos5l_io__iovdd_connect.gds
 
 EXTRA_LEFS:
 - dir::../ip/bondpad_70x70_novias/lef/bondpad_70x70_novias.lef
+- dir::../ip/sg13cmos5l_io__iovdd_connect/lef/sg13cmos5l_io__iovdd_connect.lef
+
+EXTRA_VERILOG_MODELS:
+- dir::../ip/sg13cmos5l_io__iovdd_connect/verilog/sg13cmos5l_io__iovdd_connect.v
 
 IGNORE_DISCONNECTED_MODULES:
 - bondpad_70x70_novias

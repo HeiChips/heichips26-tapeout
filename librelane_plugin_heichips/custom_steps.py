@@ -91,6 +91,19 @@ class ConnectIORing(OdbpyStep):
         return os.path.join(os.path.dirname(__file__), "scripts", "connect_ioring.py")
 
 @Step.factory.register()
+class ConnectIOVDD(OdbpyStep):
+    """
+    Connect IOVDD to core ring.
+    """
+
+    id = "Odb.ConnectIOVDD"
+    name = "Connect IOVDD"
+    long_name = "Connect IOVDD to core ring"
+
+    def get_script_path(self):
+        return os.path.join(os.path.dirname(__file__), "scripts", "connect_iovdd.py")
+
+@Step.factory.register()
 class ConvertOASIS(KLayoutStep):
     """
     Convert GDS to OASIS.

@@ -55,8 +55,8 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
 
     # Apply custom PDN script before general PDN generation
     target_flow = target_flow.Substitute([("+Odb.AddPDNObstructions", "Odb.CustomPDN")])
-
     target_flow = target_flow.Substitute([("+OpenROAD.GeneratePDN", "Odb.ConnectIORing")])
+    target_flow = target_flow.Substitute([("+Odb.ConnectIORing", "Odb.ConnectIOVDD")])
 
     # Use Magic filler generation instead of KLayout
     target_flow = target_flow.Substitute([("KLayout.Filler", "Magic.Filler")])
@@ -85,8 +85,6 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
     # Run the flow
     config = yaml.safe_load(open(common_config_path))
     
-    #config["DRT_OPT_ITERS"] = 10 # TODO
-    
     slot_map = config["HEICHIPS_SLOTS"]
     
     # Read user projects submission.yaml
@@ -107,8 +105,6 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
                 if not key in project_config:
                     err(f"Config is missing a key ({key})")
                     sys.exit(1)
-        
-                print(f"{key}: {project_config[key]}")
             
             gds = list(Path(config_path).parent.glob(project_config["gds-path"]))
             if len(gds) > 1:
@@ -180,8 +176,6 @@ def add_user_projects(config):
                 if not key in project_config:
                     err(f"Config is missing a key ({key})")
                     sys.exit(1)
-        
-                print(f"{key}: {project_config[key]}")
             
             gds = list(Path(config_path).parent.glob(project_config["gds-path"]))
             if len(gds) > 1:
@@ -444,16 +438,16 @@ def generate_rtl_wrapper(file, slot_map, user_projects_metadata):
 
             print("""`default_nettype none
 
-    module fabric_wrapper #(
-        parameter FrameBitsPerRow = 32,
-        parameter MaxFramesPerCol = 20,
-        
-        parameter NumColumns = 6,
-        parameter NumRows = 11,
-        
-        parameter FABRIC_NUM_IO_NORTH = 16,
-        parameter FABRIC_NUM_IO_SOUTH = 16
-    )(""")
+module fabric_wrapper #(
+    parameter FrameBitsPerRow = 32,
+    parameter MaxFramesPerCol = 20,
+    
+    parameter NumColumns = 6,
+    parameter NumRows = 11,
+    
+    parameter FABRIC_NUM_IO_NORTH = 16,
+    parameter FABRIC_NUM_IO_SOUTH = 16
+)(""")
             print("    `ifdef USE_POWER_PINS")
             print("    inout wire VPWR,")
             print("    inout wire VGND,")
