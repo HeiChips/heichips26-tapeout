@@ -5,7 +5,7 @@ TOP = heichips26_top
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/IHP-Open-PDK
 PDK ?= ihp-sg13cmos5l
-PDK_HASH ?= 22f43352dd8219f9007eb659e422e0d5fe28c5fb
+PDK_HASH ?= 7bbb4b5a5b64c446fedc64eacadc33fa65ade276
 
 #PDK_REPO_IHP ?= https://github.com/IHP-GmbH/IHP-Open-PDK
 #PDK_COMMIT_IHP ?= 22f2a25f1734796de3debbbf29cf697cbbc54081
@@ -152,6 +152,5 @@ resize-image:
 
 precheck:
 	PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 ${PDK_ROOT}/${PDK}/libs.tech/klayout/tech/drc/run_drc.py \
-	--precheck_drc --mp=$$(nproc) --no_offgrid --density_thr=$$(nproc) \
-	--no_angle --disable_extra_rules --no_recommended --path=final/gds/${TOP}.gds
+	--minimum_drc --no_recommended --mp=$$(nproc) --density_thr=$$(nproc) --path=final/gds/${TOP}.gds
 .PHONY: precheck
