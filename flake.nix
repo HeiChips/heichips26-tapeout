@@ -50,11 +50,11 @@
               librelane-plugin-heichips = callPythonPackage ./default.nix { };
             }
           ))
-          #(final: prev: {
-          #  openroad = prev.openroad.overrideAttrs {
-          #    patches = prev.openroad.patches ++ [./nix/disable_auto_taper.patch];
-          #  };
-          #})
+          (final: prev: {
+            openroad = prev.openroad.overrideAttrs {
+              patches = prev.openroad.patches ++ [./nix/disable_auto_taper.patch];
+            };
+          })
           ];
         }
       );
