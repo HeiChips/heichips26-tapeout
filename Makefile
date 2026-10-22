@@ -5,7 +5,7 @@ TOP = heichips26_top
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/IHP-Open-PDK
 PDK ?= ihp-sg13cmos5l
-PDK_HASH ?= 7bbb4b5a5b64c446fedc64eacadc33fa65ade276
+PDK_HASH ?= 89d42ee6d2fd9b50b86a1aada6fee6673c3e6008
 
 #PDK_REPO_IHP ?= https://github.com/IHP-GmbH/IHP-Open-PDK
 #PDK_COMMIT_IHP ?= 22f2a25f1734796de3debbbf29cf697cbbc54081
