@@ -382,7 +382,6 @@ module classic_fabric_heichips26
         input  Tile_X5Y4_UIO_OE_TT_PROJECT6, //EXTERNAL
         input  Tile_X5Y4_UIO_OE_TT_PROJECT7, //EXTERNAL
         output  Tile_X5Y4_ENABLE_POWER_TT_PROJECT, //EXTERNAL
-        output  Tile_X5Y4_SELECT_SLOT_TT_PROJECT, //EXTERNAL
         output  Tile_X5Y4_UI_IN_TT_PROJECT0, //EXTERNAL
         output  Tile_X5Y4_UI_IN_TT_PROJECT1, //EXTERNAL
         output  Tile_X5Y4_UI_IN_TT_PROJECT2, //EXTERNAL
@@ -840,6 +839,7 @@ module classic_fabric_heichips26
         input  Tile_X5Y9_UIO_OE_TT_PROJECT6, //EXTERNAL
         input  Tile_X5Y9_UIO_OE_TT_PROJECT7, //EXTERNAL
         output  Tile_X5Y9_ENABLE_POWER_TT_PROJECT, //EXTERNAL
+        output  Tile_X5Y9_SELECT_SLOT_TT_PROJECT, //EXTERNAL
         output  Tile_X5Y9_UI_IN_TT_PROJECT0, //EXTERNAL
         output  Tile_X5Y9_UI_IN_TT_PROJECT1, //EXTERNAL
         output  Tile_X5Y9_UI_IN_TT_PROJECT2, //EXTERNAL
@@ -3751,13 +3751,13 @@ assign Column_X5_FrameStrobe = FrameStrobe[MaxFramesPerCol*(5+1)-1:MaxFramesPerC
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-(* keep *) E_TT_IF_MUX
+(* keep *) E_TT_IF
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y4_Emulate_Bitstream)
     )
 `endif
-    Tile_X5Y4_E_TT_IF_MUX
+    Tile_X5Y4_E_TT_IF
     (
     .N_GBUF_END(Tile_X5Y5_N_GBUF_BEG),
     .E1END(Tile_X4Y4_E1BEG),
@@ -3796,7 +3796,6 @@ assign Column_X5_FrameStrobe = FrameStrobe[MaxFramesPerCol*(5+1)-1:MaxFramesPerC
     .UIO_OE_TT_PROJECT6(Tile_X5Y4_UIO_OE_TT_PROJECT6),
     .UIO_OE_TT_PROJECT7(Tile_X5Y4_UIO_OE_TT_PROJECT7),
     .ENABLE_POWER_TT_PROJECT(Tile_X5Y4_ENABLE_POWER_TT_PROJECT),
-    .SELECT_SLOT_TT_PROJECT(Tile_X5Y4_SELECT_SLOT_TT_PROJECT),
     .UI_IN_TT_PROJECT0(Tile_X5Y4_UI_IN_TT_PROJECT0),
     .UI_IN_TT_PROJECT1(Tile_X5Y4_UI_IN_TT_PROJECT1),
     .UI_IN_TT_PROJECT2(Tile_X5Y4_UI_IN_TT_PROJECT2),
@@ -5677,13 +5676,13 @@ assign Column_X5_FrameStrobe = FrameStrobe[MaxFramesPerCol*(5+1)-1:MaxFramesPerC
 
  //tile IO port will get directly connected to top-level tile module
  (* keep *)
-(* keep *) E_TT_IF
+(* keep *) E_TT_IF_MUX
 `ifdef EMULATION
     #(
     .Emulate_Bitstream(`Tile_X5Y9_Emulate_Bitstream)
     )
 `endif
-    Tile_X5Y9_E_TT_IF
+    Tile_X5Y9_E_TT_IF_MUX
     (
     .N_GBUF_END(Tile_X5Y10_N_GBUF_BEG),
     .E1END(Tile_X4Y9_E1BEG),
@@ -5722,6 +5721,7 @@ assign Column_X5_FrameStrobe = FrameStrobe[MaxFramesPerCol*(5+1)-1:MaxFramesPerC
     .UIO_OE_TT_PROJECT6(Tile_X5Y9_UIO_OE_TT_PROJECT6),
     .UIO_OE_TT_PROJECT7(Tile_X5Y9_UIO_OE_TT_PROJECT7),
     .ENABLE_POWER_TT_PROJECT(Tile_X5Y9_ENABLE_POWER_TT_PROJECT),
+    .SELECT_SLOT_TT_PROJECT(Tile_X5Y9_SELECT_SLOT_TT_PROJECT),
     .UI_IN_TT_PROJECT0(Tile_X5Y9_UI_IN_TT_PROJECT0),
     .UI_IN_TT_PROJECT1(Tile_X5Y9_UI_IN_TT_PROJECT1),
     .UI_IN_TT_PROJECT2(Tile_X5Y9_UI_IN_TT_PROJECT2),
