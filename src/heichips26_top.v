@@ -39,11 +39,12 @@ module heichips26_top #(
     inout  wire         fpga_config_configured_PAD,
     inout  wire [3:0]   fpga_config_slot_PAD,
     inout  wire         fpga_config_trigger_PAD,
+    inout  wire         fpga_enable_pgs_PAD,
 
     inout  wire [31:0]  fpga_io_PAD,
     
     // User I/Os
-    inout  wire [17:0]  analog_PAD
+    inout  wire [16:0]  analog_PAD
 );
 
     // FPGA
@@ -71,25 +72,14 @@ module heichips26_top #(
     wire        fpga_config_configured_CORE2PAD;
     wire [3:0]  fpga_config_slot_PAD2CORE;
     wire        fpga_config_trigger_PAD2CORE;
+    wire        fpga_enable_pgs_PAD2CORE;
 
     wire [31:0] fpga_io_PAD2CORE;
     wire [31:0] fpga_io_CORE2PAD;
     wire [31:0] fpga_io_CORE2PAD_EN;
 
-    wire icelab_analog_pin0_PADRES;
-    wire icelab_analog_pin1_PADRES;
-    wire icelab_analog_pin2_PADRES;
-    wire icelab_analog_pin3_PADRES;
-
-    wire internal_analog_pin0_PADRES;
-    wire internal_analog_pin1_PADRES;
-    wire internal_analog_pin2_PADRES;
-
-    wire pudding_i_in_PADRES;
-    wire pudding_i_out_PADBARE;
-
-    wire ethernet_dp_PADBARE;
-    wire ethernet_dn_PADBARE;
+    // Analog for the user projects
+    wire [17:0] analog_routing;
 
     // Power/ground pad instances
 
@@ -237,23 +227,6 @@ module heichips26_top #(
         .c2p (fpga_config_busy_CORE2PAD),
         .pad (fpga_config_busy_PAD)
     );
-    
-    generate
-    for (genvar i=0; i<32; i++) begin : fpga_ios
-        `sg13_IOPadInOut30mA fpga_io (
-            `ifdef USE_POWER_PINS
-            .iovdd  (IOVDD),
-            .iovss  (IOVSS),
-            .vdd    (VDD),
-            .vss    (VSS),
-            `endif
-            .c2p    (fpga_io_CORE2PAD[i]),
-            .c2p_en (fpga_io_CORE2PAD_EN[i]),
-            .p2c    (fpga_io_PAD2CORE[i]),
-            .pad    (fpga_io_PAD[i])
-        );
-    end
-    endgenerate
 
     `sg13_IOPadOut30mA fpga_config_configured (
         `ifdef USE_POWER_PINS
@@ -291,12 +264,37 @@ module heichips26_top #(
         .p2c (fpga_config_trigger_PAD2CORE),
         .pad (fpga_config_trigger_PAD)
     );
-    
-    // Analog for the user projects
-    wire [17:0] analog_routing;
+
+    `sg13_IOPadIn fpga_enable_pgs (
+        `ifdef USE_POWER_PINS
+        .iovdd  (IOVDD),
+        .iovss  (IOVSS),
+        .vdd    (VDD),
+        .vss    (VSS),
+        `endif
+        .p2c (fpga_enable_pgs_PAD2CORE),
+        .pad (fpga_enable_pgs_PAD)
+    );
+
+    generate
+    for (genvar i=0; i<32; i++) begin : fpga_ios
+        `sg13_IOPadInOut30mA fpga_io (
+            `ifdef USE_POWER_PINS
+            .iovdd  (IOVDD),
+            .iovss  (IOVSS),
+            .vdd    (VDD),
+            .vss    (VSS),
+            `endif
+            .c2p    (fpga_io_CORE2PAD[i]),
+            .c2p_en (fpga_io_CORE2PAD_EN[i]),
+            .p2c    (fpga_io_PAD2CORE[i]),
+            .pad    (fpga_io_PAD[i])
+        );
+    end
+    endgenerate
     
     generate
-    for (genvar i=0; i<18; i++) begin : analog
+    for (genvar i=0; i<17; i++) begin : analog
         (* keep *) `sg13_IOPadAnalog analog_pad (
             `ifdef USE_POWER_PINS
             .iovdd  (IOVDD),
@@ -338,23 +336,24 @@ module heichips26_top #(
         .fpga_miso_o    (fpga_miso_CORE2PAD),
         .fpga_miso_en_o (fpga_miso_CORE2PAD_EN),
 
-        .fpga_mode_i                (fpga_mode_PAD2CORE),
-        .fpga_config_busy_o         (fpga_config_busy_CORE2PAD),
-        .fpga_config_configured_o   (fpga_config_configured_CORE2PAD),
-        .fpga_config_slot_i         (fpga_config_slot_PAD2CORE),
-        .fpga_config_trigger_i      (fpga_config_trigger_PAD2CORE),
+        .fpga_mode_i              (fpga_mode_PAD2CORE),
+        .fpga_config_busy_o       (fpga_config_busy_CORE2PAD),
+        .fpga_config_configured_o (fpga_config_configured_CORE2PAD),
+        .fpga_config_slot_i       (fpga_config_slot_PAD2CORE),
+        .fpga_config_trigger_i    (fpga_config_trigger_PAD2CORE),
+        .fpga_enable_pgs_i        (fpga_enable_pgs_PAD2CORE),
 
-        .heichips26_instance_small_3_analog_0 (analog_routing[0]),
-        .heichips26_instance_small_3_analog_1 (analog_routing[1]),
-        .heichips26_instance_small_3_analog_2 (analog_routing[2]),
+        .heichips26_instance_small_3_analog_0 (analog_routing[13]),
+        .heichips26_instance_small_3_analog_1 (analog_routing[14]),
+        .heichips26_instance_small_3_analog_2 (analog_routing[15]),
 
-        .heichips26_instance_small_4_analog_0 (analog_routing[3]),
-        .heichips26_instance_small_4_analog_1 (analog_routing[4]),
-        .heichips26_instance_small_4_analog_2 (analog_routing[5]),
+        .heichips26_instance_small_4_analog_0 (analog_routing[10]),
+        .heichips26_instance_small_4_analog_1 (analog_routing[11]),
+        .heichips26_instance_small_4_analog_2 (analog_routing[12]),
 
-        .heichips26_instance_small_5_analog_0 (analog_routing[6]),
-        .heichips26_instance_small_5_analog_1 (analog_routing[7]),
-        .heichips26_instance_small_5_analog_2 (analog_routing[8]),
+        .heichips26_instance_small_5_analog_0 (analog_routing[3]),
+        .heichips26_instance_small_5_analog_1 (analog_routing[4]),
+        .heichips26_instance_small_5_analog_2 (analog_routing[5]),
 
         // I/Os FPGA
         .fabric_io_in_i     (fpga_io_PAD2CORE),

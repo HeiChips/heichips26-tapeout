@@ -462,6 +462,9 @@ module fabric_wrapper #(
             print("""    input                                configured_i,""")
             print("""    input                                sys_reset_i,\n""")
 
+            print(f'    // Enable all power gates')
+            print("""    input                                enable_pgs_i,""")
+
             print(f'    // Analog pins')
             for i, (coords, projects) in enumerate(slot_map.items()):
                 if projects is None:
@@ -673,7 +676,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
@@ -683,7 +686,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                     # Two "tiny" user projects
@@ -729,7 +732,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
@@ -739,7 +742,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
 
                             module, instance = projects[1]
@@ -761,7 +764,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
@@ -771,7 +774,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
 
                 if "sram" in projects[0][1]:
