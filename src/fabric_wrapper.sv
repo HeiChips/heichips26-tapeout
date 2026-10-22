@@ -24,6 +24,8 @@ module fabric_wrapper #(
     input                                configured_i,
     input                                sys_reset_i,
 
+    // Enable all power gates
+    input                                enable_pgs_i,
     // Analog pins
     inout wire heichips26_instance_small_3_analog_0, // heichips26_ook_top analog_0
     inout wire heichips26_instance_small_3_analog_1, // heichips26_ook_top analog_1
@@ -150,7 +152,6 @@ module fabric_wrapper #(
     logic  tt_project_11_enable_power;
 
     // TT_PROJECT 12 (X5Y4)
-    logic tt_project_12_select_slot;
     logic [7:0] tt_project_12_ui_in;
     logic [7:0] tt_project_12_uo_out;
     logic [7:0] tt_project_12_uio_in;
@@ -196,6 +197,7 @@ module fabric_wrapper #(
     logic  tt_project_16_enable_power;
 
     // TT_PROJECT 17 (X5Y9)
+    logic tt_project_17_select_slot;
     logic [7:0] tt_project_17_ui_in;
     logic [7:0] tt_project_17_uo_out;
     logic [7:0] tt_project_17_uio_in;
@@ -885,7 +887,6 @@ module fabric_wrapper #(
         .Tile_X5Y3_ENABLE_POWER_TT_PROJECT(tt_project_11_enable_power),
 
         // TT_PROJECT 12 (X5Y4)
-        .Tile_X5Y4_SELECT_SLOT_TT_PROJECT(tt_project_12_select_slot),
         .Tile_X5Y4_UI_IN_TT_PROJECT0(tt_project_12_ui_in[0]),
         .Tile_X5Y4_UI_IN_TT_PROJECT1(tt_project_12_ui_in[1]),
         .Tile_X5Y4_UI_IN_TT_PROJECT2(tt_project_12_ui_in[2]),
@@ -1139,6 +1140,7 @@ module fabric_wrapper #(
         .Tile_X5Y8_ENABLE_POWER_TT_PROJECT(tt_project_16_enable_power),
 
         // TT_PROJECT 17 (X5Y9)
+        .Tile_X5Y9_SELECT_SLOT_TT_PROJECT(tt_project_17_select_slot),
         .Tile_X5Y9_UI_IN_TT_PROJECT0(tt_project_17_ui_in[0]),
         .Tile_X5Y9_UI_IN_TT_PROJECT1(tt_project_17_ui_in[1]),
         .Tile_X5Y9_UI_IN_TT_PROJECT2(tt_project_17_ui_in[2]),
@@ -1202,7 +1204,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_1_enable_power && configured_i)
+            .CTRL (tt_project_1_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x415 heichips26_instance_large_0_pg_hv (
@@ -1212,7 +1214,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_1_enable_power && configured_i)
+            .CTRL (tt_project_1_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_ballmer_peak_detector heichips26_instance_small_0 (
@@ -1232,7 +1234,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_0_pg_hv (
@@ -1242,7 +1244,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_dna_sequencer heichips26_instance_small_1 (
@@ -1262,7 +1264,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_3_enable_power && configured_i)
+            .CTRL (tt_project_3_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_1_pg_hv (
@@ -1272,7 +1274,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_3_enable_power && configured_i)
+            .CTRL (tt_project_3_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_noise_gen heichips26_instance_small_2 (
@@ -1292,7 +1294,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_4_enable_power && configured_i)
+            .CTRL (tt_project_4_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_2_pg_hv (
@@ -1302,7 +1304,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_4_enable_power && configured_i)
+            .CTRL (tt_project_4_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_e2spike heichips26_instance_large_1 (
@@ -1322,7 +1324,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_6_enable_power && configured_i)
+            .CTRL (tt_project_6_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x415 heichips26_instance_large_1_pg_hv (
@@ -1332,7 +1334,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_6_enable_power && configured_i)
+            .CTRL (tt_project_6_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_RiMaX heichips26_instance_large_2 (
@@ -1352,7 +1354,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_8_enable_power && configured_i)
+            .CTRL (tt_project_8_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x415 heichips26_instance_large_2_pg_hv (
@@ -1362,7 +1364,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_8_enable_power && configured_i)
+            .CTRL (tt_project_8_enable_power && configured_i && enable_pgs_i)
     );
 
     logic [7:0] tt_project_9_0_uo_out;
@@ -1394,7 +1396,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_9_enable_power && configured_i)
+            .CTRL (tt_project_9_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_0_0_pg_hv (
@@ -1404,7 +1406,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_9_enable_power && configured_i)
+            .CTRL (tt_project_9_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_minimal_multicore_processor heichips26_instance_tiny_0_1 (
@@ -1424,7 +1426,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_9_enable_power && configured_i)
+            .CTRL (tt_project_9_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_0_1_pg_hv (
@@ -1434,7 +1436,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_9_enable_power && configured_i)
+            .CTRL (tt_project_9_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_ook_top heichips26_instance_small_3 (
@@ -1457,7 +1459,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_3_pg_hv (
@@ -1467,7 +1469,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_vcr heichips26_instance_small_4 (
@@ -1490,7 +1492,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_4_pg_hv (
@@ -1500,79 +1502,37 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
-    logic [7:0] tt_project_12_0_uo_out;
-    logic [7:0] tt_project_12_0_uio_out;
-    logic [7:0] tt_project_12_0_uio_oe;
-
-    logic [7:0] tt_project_12_1_uo_out;
-    logic [7:0] tt_project_12_1_uio_out;
-    logic [7:0] tt_project_12_1_uio_oe;
-
-    assign tt_project_12_uo_out  = tt_project_12_select_slot ? tt_project_12_1_uo_out : tt_project_12_0_uo_out;
-    assign tt_project_12_uio_out = tt_project_12_select_slot ? tt_project_12_1_uio_out : tt_project_12_0_uio_out;
-    assign tt_project_12_uio_oe  = tt_project_12_select_slot ? tt_project_12_1_uio_oe : tt_project_12_0_uio_oe;
-
-    (* keep *) heichips26_heiscore heichips26_instance_tiny_1_0 (
+    (* keep *) heichips26_example_small heichips26_instance_small_7 (
             .clk        (tt_project_12_clk),
             .rst_n      (tt_project_12_rst_n),
             .ena        (tt_project_12_ena),
             .ui_in      (tt_project_12_ui_in),
             .uio_in     (tt_project_12_uio_in),
-            .uo_out     (tt_project_12_0_uo_out),
-            .uio_out    (tt_project_12_0_uio_out),
-            .uio_oe     (tt_project_12_0_uio_oe)
+            .uo_out     (tt_project_12_uo_out),
+            .uio_out    (tt_project_12_uio_out),
+            .uio_oe     (tt_project_12_uio_oe)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_1_0_pg_lv (
+    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_7_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
-            .GND   (VGND),
-            .GPWR  (),
+            .VPWR (VPWR),
+            .GND  (VGND),
+            .GPWR (),
             `endif
-            .CTRL (tt_project_12_enable_power && configured_i)
+            .CTRL (tt_project_12_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_1_0_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_7_pg_hv (
             `ifdef USE_POWER_PINS
             .VAPWR (VAPWR),
             .VDPWR (VPWR),
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_12_enable_power && configured_i)
-    );
-
-    (* keep *) heichips26_example_tiny heichips26_instance_tiny_1_1 (
-            .clk        (tt_project_12_clk),
-            .rst_n      (tt_project_12_rst_n),
-            .ena        (tt_project_12_ena),
-            .ui_in      (tt_project_12_ui_in),
-            .uio_in     (tt_project_12_uio_in),
-            .uo_out     (tt_project_12_1_uo_out),
-            .uio_out    (tt_project_12_1_uio_out),
-            .uio_oe     (tt_project_12_1_uio_oe)
-    );
-
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_1_1_pg_lv (
-            `ifdef USE_POWER_PINS
-            .VPWR  (VPWR),
-            .GND   (VGND),
-            .GPWR  (),
-            `endif
-            .CTRL (tt_project_12_enable_power && configured_i)
-    );
-
-    (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_1_1_pg_hv (
-            `ifdef USE_POWER_PINS
-            .VAPWR (VAPWR),
-            .VDPWR (VPWR),
-            .GND   (VGND),
-            .GPWR  (),
-            `endif
-            .CTRL (tt_project_12_enable_power && configured_i)
+            .CTRL (tt_project_12_enable_power && configured_i && enable_pgs_i)
     );
 
     // SRAM 14 instance
@@ -1619,7 +1579,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_5_pg_hv (
@@ -1629,7 +1589,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_2_enable_power && configured_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) heichips26_daftASIC heichips26_instance_small_6 (
@@ -1649,7 +1609,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_16_enable_power && configured_i)
+            .CTRL (tt_project_16_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_small_6_pg_hv (
@@ -1659,37 +1619,79 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_16_enable_power && configured_i)
+            .CTRL (tt_project_16_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) heichips26_example_small heichips26_instance_small_7 (
+    logic [7:0] tt_project_17_0_uo_out;
+    logic [7:0] tt_project_17_0_uio_out;
+    logic [7:0] tt_project_17_0_uio_oe;
+
+    logic [7:0] tt_project_17_1_uo_out;
+    logic [7:0] tt_project_17_1_uio_out;
+    logic [7:0] tt_project_17_1_uio_oe;
+
+    assign tt_project_17_uo_out  = tt_project_17_select_slot ? tt_project_17_1_uo_out : tt_project_17_0_uo_out;
+    assign tt_project_17_uio_out = tt_project_17_select_slot ? tt_project_17_1_uio_out : tt_project_17_0_uio_out;
+    assign tt_project_17_uio_oe  = tt_project_17_select_slot ? tt_project_17_1_uio_oe : tt_project_17_0_uio_oe;
+
+    (* keep *) heichips26_heiscore heichips26_instance_tiny_1_0 (
             .clk        (tt_project_17_clk),
             .rst_n      (tt_project_17_rst_n),
             .ena        (tt_project_17_ena),
             .ui_in      (tt_project_17_ui_in),
             .uio_in     (tt_project_17_uio_in),
-            .uo_out     (tt_project_17_uo_out),
-            .uio_out    (tt_project_17_uio_out),
-            .uio_oe     (tt_project_17_uio_oe)
+            .uo_out     (tt_project_17_0_uo_out),
+            .uio_out    (tt_project_17_0_uio_out),
+            .uio_oe     (tt_project_17_0_uio_oe)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_7_pg_lv (
+    (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_1_0_pg_lv (
             `ifdef USE_POWER_PINS
-            .VPWR (VPWR),
-            .GND  (VGND),
-            .GPWR (),
+            .VPWR  (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
             `endif
-            .CTRL (tt_project_17_enable_power && configured_i)
+            .CTRL (tt_project_17_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_7_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_1_0_pg_hv (
             `ifdef USE_POWER_PINS
             .VAPWR (VAPWR),
             .VDPWR (VPWR),
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_17_enable_power && configured_i)
+            .CTRL (tt_project_17_enable_power && configured_i && enable_pgs_i)
+    );
+
+    (* keep *) heichips26_example_tiny heichips26_instance_tiny_1_1 (
+            .clk        (tt_project_17_clk),
+            .rst_n      (tt_project_17_rst_n),
+            .ena        (tt_project_17_ena),
+            .ui_in      (tt_project_17_ui_in),
+            .uio_in     (tt_project_17_uio_in),
+            .uo_out     (tt_project_17_1_uo_out),
+            .uio_out    (tt_project_17_1_uio_out),
+            .uio_oe     (tt_project_17_1_uio_oe)
+    );
+
+    (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_1_1_pg_lv (
+            `ifdef USE_POWER_PINS
+            .VPWR  (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
+            `endif
+            .CTRL (tt_project_17_enable_power && configured_i && enable_pgs_i)
+    );
+
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_1_1_pg_hv (
+            `ifdef USE_POWER_PINS
+            .VAPWR (VAPWR),
+            .VDPWR (VPWR),
+            .GND   (VGND),
+            .GPWR  (),
+            `endif
+            .CTRL (tt_project_17_enable_power && configured_i && enable_pgs_i)
     );
 
 

@@ -36,6 +36,7 @@ module heichips26_core (
     output logic        fpga_config_configured_o,
     input  logic [3:0]  fpga_config_slot_i,
     input  logic        fpga_config_trigger_i,
+    input  logic        fpga_enable_pgs_i,
 
     // Analog pins
     inout wire heichips26_instance_small_3_analog_0, // heichips26_ook_top analog_0
@@ -327,7 +328,11 @@ module heichips26_core (
         // Fabric is configured
         .configured_i   (fabric_config_configured),
         .sys_reset_i    (fabric_config_busy),
+        
+        // Enable all power gates
+        .enable_pgs_i (fpga_enable_pgs_i),
 
+        // Analog pins
         .heichips26_instance_small_3_analog_0 (heichips26_instance_small_3_analog_0),
         .heichips26_instance_small_3_analog_1 (heichips26_instance_small_3_analog_1),
         .heichips26_instance_small_3_analog_2 (heichips26_instance_small_3_analog_2),
