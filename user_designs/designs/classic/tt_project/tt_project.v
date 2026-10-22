@@ -33,7 +33,9 @@ module tt_project (
     wire [7:0] uio_out;
     wire [7:0] uio_oe;
 
-    TT_PROJECT_wrapper TT_PROJECT_wrapper (
+    TT_PROJECT_wrapper #(
+        .ENABLE_POWER (1'b1)
+    ) TT_PROJECT_wrapper (
         .UI_IN    (ui_in),
         .UO_OUT   (uo_out),
         .UIO_IN   (uio_in),
@@ -51,7 +53,9 @@ module tt_project (
 
 endmodule
 
-module TT_PROJECT_wrapper (
+module TT_PROJECT_wrapper #(
+    parameter ENABLE_POWER=0
+)(
     input  wire [7:0] UI_IN,
     output wire [7:0] UO_OUT,
     input  wire [7:0] UIO_IN,
@@ -62,7 +66,9 @@ module TT_PROJECT_wrapper (
     input  wire       RST_N
 );
 
-    TT_PROJECT i_TT_PROJECT (
+    TT_PROJECT #(
+        .ENABLE_POWER (ENABLE_POWER)
+    ) i_TT_PROJECT (
         .UI_IN0    (UI_IN[0]),
         .UI_IN1    (UI_IN[1]),
         .UI_IN2    (UI_IN[2]),

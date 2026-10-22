@@ -39,7 +39,9 @@ module tt_project_mux #(
     
       for (i=0; i<NUM_TT_PROJECT + NUM_TT_PROJECT_MUX + NUM_TT_PROJECT_LARGE; i++) begin : tt_projects
           if (i < NUM_TT_PROJECT) begin
-              TT_PROJECT_wrapper TT_PROJECT_wrapper (
+              TT_PROJECT_wrapper #(
+                .ENABLE_POWER (1'b1)
+              ) TT_PROJECT_wrapper (
                   .UI_IN    (ui_in),
                   .UO_OUT   (uo_out[i]),
                   .UIO_IN   (uio_in),
@@ -50,7 +52,9 @@ module tt_project_mux #(
                   .RST_N    (rst_n_buf)
               );
           end else if (i < NUM_TT_PROJECT + NUM_TT_PROJECT_MUX) begin
-              TT_PROJECT_MUX_wrapper TT_PROJECT_MUX_wrapper (
+              TT_PROJECT_MUX_wrapper #(
+                .ENABLE_POWER (1'b1)
+              ) TT_PROJECT_MUX_wrapper (
                   .UI_IN    (ui_in),
                   .UO_OUT   (uo_out[i]),
                   .UIO_IN   (uio_in),
@@ -61,7 +65,9 @@ module tt_project_mux #(
                   .RST_N    (rst_n_buf)
               );
           end else begin
-              TT_PROJECT_LARGE_wrapper TT_PROJECT_LARGE_wrapper (
+              TT_PROJECT_LARGE_wrapper #(
+                .ENABLE_POWER (1'b1)
+              ) TT_PROJECT_LARGE_wrapper (
                   .UI_IN    ({8'b0, ui_in}),
                   .UO_OUT   (uo_out[i]),
                   .UIO_IN   ({8'b0, uio_in}),

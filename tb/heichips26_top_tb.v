@@ -23,11 +23,12 @@ module heichips26_top_tb;
     wire         fpga_config_configured_PAD;
     wire [3:0]   fpga_config_slot_PAD;
     wire         fpga_config_trigger_PAD;
-
+    wire         fpga_enable_pgs_PAD;
+    
     wire [31:0]  fpga_io_PAD;
     
     // User I/Os
-    inout  wire [17:0]  analog_PAD;
+    inout  wire [16:0]  analog_PAD;
     
     wire fpga_io_PAD_0;
     wire fpga_io_PAD_1;
@@ -110,6 +111,7 @@ module heichips26_top_tb;
       .fpga_config_configured_PAD,
       .fpga_config_slot_PAD,
       .fpga_config_trigger_PAD,
+      .fpga_enable_pgs_PAD,
 
       .fpga_io_PAD ({fpga_io_PAD_31, fpga_io_PAD_30, fpga_io_PAD_29, fpga_io_PAD_28, fpga_io_PAD_27, fpga_io_PAD_26, fpga_io_PAD_25, fpga_io_PAD_24, fpga_io_PAD_23, fpga_io_PAD_22, fpga_io_PAD_21, fpga_io_PAD_20, fpga_io_PAD_19, fpga_io_PAD_18, fpga_io_PAD_17, fpga_io_PAD_16, fpga_io_PAD_15, fpga_io_PAD_14, fpga_io_PAD_13, fpga_io_PAD_12, fpga_io_PAD_11, fpga_io_PAD_10, fpga_io_PAD_9, fpga_io_PAD_8, fpga_io_PAD_7, fpga_io_PAD_6, fpga_io_PAD_5, fpga_io_PAD_4, fpga_io_PAD_3, fpga_io_PAD_2, fpga_io_PAD_1, fpga_io_PAD_0}),
       
