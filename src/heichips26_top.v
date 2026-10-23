@@ -378,7 +378,7 @@ module heichips26_top #(
     (* keep *) logo_bmftr logo_bmftr ();
 
     generate
-    for (genvar i=0; i<2; i++) begin : iovdd_connect_slices
+    for (genvar i=0; i<16; i++) begin : iovdd_connect_slices
         (* keep *) sg13cmos5l_io__iovdd_connect iovdd_connect (
             `ifdef USE_POWER_PINS
             .iovdd  (IOVDD),
