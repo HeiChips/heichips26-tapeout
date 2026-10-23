@@ -855,4 +855,6 @@ The chip is licensed under the Apache 2.0 license. This license may *not* apply 
 
 The chip was designed by Leo Moser for the HeiChips Summer School 2026.
 
-Thanks to [Heidelberg University](https://www.uni-heidelberg.de/en), [BMFTR](https://www.bmftr.bund.de/) and [Chipdesign Germany](https://www.chipdesign-germany.de/en/) for the finanical support enabling the tapeout of the chip.
+The power gates for the user projects were designed by Daniel Arevalos Ortiz based on the TT power gates designed by Sylvain Munaut.
+
+Thanks to [Heidelberg University](https://www.uni-heidelberg.de/en), [BMFTR](https://www.bmftr.bund.de/) and [Chipdesign Germany](https://www.chipdesign-germany.de/en/) for their financial support, which enabled the tapeout of the chip.
