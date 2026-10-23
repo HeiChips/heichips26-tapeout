@@ -3,7 +3,7 @@
 ![heichips26.jpg](img/heichips26.jpg)
 
 This repository contains the chip for the [HeiChips Summer School 2026](https://heichips.github.io/) targeting [SG13CMOS5L](https://dk.ihp-microelectronics.com/OpenSourceRequest.php) from IHP. It includes several designs created during the Hackathon all connected to a common eFPGA fabric in the center.
-Thanks to FABulous, the user bitstream for the FPGA can be generated using the Yosys and nextpnr toolchain.
+Thanks to [FABulous](https://github.com/FPGA-Research/FABulous), the user bitstream for the FPGA can be generated using the [Yosys](https://github.com/YosysHQ/yosys) and [nextpnr](https://github.com/YosysHQ/nextpnr) toolchain.
 
 The chip is designed with open source EDA tools and the [IHP Open Source PDK](https://github.com/IHP-GmbH/IHP-Open-PDK).
 
@@ -17,15 +17,18 @@ The chip is designed with open source EDA tools and the [IHP Open Source PDK](ht
 
 The chip includes several user submitted designs from the HeiChips 2026 Hackathon. In the center of the chip is an eFPGA which allows the user projects to connect to each other, utilize the SRAM, or connect to the external I/Os.
 
-- [FABulous](https://github.com/FPGA-Research/FABulous) eFPGA
-  - 32x I/Os
-  - 288x LUT4 + FF
-    - w. carry chain
-  - 1x SRAM
-    - 4 KiB memory: 32 bit wide, 10 bit deep (1024 entries)
+- FABulous eFPGA
+  - 32x `IOBUF`
+  - 288x `FABULOUS_LC`
+    - LUT4 + FF, w/ carry chain
+  - 1x `IHP_SRAM_1024x32_1RW`
+    - 4 KiB memory, single port
     - individual bit-enable
-  - 4x global buffers
-  - 1x system reset
+  - 4x `GBUF`
+    - global buffer
+    - clock, reset or enable
+  - 1x `SYS_RESET`
+    - reset design after configuration
 
 The following user projects are included:
 
