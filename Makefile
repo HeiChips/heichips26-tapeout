@@ -7,23 +7,15 @@ PDK_ROOT ?= $(MAKEFILE_DIR)/IHP-Open-PDK
 PDK ?= ihp-sg13cmos5l
 PDK_HASH ?= 89d42ee6d2fd9b50b86a1aada6fee6673c3e6008
 
-#PDK_REPO_IHP ?= https://github.com/IHP-GmbH/IHP-Open-PDK
-#PDK_COMMIT_IHP ?= 22f2a25f1734796de3debbbf29cf697cbbc54081
-
-#PDK_REPO ?= https://github.com/IHP-GmbH/ihp-sg13cmos5l
-#PDK_COMMIT ?= e8a87d708b8977e7c07684b033658a0f80af59a0
-#PDK_BRANCH ?= heichips25
+PDK_BRANCH ?= heichips26
 
 SCL ?= sg13cmos5l_stdcell
 
 .DEFAULT_GOAL := help
 
 $(PDK_ROOT)/$(PDK):
-	ciel enable $(PDK_HASH) --pdk-root $(PDK_ROOT) --pdk $(PDK)
-	#mkdir -p $(PDK_ROOT)
-	#git clone $(PDK_REPO) --recurse-submodules --depth=1 --single-branch -b $(PDK_BRANCH) $(PDK_ROOT)
-	#git clone $(PDK_REPO_IHP) --recurse-submodules --depth=1 --revision $(PDK_COMMIT_IHP) $(PDK_ROOT)
-	#git clone $(PDK_REPO) --recurse-submodules --depth=1 --revision $(PDK_COMMIT) $(PDK_ROOT)/$(PDK)
+	#ciel enable $(PDK_HASH) --pdk-root $(PDK_ROOT) --pdk $(PDK)
+	git clone https://github.com/HeiChips/IHP-Open-PDK.git --recurse-submodules --depth=1 --single-branch -b $(PDK_BRANCH)
 
 # Get the fabric names
 FABRICS :=  $(patsubst fabrics/%,%,$(wildcard fabrics/*)) 
