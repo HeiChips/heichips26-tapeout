@@ -41,37 +41,41 @@ NUM_SRAM = 1
 SRAM_WIDTH = 32
 
 def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to=None):
-    target_flow = Flow.factory.get("Chip")
+    # Collect all substitutions
+    step_substitutions = []
 
     # Magic reports some overlaps which can be ignored
-    target_flow = target_flow.Substitute([("Checker.IllegalOverlap", None)])
+    step_substitutions.append(("Checker.IllegalOverlap", None))
     
     # Render the layout after sealring insertion
-    target_flow = target_flow.Substitute([("KLayout.Render", None)])
-    target_flow = target_flow.Substitute([("+KLayout.SealRing", "KLayout.Render")])
+    step_substitutions.append(("KLayout.Render", None))
+    step_substitutions.append(("+KLayout.SealRing", "KLayout.Render"))
 
     # No IR-drop report
-    target_flow = target_flow.Substitute([("OpenROAD.IRDropReport", None)])
+    step_substitutions.append(("OpenROAD.IRDropReport", None))
 
     # Apply custom PDN script before general PDN generation
-    target_flow = target_flow.Substitute([("+Odb.AddPDNObstructions", "Odb.CustomPDN")])
-    target_flow = target_flow.Substitute([("+OpenROAD.GeneratePDN", "Odb.ConnectIORing")])
-    target_flow = target_flow.Substitute([("+Odb.ConnectIORing", "Odb.ConnectIOVDD")])
+    step_substitutions.append(("+Odb.AddPDNObstructions", "Odb.CustomPDN"))
+    step_substitutions.append(("+OpenROAD.GeneratePDN", "Odb.ConnectIORing"))
+    step_substitutions.append(("+Odb.ConnectIORing", "Odb.ConnectIOVDD"))
 
     # Use Magic filler generation instead of KLayout
-    target_flow = target_flow.Substitute([("KLayout.Filler", "Magic.Filler")])
+    step_substitutions.append(("KLayout.Filler", "Magic.Filler"))
 
     # Write OASIS
-    target_flow = target_flow.Substitute([("+Magic.Filler", "KLayout.ConvertOASIS")])
+    step_substitutions.append(("+Magic.Filler", "KLayout.ConvertOASIS"))
     
     # Always disable Magic.DRC
-    target_flow = target_flow.Substitute([("Magic.DRC", None)])
+    step_substitutions.append(("Magic.DRC", None))
     
     # Disable DRC checks
     if nodrc:
-        target_flow = target_flow.Substitute([("KLayout.DRC", None)])
-        target_flow = target_flow.Substitute([("KLayout.Antenna", None)])
-        target_flow = target_flow.Substitute([("KLayout.Density", None)])
+        step_substitutions.append(("KLayout.DRC", None))
+        step_substitutions.append(("KLayout.Antenna", None))
+        step_substitutions.append(("KLayout.Density", None))
+
+    target_flow = Flow.factory.get("Chip")
+    target_flow = target_flow.Substitute(step_substitutions)
 
     # GUI flows
     if gui == "openroad":
@@ -462,6 +466,9 @@ module fabric_wrapper #(
             print("""    input                                configured_i,""")
             print("""    input                                sys_reset_i,\n""")
 
+            print(f'    // Enable all power gates')
+            print("""    input                                enable_pgs_i,""")
+
             print(f'    // Analog pins')
             for i, (coords, projects) in enumerate(slot_map.items()):
                 if projects is None:
@@ -673,7 +680,7 @@ module fabric_wrapper #(
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
@@ -683,7 +690,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                     # Two "tiny" user projects
@@ -729,7 +736,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
@@ -739,7 +746,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
 
                             module, instance = projects[1]
@@ -761,7 +768,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
                             
                             print(f"""    (* keep *) {pg_hv} {instance}_pg_hv (
@@ -771,7 +778,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_{i}_enable_power && configured_i)""")
+            .CTRL (tt_project_{i}_enable_power && configured_i && enable_pgs_i)""")
                             print(f"""    );\n""")
 
                 if "sram" in projects[0][1]:

@@ -274,6 +274,7 @@ async def test_all_zeros(dut):
     dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
     dut.fpga_config_slot_PAD.value = 0
     dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 0
 
     cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
 
@@ -289,6 +290,9 @@ async def test_all_zeros(dut):
     await cocotb.start_soon(clear_bitstream_spi(spi_master))
     await cocotb.start_soon(upload_bitstream_spi(proj_path / f'../user_designs/designs/{tile_library}/{testname}/{testname}.bit', spi_master))
     await ClockCycles(dut.fpga_clk_PAD, 10)
+    dut.fpga_enable_pgs_PAD.value = 1
+    await ClockCycles(dut.fpga_clk_PAD, 10)
+    
 
     assert pcf.get("all").to_unsigned() == LogicArray.from_unsigned(0, len(pcf.get("all")))
 
@@ -319,6 +323,7 @@ async def test_passthrough(dut):
     dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
     dut.fpga_config_slot_PAD.value = 0
     dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 1
 
     cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
 
@@ -370,6 +375,7 @@ async def test_addition(dut):
     dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
     dut.fpga_config_slot_PAD.value = 0
     dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 0
 
     cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
 
@@ -433,6 +439,7 @@ async def test_counter(dut):
     dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
     dut.fpga_config_slot_PAD.value = 0
     dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 0
 
     cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
 
@@ -494,6 +501,7 @@ async def test_multiplication(dut):
     dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
     dut.fpga_config_slot_PAD.value = 0
     dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 0
 
     cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
 
@@ -554,6 +562,7 @@ async def test_ihp_sram_1024x32_1rw(dut):
     dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
     dut.fpga_config_slot_PAD.value = 0
     dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 0
 
     cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
 
@@ -639,6 +648,7 @@ async def test_mem_1024x32_1rw(dut):
     dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
     dut.fpga_config_slot_PAD.value = 0
     dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 0
 
     cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
 
@@ -692,6 +702,54 @@ async def test_mem_1024x32_1rw(dut):
         await ClockCycles(clock1, 2)
 
         assert(pcf.get("ram_dout_byte").to_unsigned() == i & 0xFF)
+
+@cocotb.test()
+async def test_tt_project_mux(dut):
+    """Load bitstream for tt_project_mux"""
+
+    testname = "tt_project_mux"
+
+    pcf = PCF(dut, proj_path / f"../fabrics/{fabric}/constraints.pcf", lookup)
+    pcf.write_gtkw(f"{testname}.gtkw", ["clk1", "rst", "ena"])
+
+    # Setup SPI
+    spi_bus = SpiBus.from_prefix(dut, "fpga", bus_separator="_", sclk_name="sclk_PAD", cs_name="cs_n_PAD", mosi_name='mosi_PAD', miso_name='miso_PAD')
+
+    spi_config = SpiConfig(
+        word_width = 8,
+        sclk_freq  = 10e6,
+        cpol       = False,
+        cpha       = True,
+        msb_first  = True,
+        frame_spacing_ns = 500
+    )
+
+    spi_master = SpiMaster(spi_bus, spi_config)
+
+    # Static setup
+    dut.fpga_mode_PAD.value = 1 # Configure FPGA as receiver
+    dut.fpga_config_slot_PAD.value = 0
+    dut.fpga_config_trigger_PAD.value = 0
+    dut.fpga_enable_pgs_PAD.value = 0
+
+    cocotb.start_soon(Clock(dut.fpga_clk_PAD, 10, 'ns').start())
+
+    # Assert reset
+    dut.fpga_rst_n_PAD.value = 0
+    await ClockCycles(dut.fpga_clk_PAD, 10)
+
+    # Deassert reset
+    dut.fpga_rst_n_PAD.value = 1
+    await ClockCycles(dut.fpga_clk_PAD, 10)
+
+    # Configure FPGA via SPI
+    await cocotb.start_soon(clear_bitstream_spi(spi_master))
+    await cocotb.start_soon(upload_bitstream_spi(proj_path / f'../user_designs/designs/{tile_library}/{testname}/{testname}.bit', spi_master))
+    await ClockCycles(dut.fpga_clk_PAD, 10)
+
+    dut.fpga_enable_pgs_PAD.value = 1
+    
+    await ClockCycles(dut.fpga_clk_PAD, 10)
 
 if __name__ == "__main__":
 

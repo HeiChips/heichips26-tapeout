@@ -37,12 +37,12 @@ HEICHIPS_SLOTS:
     'X5Y1': [['heichips26_dram_replica', 'heichips26_instance_tiny_0_0'], ['heichips26_minimal_multicore_processor', 'heichips26_instance_tiny_0_1']]
     'X5Y2': [['heichips26_ook_top', 'heichips26_instance_small_3']]
     'X5Y3': [['heichips26_vcr', 'heichips26_instance_small_4']]
-    'X5Y4': [['heichips26_heiscore', 'heichips26_instance_tiny_1_0'], ['heichips26_example_tiny', 'heichips26_instance_tiny_1_1']]
+    'X5Y4': [['heichips26_example_small', 'heichips26_instance_small_7']]
     'X5Y5': null
     'X5Y6': [["RM_IHPSG13_1P_1024x32_c2_bm_bist", "heichips26_instance_sram_0"]]
     'X5Y7': [['heichips26_FAIf', 'heichips26_instance_small_5']]
     'X5Y8': [['heichips26_daftASIC', 'heichips26_instance_small_6']]
-    'X5Y9': [['heichips26_example_small', 'heichips26_instance_small_7']]
+    'X5Y9': [['heichips26_heiscore', 'heichips26_instance_tiny_1_0'], ['heichips26_example_tiny', 'heichips26_instance_tiny_1_1']]
 
 PAD_CFG: dir::pad_cfg.tcl
 
@@ -145,9 +145,9 @@ PAD_WEST: [
     fpga_config_trigger,
     fpga_config_busy,
     fpga_config_configured,
-    
+    fpga_enable_pgs,
+
     "analog\\[16\\].analog_pad",
-    "analog\\[17\\].analog_pad",
     
     fpga_rst_n,
     fpga_clk,
@@ -271,14 +271,14 @@ NON_DEFAULT_RULES:
 
   # 0.4um traces with dual-cut vias
   NDR_0p4:
-    width: ["0.4"]
-    spacing: ["0.2"]
+    width: ["Metal2", "0.22", "Metal3", "0.4", "Metal4", "0.4"]
+    spacing: ["Metal2", "0.2", "Metal3", "0.2", "Metal4", "0.2"]
     via: ["Via1_DC1B", "Via2_DC1B", "Via3_DC1B", "TopVia1EWNS"]
 
 DRT_ASSIGN_NDR:
   # Analog traces for internal project
   #"^internal_analog_pin0_PADRES$": NDR_0p4
-  "analog_routing": NDR_3W_3S
+  "analog_routing": NDR_0p4
 
 # Analog traces for internal project
 RSZ_DONT_TOUCH_RX: "analog_routing"

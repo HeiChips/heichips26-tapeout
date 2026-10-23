@@ -3,7 +3,7 @@
 ![heichips26.jpg](img/heichips26.jpg)
 
 This repository contains the chip for the [HeiChips Summer School 2026](https://heichips.github.io/) targeting [SG13CMOS5L](https://dk.ihp-microelectronics.com/OpenSourceRequest.php) from IHP. It includes several designs created during the Hackathon all connected to a common eFPGA fabric in the center.
-Thanks to FABulous, the user bitstream for the FPGA can be generated using the Yosys and nextpnr toolchain.
+Thanks to [FABulous](https://github.com/FPGA-Research/FABulous), the user bitstream for the FPGA can be generated using the [Yosys](https://github.com/YosysHQ/yosys) and [nextpnr](https://github.com/YosysHQ/nextpnr) toolchain.
 
 The chip is designed with open source EDA tools and the [IHP Open Source PDK](https://github.com/IHP-GmbH/IHP-Open-PDK).
 
@@ -17,15 +17,18 @@ The chip is designed with open source EDA tools and the [IHP Open Source PDK](ht
 
 The chip includes several user submitted designs from the HeiChips 2026 Hackathon. In the center of the chip is an eFPGA which allows the user projects to connect to each other, utilize the SRAM, or connect to the external I/Os.
 
-- [FABulous](https://github.com/FPGA-Research/FABulous) eFPGA
-  - 32x I/Os
-  - 288x LUT4 + FF
-    - w. carry chain
-  - 1x SRAM
-    - 4 KiB memory: 32 bit wide, 10 bit deep (1024 entries)
+- FABulous eFPGA
+  - 32x `IOBUF`
+  - 288x `FABULOUS_LC`
+    - LUT4 + FF, w/ carry chain
+  - 1x `IHP_SRAM_1024x32_1RW`
+    - 4 KiB memory, single port
     - individual bit-enable
-  - 4x global buffers
-  - 1x system reset
+  - 4x `GBUF`
+    - global buffer
+    - clock, reset or enable
+  - 1x `SYS_RESET`
+    - reset design after configuration
 
 The following user projects are included:
 
@@ -721,70 +724,22 @@ Using a core voltage higher than 1.65V (while remaining within the safe operatin
 | Pin name                | Description                   |
 |-------------------------|-------------------------------|
 | fpga_clk                | The clock for the FPGA configuration logic. |
-| fpga_rst_n              | The reset for the FPGA configuration logic (active low) |
+| fpga_rst_n              | The reset for the FPGA configuration logic (active low). |
 | fpga_mode               | Set configuration mode. 0 = active, 1 = passive. |
 | fpga_config_busy        | High while the FPGA is under configuration. |
 | fpga_config_configured  | High after the FPGA has been configured. |
-| fpga_sclk               | SPI: source clock             |
-| fpga_cs_n               | SPI: chip select (active low) |
-| fpga_mosi               | SPI controller out, peripheral in |
-| fpga_miso               | SPI: controller in, peripheral out |
+| fpga_enable_pgs         | Global enable for all power gates (active high). |
+| fpga_sclk               | SPI: source clock.             |
+| fpga_cs_n               | SPI: chip select (active low). |
+| fpga_mosi               | SPI controller out, peripheral in. |
+| fpga_miso               | SPI: controller in, peripheral out. |
 | fpga_config_trigger     | If high, trigger a reconfiguration in active mode from one of 16 slots of the SPI flash. |
-| fpga_config_slot[0]     | Set bit 0 for the FPGA configuration slot. |
-| fpga_config_slot[1]     | Set bit 1 for the FPGA configuration slot. |
-| fpga_config_slot[2]     | Set bit 2 for the FPGA configuration slot. |
-| fpga_config_slot[3]     | Set bit 3 for the FPGA configuration slot. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| ...                     | Pin of the ... project. |
-| fpga_io[0]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[1]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[2]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[3]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[4]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[5]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[6]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[7]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[8]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[9]              | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[10]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[11]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[12]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[13]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[14]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[15]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[16]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[17]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[18]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[19]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[20]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[21]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[22]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[23]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[24]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[25]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[26]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[27]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[28]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[29]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[30]             | I/O pin which can be controlled by the FPGA user project. |
-| fpga_io[31]             | I/O pin which can be controlled by the FPGA user project. |
-
+| fpga_config_slot[3:0]   | Set selected slot for the FPGA configuration. |
+| analog[2:0]             | Analog pins of `instance_small_3`. |
+| analog[5:3]             | Analog pins of `instance_small_4`. |
+| analog[8:6]             | Analog pins of `instance_small_5`. |
+| analog[16:9]            | Currently unused. |
+| fpga_io[31:0]           | I/O pins which can be controlled by the FPGA user project. |
 
 ## Building User Designs for the eFPGA
 
@@ -903,4 +858,6 @@ The chip is licensed under the Apache 2.0 license. This license may *not* apply 
 
 The chip was designed by Leo Moser for the HeiChips Summer School 2026.
 
-Thanks to [Heidelberg University](https://www.uni-heidelberg.de/en), [BMFTR](https://www.bmftr.bund.de/) and [Chipdesign Germany](https://www.chipdesign-germany.de/en/) for the finanical support enabling the tapeout of the chip.
+The power gates for the user projects were designed by Daniel Arevalos Ortiz based on the TT power gates designed by Sylvain Munaut.
+
+Thanks to [Heidelberg University](https://www.uni-heidelberg.de/en), [BMFTR](https://www.bmftr.bund.de/) and [Chipdesign Germany](https://www.chipdesign-germany.de/en/) for their financial support, which enabled the tapeout of the chip.

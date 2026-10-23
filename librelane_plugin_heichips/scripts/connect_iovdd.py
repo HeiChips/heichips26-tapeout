@@ -223,9 +223,9 @@ def custom_pdn(reader):
     
     master = reader.db.findMaster("sg13cmos5l_io__iovdd_connect")
     
-    # Via library
-    via_library = {}
-    vg = ViaGenerator(reader, "viaTop1Array")
+    vg_m2_m3 = ViaGenerator(reader, "via2Array")
+    vg_m3_m4 = ViaGenerator(reader, "via3Array")
+    vg_m4_tm1 = ViaGenerator(reader, "viaTop1Array")
     
     net = reader.block.findNet(f"IOVDD")
     assert(net)
@@ -237,7 +237,7 @@ def custom_pdn(reader):
     
     for mpin in master.findMTerm("iovdd").getMPins():
         for box in mpin.getGeometry():
-            if box.getTechLayer().getName() == "Metal4":
+            if box.getTechLayer().getName() == "Metal2":
                 if box.getDX() == 4_000:
                     pin_box = box
     
@@ -265,10 +265,64 @@ def custom_pdn(reader):
             width = 4_000
             core_ring_width = 10_000
             
-            v = vg.get4sz_ext(width, core_ring_width)
+            v_m2_m3 = vg_m2_m3.get4sz_ext(width, core_ring_width)
+            v_m3_m4 = vg_m3_m4.get4sz_ext(width, core_ring_width)
+            v_m4_tm1 = vg_m4_tm1.get4sz_ext(width, core_ring_width)
 
-            odb.createSBoxes(sw, tech.findLayer("Metal4"), [odb.Rect(point_x - width//2, point_y, point_x + width//2, point_y + extension)], "STRIPE")
-            odb.createSBoxes(sw, v, [odb.Point(point_x, point_y + extension - core_ring_width//2)], "STRIPE")
+            odb.createSBoxes(sw, tech.findLayer("Metal2"), [odb.Rect(point_x - width//2, point_y, point_x + width//2, point_y + extension)], "STRIPE")
+            odb.createSBoxes(sw, v_m2_m3, [odb.Point(point_x, point_y + extension - core_ring_width//2)], "STRIPE")
+            odb.createSBoxes(sw, v_m3_m4, [odb.Point(point_x, point_y + extension - core_ring_width//2)], "STRIPE")
+            odb.createSBoxes(sw, v_m4_tm1, [odb.Point(point_x, point_y + extension - core_ring_width//2)], "STRIPE")
+
+        if instance.getOrient() == "MX":
+            point_x = instance.getLocation()[0] + pin_box.xMin() + pin_box.getDX()//2
+            point_y = instance.getLocation()[1] + (instance.getBBox().getDY() - pin_box.yMax())
+            
+            extension = 15_340
+            width = 4_000
+            core_ring_width = 10_000
+            
+            v_m2_m3 = vg_m2_m3.get4sz_ext(width, core_ring_width)
+            v_m3_m4 = vg_m3_m4.get4sz_ext(width, core_ring_width)
+            v_m4_tm1 = vg_m4_tm1.get4sz_ext(width, core_ring_width)
+
+            odb.createSBoxes(sw, tech.findLayer("Metal2"), [odb.Rect(point_x - width//2, point_y, point_x + width//2, point_y - extension)], "STRIPE")
+            odb.createSBoxes(sw, v_m2_m3, [odb.Point(point_x, point_y - extension + core_ring_width//2)], "STRIPE")
+            odb.createSBoxes(sw, v_m3_m4, [odb.Point(point_x, point_y - extension + core_ring_width//2)], "STRIPE")
+            odb.createSBoxes(sw, v_m4_tm1, [odb.Point(point_x, point_y - extension + core_ring_width//2)], "STRIPE")
+
+        if instance.getOrient() == "MXR90":
+            point_x = instance.getLocation()[0] + pin_box.yMax()
+            point_y = instance.getLocation()[1] + pin_box.xMin() + pin_box.getDX()//2
+            
+            extension = 15_280
+            width = 4_000
+            core_ring_width = 10_000
+            
+            v_m2_m3 = vg_m2_m3.get4sz_ext(core_ring_width, width)
+            v_m3_m4 = vg_m3_m4.get4sz_ext(core_ring_width, width)
+            v_m4_tm1 = vg_m4_tm1.get4sz_ext(core_ring_width, width)
+
+            odb.createSBoxes(sw, tech.findLayer("Metal2"), [odb.Rect(point_x, point_y - width//2, point_x + extension, point_y + width//2)], "STRIPE")
+            odb.createSBoxes(sw, v_m2_m3, [odb.Point(point_x + extension - core_ring_width//2, point_y)], "STRIPE")
+            odb.createSBoxes(sw, v_m3_m4, [odb.Point(point_x + extension - core_ring_width//2, point_y)], "STRIPE")
+
+        if instance.getOrient() == "R90":
+            point_x = instance.getLocation()[0] + (instance.getBBox().getDX() - pin_box.yMax())
+            point_y = instance.getLocation()[1] + pin_box.xMin() + pin_box.getDX()//2
+            
+            extension = 15_280
+            width = 4_000
+            core_ring_width = 10_000
+            
+            v_m2_m3 = vg_m2_m3.get4sz_ext(core_ring_width, width)
+            v_m3_m4 = vg_m3_m4.get4sz_ext(core_ring_width, width)
+            v_m4_tm1 = vg_m4_tm1.get4sz_ext(core_ring_width, width)
+
+            odb.createSBoxes(sw, tech.findLayer("Metal2"), [odb.Rect(point_x, point_y - width//2, point_x - extension, point_y + width//2)], "STRIPE")
+            odb.createSBoxes(sw, v_m2_m3, [odb.Point(point_x - extension + core_ring_width//2, point_y)], "STRIPE")
+            odb.createSBoxes(sw, v_m3_m4, [odb.Point(point_x - extension + core_ring_width//2, point_y)], "STRIPE")
+
 
 if __name__ == "__main__":
     custom_pdn()
