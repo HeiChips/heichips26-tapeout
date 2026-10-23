@@ -186,8 +186,51 @@ puts "\[INFO\] Placing sg13cmos5l_io__iovdd_connect cells…"
 place_pad -row IO_SOUTH -location 553 \
     iovdd_connect_slices\\\[0\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
 
-place_pad -row IO_SOUTH -location 2461 \
+place_pad -row IO_SOUTH -location 1295 \
     iovdd_connect_slices\\\[1\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_SOUTH -location 1719 \
+    iovdd_connect_slices\\\[2\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_SOUTH -location 2461 \
+    iovdd_connect_slices\\\[3\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_NORTH -location 553 \
+    iovdd_connect_slices\\\[4\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_NORTH -location 1295 \
+    iovdd_connect_slices\\\[5\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_NORTH -location 1719 \
+    iovdd_connect_slices\\\[6\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_NORTH -location 2461 \
+    iovdd_connect_slices\\\[7\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_EAST -location 553 \
+    iovdd_connect_slices\\\[8\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_EAST -location 1295 \
+    iovdd_connect_slices\\\[9\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_EAST -location 1719 \
+    iovdd_connect_slices\\\[10\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_EAST -location 2461 \
+    iovdd_connect_slices\\\[11\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_WEST -location 553 \
+    iovdd_connect_slices\\\[12\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_WEST -location 1295 \
+    iovdd_connect_slices\\\[13\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_WEST -location 1719 \
+    iovdd_connect_slices\\\[14\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
+place_pad -row IO_WEST -location 2461 \
+    iovdd_connect_slices\\\[15\\\].iovdd_connect -master sg13cmos5l_io__iovdd_connect
+
 
 puts "\[INFO\] Placing corner cells…"
 
