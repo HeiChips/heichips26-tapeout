@@ -5,7 +5,7 @@ TOP = heichips26_top
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/IHP-Open-PDK
 PDK ?= ihp-sg13cmos5l
-PDK_HASH ?= 89d42ee6d2fd9b50b86a1aada6fee6673c3e6008
+PDK_HASH ?= 7048727554150e9e6fcfbd46d5d1f3c3c8e1a6b1
 
 PDK_BRANCH ?= heichips26
 
@@ -87,6 +87,10 @@ logos: $(PDK_ROOT)/$(PDK) ## Run LibreLane
 librelane: $(PDK_ROOT)/$(PDK) ## Run LibreLane
 	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --save-views-to final/
 .PHONY: librelane
+
+librelane-extract: $(PDK_ROOT)/$(PDK) ## Run LibreLane
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py
+.PHONY: librelane-extract
 
 librelane-nodrc: $(PDK_ROOT)/$(PDK) ## Run LibreLane without DRC checks
 	PDK_ROOT=${PDK_ROOT} PDK=${PDK} SCL=${SCL} python3 librelane/chip.py --nodrc --save-views-to final/
