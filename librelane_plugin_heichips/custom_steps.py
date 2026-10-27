@@ -1,10 +1,13 @@
+import io
 import os
 import sys
 import yaml
 import pathlib
+import textwrap
+from glob import glob
 from decimal import Decimal
 from typing import Callable, List, Literal, Mapping, Tuple, Union, Optional, Dict, Any
-from librelane.steps import Step, OdbpyStep
+from librelane.steps import Step, OdbpyStep, OpenROADStep
 from librelane.steps.klayout import KLayoutStep
 from librelane.steps.step import (
     ViewsUpdate,
@@ -13,7 +16,7 @@ from librelane.steps.step import (
 from librelane.steps.common_variables import io_layer_variables
 from librelane.flows import Flow, FlowError
 from librelane.state import DesignFormat, State
-from librelane.common import Path
+from librelane.common import Path, aggregate_metrics
 from librelane.config import Variable
 from librelane.logging import (
     verbose,
@@ -102,6 +105,62 @@ class ConnectIOVDD(OdbpyStep):
 
     def get_script_path(self):
         return os.path.join(os.path.dirname(__file__), "scripts", "connect_iovdd.py")
+
+def get_psm_error_count(rpt: io.TextIOWrapper) -> int:
+    sio = io.StringIO()
+
+    # Turn almost-YAML into YAML
+    VIO_TYPE_PFX = "violation type: "
+    for line in rpt:
+        if line.startswith(VIO_TYPE_PFX):
+            vio_type = line[len(VIO_TYPE_PFX) :].strip()
+            sio.write(f"- type: {vio_type}\n")
+        elif "bbox = " in line:
+            sio.write(f"    {textwrap.dedent(line.replace('bbox = ', '- bbox ='))}")
+        else:
+            sio.write(f"  {textwrap.dedent(line)}")
+
+    sio.seek(0)
+    violations = yaml.load(sio, Loader=yaml.SafeLoader) or []
+    return sum(len(violation["srcs"]) for violation in violations)
+
+@Step.factory.register()
+class CheckPowerGrid(OpenROADStep):
+    """
+    Checks the power grid.
+    """
+
+    id = "OpenROAD.CheckPowerGrid"
+    name = "Check Power Grid"
+    long_name = "Check Power Grid"
+
+    def get_script_path(self):
+        return os.path.join(os.path.dirname(__file__), "scripts", "check_power_grid.tcl")
+
+    def run(self, state_in: State, **kwargs) -> Tuple[ViewsUpdate, MetricsUpdate]:
+        kwargs, env = self.extract_env(kwargs)
+        views_updates, metrics_updates = super().run(state_in, env=env, **kwargs)
+
+        alerts = self.alerts or []
+        error_reports = glob(os.path.join(self.step_dir, "*-grid-errors.rpt"))
+        for report in error_reports:
+            net = os.path.basename(report).split("-", maxsplit=1)[0]
+            no_terminals = any(
+                alert.code == "PSM-0025" and alert.message.startswith(net)
+                for alert in alerts
+            )
+            if no_terminals:
+                count = 1
+            else:
+                count = get_psm_error_count(open(report, encoding="utf8"))
+            metrics_updates[f"design__power_grid_violation__count__net:{net}"] = count
+
+        metric_updates_with_aggregates = aggregate_metrics(
+            metrics_updates,
+            {"design__power_grid_violation__count": (0, lambda x: sum(x))},
+        )
+
+        return views_updates, metric_updates_with_aggregates
 
 @Step.factory.register()
 class ConvertOASIS(KLayoutStep):
