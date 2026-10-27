@@ -58,6 +58,7 @@ def main(gui, nodrc, pdk, pdk_root, scl, tag=None, last_run=False, save_views_to
     step_substitutions.append(("+Odb.AddPDNObstructions", "Odb.CustomPDN"))
     step_substitutions.append(("+OpenROAD.GeneratePDN", "Odb.ConnectIORing"))
     step_substitutions.append(("+Odb.ConnectIORing", "Odb.ConnectIOVDD"))
+    step_substitutions.append(("+Odb.ConnectIOVDD", "OpenROAD.CheckPowerGrid"))
 
     # Use Magic filler generation instead of KLayout
     step_substitutions.append(("KLayout.Filler", "Magic.Filler"))
