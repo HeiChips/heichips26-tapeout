@@ -279,6 +279,9 @@ DRT_ASSIGN_NDR:
   #"^internal_analog_pin0_PADRES$": NDR_0p4
   "analog_routing": NDR_analog
 
+DRT_DISABLE_AUTO_TAPER:
+- "analog_routing"
+
 # Analog traces for internal project
 RSZ_DONT_TOUCH_RX: "analog_routing"
 

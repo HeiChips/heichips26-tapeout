@@ -9,7 +9,7 @@
   };
 
   inputs = {
-    librelane.url = "github:librelane/librelane/dev";
+    librelane.url = "github:librelane/librelane/donn/openroad_26q4";
     librelane_plugin_fabulous = {
       url = "github:mole99/librelane_plugin_fabulous/1.14.1";
       inputs.librelane.follows = "librelane";
@@ -50,11 +50,11 @@
               librelane-plugin-heichips = callPythonPackage ./default.nix { };
             }
           ))
-          (final: prev: {
-            openroad = prev.openroad.overrideAttrs {
-              patches = prev.openroad.patches ++ [./nix/disable_auto_taper.patch];
-            };
-          })
+          #(final: prev: {
+          #  openroad = prev.openroad.overrideAttrs {
+          #    patches = prev.openroad.patches ++ [./nix/disable_auto_taper.patch];
+          #  };
+          #})
           ];
         }
       );
