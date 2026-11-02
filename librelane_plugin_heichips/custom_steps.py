@@ -9,6 +9,7 @@ from decimal import Decimal
 from typing import Callable, List, Literal, Mapping, Tuple, Union, Optional, Dict, Any
 from librelane.steps import Step, OdbpyStep, OpenROADStep
 from librelane.steps.klayout import KLayoutStep
+from librelane.steps.openroad import get_psm_error_count
 from librelane.steps.step import (
     ViewsUpdate,
     MetricsUpdate,
@@ -27,17 +28,6 @@ from librelane.logging import (
     warn,
     err,
     subprocess,
-)
-from librelane.steps import (
-    Yosys,
-    OpenROAD,
-    Magic,
-    KLayout,
-    Odb,
-    Netgen,
-    Checker,
-    Verilator,
-    Misc,
 )
 
 DesignFormat(
@@ -105,24 +95,6 @@ class ConnectIOVDD(OdbpyStep):
 
     def get_script_path(self):
         return os.path.join(os.path.dirname(__file__), "scripts", "connect_iovdd.py")
-
-def get_psm_error_count(rpt: io.TextIOWrapper) -> int:
-    sio = io.StringIO()
-
-    # Turn almost-YAML into YAML
-    VIO_TYPE_PFX = "violation type: "
-    for line in rpt:
-        if line.startswith(VIO_TYPE_PFX):
-            vio_type = line[len(VIO_TYPE_PFX) :].strip()
-            sio.write(f"- type: {vio_type}\n")
-        elif "bbox = " in line:
-            sio.write(f"    {textwrap.dedent(line.replace('bbox = ', '- bbox ='))}")
-        else:
-            sio.write(f"  {textwrap.dedent(line)}")
-
-    sio.seek(0)
-    violations = yaml.load(sio, Loader=yaml.SafeLoader) or []
-    return sum(len(violation["srcs"]) for violation in violations)
 
 @Step.factory.register()
 class CheckPowerGrid(OpenROADStep):
