@@ -39,16 +39,17 @@ The following user projects are included:
 | Event-Driven Motion SNN | large | X0Y2 | A packetized event-camera filter and time-multiplexed 16-neuron SNN for low-power motion classification. | [Repo](https://github.com/HeiChips/heichips26-aiaccel) |
 | FABulous Analogue Interface | small | X5Y7 | Analogue mixed-signal peripherals | [Repo](https://github.com/HeiChips/heichips26-FAIfplus) |
 | E2Spike | large | X0Y7 | This project develops a compact edge AI accelerator for end-to-end spiking neural network inference and on-chip learning, supporting operators such as depthwise convolution, pointwise convolution, and fully connected layers. It also explores SDSP-based lifelong learning and always-on applications such as seizure detection and fall detection. | [Repo](https://github.com/HeiChips/heichips26-e2spike) |
+| Multimode DLL | small | X5Y4 | Standard-cell clock generator with a tunable ring oscillator, automatic frequency control, phase-selectable divided outputs, a glitch-free clock mux, and a CrocoScale Wishbone CDC bridge. | [Repo](https://github.com/HeiChips/heichips26-multimode_dll) |
 | Intel 1103 Replica | tiny | X5Y1/0 | This project attempts to recreate the first ever commercially available DRAM memory, the Intel 1103. | [Repo](https://github.com/HeiChips/heichips26_dram_replica) |
 | RiMaX | large | X0Y9 | This project uses a simple riscv core and is equipted with an approximate floating point multiplier | [Repo](https://github.com/HeiChips/heichips26-rimax) |
-| HeiScore | tiny | X5Y4/0 | A noRTL written implementation of Pong. | [Repo](https://github.com/HeiChips/heichips26-heiscore) |
+| HeiScore | tiny | X5Y9/0 | A noRTL written implementation of Pong. | [Repo](https://github.com/HeiChips/heichips26-heiscore) |
 | Minimal Multicore Processor | tiny | X5Y1/1 | A custom 3-instruction dual-core 8-Bit CPU with a memory management unit supporting atomic swap operations. | [Repo](https://github.com/HeiChips/heichips26-minimal-processor) |
 | Noiser | small | X0Y5 | ring-oscillator designs for generating power side-channel noise | [Repo](https://github.com/HeiChips/heichips26_noise_gen) |
-| DNA Sequence Aligner | small | X5Y3 | This is a DNA sequence alignment accelerator based on Smith-Waterman algorithm. | [Repo](https://github.com/HeiChips/heichips26-DNA_sequencer) |
-| An On-Off keying Transmitter/Receiver | small | X0Y3 | ON OFF keying Transmitter+Receiver. Very cool. | [Repo](https://github.com/HeiChips/heichips26-on-off) |
-| Voltage Controlled Resistor | small | X0Y4 | A fully analog component with ohmic behaviour whose resistance value can be changed in accordance with an external analog control voltage. | [Repo](https://github.com/HeiChips/heichips26-voltage-controlled-resistor) |
+| DNA Sequence Aligner | small | X0Y4 | This is a DNA sequence alignment accelerator based on Smith-Waterman algorithm. | [Repo](https://github.com/HeiChips/heichips26-DNA_sequencer) |
+| An On-Off keying Transmitter/Receiver | small | X5Y2 | ON OFF keying Transmitter+Receiver. Very cool. | [Repo](https://github.com/HeiChips/heichips26-on-off) |
+| Voltage Controlled Resistor | small | X5Y3 | A fully analog component with ohmic behaviour whose resistance value can be changed in accordance with an external analog control voltage. | [Repo](https://github.com/HeiChips/heichips26-voltage-controlled-resistor) |
 | daftASIC | small | X5Y8 | An extensively, named daftASIC, designed and expandable music synthesizer built purely in silicon, supporting both visual and audio outputs | [Repo](https://github.com/HeiChips/heichips26-daftasic) |
-| Ballmer-Peak-Detector | small | X5Y2 | Edge State Space Model Processing Element using Posit Arithmetic | [Repo](https://github.com/HeiChips/heichips26-ballmer-peak-detector) |
+| Ballmer-Peak-Detector | small | X0Y3 | Edge State Space Model Processing Element using Posit Arithmetic | [Repo](https://github.com/HeiChips/heichips26-ballmer-peak-detector) |
 
 <!--- project_table_end -->
 
@@ -233,6 +234,75 @@ Key features include:
 
 The project is open source and available on
 [GitHub](https://github.com/xiaoyuehai/heichips26-e2spike).
+
+
+### Multimode DLL
+
+Standard-cell clock generator with a tunable ring oscillator, automatic frequency control, phase-selectable divided outputs, a glitch-free clock mux, and a CrocoScale Wishbone CDC bridge.
+
+<p align="center">
+  <a href="img/user_projects/heichips26_multimode_dll.png">
+    <img src="img/user_projects/heichips26_multimode_dll.png" alt="Render of heichips26_multimode_dll" width=40%>
+  </a>
+</p>
+
+Top cell: `heichips26_multimode_dll`
+Slot size: `small`
+Analog pins: `3`
+Uses VAPRW: `False`
+
+**Team members:**
+
+- Kevin Klein
+- Nils Kissner
+
+**Description:**
+
+The multimode DLL explores configurable clock generation using only standard
+cells in the IHP SG13CMOS5L process. It contains no tri-state cells. A 13-stage
+ring oscillator supports manual digitally controlled oscillator (DCO) tuning
+and automatic frequency-locked loop (FLL) control. In FLL mode, a reference
+divider and multiplier set the target frequency within the oscillator's tuning
+range; frequency lock does not imply phase lock to the external reference.
+
+Three output channels provide ring-tap phase selection, independent division,
+polarity selection and optional XOR mixing. A 71-bit serial configuration
+frame is shifted MSB first using clk, shift enable ui_in[0] and data ui_in[1].
+Hold DLL enable ui_in[4] low while loading; raise it after the complete frame.
+Reset rst_n low to clear the configuration and load a new frame.
+
+analog_0 carries DLL clk0 and analog_1 carries DLL clk1. A standard-cell
+glitch-free clock mux selects clk0 or clk2 using ui_in[5] and drives analog_2.
+Both source clocks must remain running during handover. Hold the select value
+for at least four periods of the slower clock between changes. The six
+signals are continuously available to the eFPGA: uo_out[0], uo_out[1] and
+uo_out[2] carry DLL clk0, clk1 and clk2 respectively. uo_out[3] carries the
+buffered reference, uo_out[4] carries stable, and uo_out[5] carries the
+clock-mux output. uo_out[7:6], uio_out[7] and uio_oe are tied low.
+
+CrocoScale BusKit uses its default 2-bit address, 4-bit data, eight-entry FIFO
+and enabled 256-cycle watchdog settings. Its fabric clock and active-high
+reset use ui_in[2] and ui_in[3]; Wishbone cycle and strobe use ui_in[6] and
+ui_in[7]. uio_in[0] is write enable, uio_in[2:1] is address, uio_in[6:3] is
+write data, and uio_in[7] is the active-high BusKit DLL-domain reset. Stall,
+acknowledge and error appear on uio_out[0], uio_out[1] and uio_out[2], with
+read data on uio_out[6:3]. DLL clk1 clocks the BusKit slave domain. Hold both
+BusKit resets asserted during DLL configuration/startup and disable clk1 XOR
+mixing when using this clock. Timing targets are 100 MHz fabric and 250 MHz
+DLL slave clock. BusKit logic is placed as standard cells beside the DLL.
+
+Testing requires an external reference/configuration clock, GPIO control and
+an oscilloscope or frequency counter for the clock outputs. Allow oscillator
+startup and controller acquisition before measuring frequency. The project
+includes RTL integration tests, DLL gate-level tests with SDF back-annotation,
+oscillator transistor-level SPICE characterization, and clock-mux Icarus and
+SPICE handover tests. Simulation scope and results are documented in the macro
+READMEs. The hardware uses VPWR and VGND, with no separate VAPWR domain.
+
+Build the DLL and wrapper from the repository root with make build-top after
+loading the EDA tools and sourcing env.sh. See
+macros/heichips26_multimode_dll/README.md for the full interface, configuration
+encoding, operating limits and reproducible simulation commands.
 
 
 ### Intel 1103 Replica
