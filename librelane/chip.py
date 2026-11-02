@@ -468,7 +468,7 @@ module fabric_wrapper #(
             print("""    input                                sys_reset_i,\n""")
 
             print(f'    // Enable all power gates')
-            print("""    input                                enable_pgs_i,""")
+            print("""    input                                enable_pgs_i,\n""")
 
             print(f'    // Analog pins')
             for i, (coords, projects) in enumerate(slot_map.items()):

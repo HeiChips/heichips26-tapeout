@@ -47,9 +47,13 @@ module heichips26_core (
     inout wire heichips26_instance_small_4_analog_1, // heichips26_vcr analog_1
     inout wire heichips26_instance_small_4_analog_2, // heichips26_vcr analog_2
 
-    inout wire heichips26_instance_small_5_analog_0, // heichips26_FAIf analog_0
-    inout wire heichips26_instance_small_5_analog_1, // heichips26_FAIf analog_1
-    inout wire heichips26_instance_small_5_analog_2, // heichips26_FAIf analog_2
+    inout wire heichips26_instance_small_5_analog_0, // heichips26_multimode_dll analog_0
+    inout wire heichips26_instance_small_5_analog_1, // heichips26_multimode_dll analog_1
+    inout wire heichips26_instance_small_5_analog_2, // heichips26_multimode_dll analog_2
+
+    inout wire heichips26_instance_small_6_analog_0, // heichips26_FAIf analog_0
+    inout wire heichips26_instance_small_6_analog_1, // heichips26_FAIf analog_1
+    inout wire heichips26_instance_small_6_analog_2, // heichips26_FAIf analog_2
 
     // I/Os FPGA
     input  wire [32-1:0] fabric_io_in_i,
@@ -344,6 +348,10 @@ module heichips26_core (
         .heichips26_instance_small_5_analog_0 (heichips26_instance_small_5_analog_0),
         .heichips26_instance_small_5_analog_1 (heichips26_instance_small_5_analog_1),
         .heichips26_instance_small_5_analog_2 (heichips26_instance_small_5_analog_2),
+
+        .heichips26_instance_small_6_analog_0 (heichips26_instance_small_6_analog_0),
+        .heichips26_instance_small_6_analog_1 (heichips26_instance_small_6_analog_1),
+        .heichips26_instance_small_6_analog_2 (heichips26_instance_small_6_analog_2),
 
         // I/Os North
         .io_north_in_i  (fabric_io_north_in_i),

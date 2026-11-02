@@ -26,6 +26,7 @@ module fabric_wrapper #(
 
     // Enable all power gates
     input                                enable_pgs_i,
+
     // Analog pins
     inout wire heichips26_instance_small_3_analog_0, // heichips26_ook_top analog_0
     inout wire heichips26_instance_small_3_analog_1, // heichips26_ook_top analog_1
@@ -35,9 +36,13 @@ module fabric_wrapper #(
     inout wire heichips26_instance_small_4_analog_1, // heichips26_vcr analog_1
     inout wire heichips26_instance_small_4_analog_2, // heichips26_vcr analog_2
 
-    inout wire heichips26_instance_small_5_analog_0, // heichips26_FAIf analog_0
-    inout wire heichips26_instance_small_5_analog_1, // heichips26_FAIf analog_1
-    inout wire heichips26_instance_small_5_analog_2, // heichips26_FAIf analog_2
+    inout wire heichips26_instance_small_5_analog_0, // heichips26_multimode_dll analog_0
+    inout wire heichips26_instance_small_5_analog_1, // heichips26_multimode_dll analog_1
+    inout wire heichips26_instance_small_5_analog_2, // heichips26_multimode_dll analog_2
+
+    inout wire heichips26_instance_small_6_analog_0, // heichips26_FAIf analog_0
+    inout wire heichips26_instance_small_6_analog_1, // heichips26_FAIf analog_1
+    inout wire heichips26_instance_small_6_analog_2, // heichips26_FAIf analog_2
 
     // I/Os North
     input  [FABRIC_NUM_IO_NORTH-1:0]      io_north_in_i,
@@ -1505,7 +1510,7 @@ module fabric_wrapper #(
             .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) heichips26_example_small heichips26_instance_small_7 (
+    (* keep *) heichips26_multimode_dll heichips26_instance_small_5 (
             .clk        (tt_project_12_clk),
             .rst_n      (tt_project_12_rst_n),
             .ena        (tt_project_12_ena),
@@ -1513,26 +1518,29 @@ module fabric_wrapper #(
             .uio_in     (tt_project_12_uio_in),
             .uo_out     (tt_project_12_uo_out),
             .uio_out    (tt_project_12_uio_out),
-            .uio_oe     (tt_project_12_uio_oe)
+            .uio_oe     (tt_project_12_uio_oe),
+            .analog_0 (heichips26_instance_small_5_analog_0),
+            .analog_1 (heichips26_instance_small_5_analog_1),
+            .analog_2 (heichips26_instance_small_5_analog_2)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_7_pg_lv (
+    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_5_pg_lv (
             `ifdef USE_POWER_PINS
             .VPWR (VPWR),
             .GND  (VGND),
             .GPWR (),
             `endif
-            .CTRL (tt_project_12_enable_power && configured_i && enable_pgs_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_7_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_5_pg_hv (
             `ifdef USE_POWER_PINS
             .VAPWR (VAPWR),
             .VDPWR (VPWR),
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_12_enable_power && configured_i && enable_pgs_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     // SRAM 14 instance
@@ -1559,7 +1567,7 @@ module fabric_wrapper #(
     );
 
     
-    (* keep *) heichips26_FAIf heichips26_instance_small_5 (
+    (* keep *) heichips26_FAIf heichips26_instance_small_6 (
             .clk        (tt_project_15_clk),
             .rst_n      (tt_project_15_rst_n),
             .ena        (tt_project_15_ena),
@@ -1568,12 +1576,12 @@ module fabric_wrapper #(
             .uo_out     (tt_project_15_uo_out),
             .uio_out    (tt_project_15_uio_out),
             .uio_oe     (tt_project_15_uio_oe),
-            .analog_0 (heichips26_instance_small_5_analog_0),
-            .analog_1 (heichips26_instance_small_5_analog_1),
-            .analog_2 (heichips26_instance_small_5_analog_2)
+            .analog_0 (heichips26_instance_small_6_analog_0),
+            .analog_1 (heichips26_instance_small_6_analog_1),
+            .analog_2 (heichips26_instance_small_6_analog_2)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_5_pg_lv (
+    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_6_pg_lv (
             `ifdef USE_POWER_PINS
             .VPWR (VPWR),
             .GND  (VGND),
@@ -1582,7 +1590,7 @@ module fabric_wrapper #(
             .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_5_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_6_pg_hv (
             `ifdef USE_POWER_PINS
             .VAPWR (VAPWR),
             .VDPWR (VPWR),
@@ -1592,7 +1600,7 @@ module fabric_wrapper #(
             .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) heichips26_daftASIC heichips26_instance_small_6 (
+    (* keep *) heichips26_daftASIC heichips26_instance_small_7 (
             .clk        (tt_project_16_clk),
             .rst_n      (tt_project_16_rst_n),
             .ena        (tt_project_16_ena),
@@ -1603,7 +1611,7 @@ module fabric_wrapper #(
             .uio_oe     (tt_project_16_uio_oe)
     );
 
-    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_6_pg_lv (
+    (* keep *) hm_pg_lv_17x200 heichips26_instance_small_7_pg_lv (
             `ifdef USE_POWER_PINS
             .VPWR (VPWR),
             .GND  (VGND),
@@ -1612,7 +1620,7 @@ module fabric_wrapper #(
             .CTRL (tt_project_16_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_6_pg_hv (
+    (* keep *) hm_pg_hv_17x200 heichips26_instance_small_7_pg_hv (
             `ifdef USE_POWER_PINS
             .VAPWR (VAPWR),
             .VDPWR (VPWR),
