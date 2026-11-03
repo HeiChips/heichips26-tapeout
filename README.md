@@ -40,6 +40,7 @@ The following user projects are included:
 | FABulous Analogue Interface | small | X5Y7 | Analogue mixed-signal peripherals | [Repo](https://github.com/HeiChips/heichips26-FAIfplus) |
 | E2Spike | large | X0Y7 | This project develops a compact edge AI accelerator for end-to-end spiking neural network inference and on-chip learning, supporting operators such as depthwise convolution, pointwise convolution, and fully connected layers. It also explores SDSP-based lifelong learning and always-on applications such as seizure detection and fall detection. | [Repo](https://github.com/HeiChips/heichips26-e2spike) |
 | Multimode DLL | small | X5Y4 | Standard-cell clock generator with a tunable ring oscillator, automatic frequency control, phase-selectable divided outputs, a glitch-free clock mux, and a CrocoScale Wishbone CDC bridge. | [Repo](https://github.com/HeiChips/heichips26-multimode_dll) |
+| SRAM Cell Test | tiny | X5Y9/1 | A test of using sram cells directly as configuration memory. | [Repo](https://github.com/HeiChips/heichips26-sramcell-test) |
 | Intel 1103 Replica | tiny | X5Y1/0 | This project attempts to recreate the first ever commercially available DRAM memory, the Intel 1103. | [Repo](https://github.com/HeiChips/heichips26_dram_replica) |
 | RiMaX | large | X0Y9 | This project uses a simple riscv core and is equipted with an approximate floating point multiplier | [Repo](https://github.com/HeiChips/heichips26-rimax) |
 | HeiScore | tiny | X5Y9/0 | A noRTL written implementation of Pong. | [Repo](https://github.com/HeiChips/heichips26-heiscore) |
@@ -303,6 +304,44 @@ Build the DLL and wrapper from the repository root with make build-top after
 loading the EDA tools and sourcing env.sh. See
 macros/heichips26_multimode_dll/README.md for the full interface, configuration
 encoding, operating limits and reproducible simulation commands.
+
+
+### SRAM Cell Test
+
+A test of using sram cells directly as configuration memory.
+
+<p align="center">
+  <a href="img/user_projects/heichips26_sramcell_test.png">
+    <img src="img/user_projects/heichips26_sramcell_test.png" alt="Render of heichips26_sramcell_test" width=40%>
+  </a>
+</p>
+
+Top cell: `heichips26_sramcell_test`
+Slot size: `tiny`
+Analog pins: `3`
+Uses VAPRW: `False`
+
+**Team members:**
+
+- Leo Moser
+
+**Description:**
+
+This project uses a single column of a 6T SRAM bitcell array directly connected to the project outputs, to be evaluated as configuration memory for an FPGA.
+
+The SRAM bitcell array is generated using [c4m-arrakeen-memgen](https://gitlab.com/Chips4Makers/c4m-arrakeen-memgen/-/tree/lut), more specifically, using the [lut branch](https://gitlab.com/Chips4Makers/c4m-arrakeen-memgen/-/tree/lut) and running `uv run gen_16x1.py`.
+
+Two macros are implemented using LibreLane in order to select the row to write to (`wl`) and to write the bit data (`bl`/`bl_n`). Two `sg13cmos5l_ebufn_8` are used to write to `bl` and `bl_n`.
+
+The array holds 16 bits and can be accessed as follows:
+
+- `io_in[0]` - we_i (enable the write buffers)
+- `ui_in[1]` - in_i (the bit to write)
+- `ui_in[5:2]` - addr_i (address of the bitcell array)
+- `uo_out[7:0]` - `bit[8:15]`
+- `uio_out[7:0]` - `bit[0:7]`
+
+Additionally, `bit[13:15]` are connected to `analog_[2:0]` in reverse order.
 
 
 ### Intel 1103 Replica

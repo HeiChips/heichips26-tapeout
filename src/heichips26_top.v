@@ -359,7 +359,9 @@ module heichips26_top #(
         .heichips26_instance_small_6_analog_1 (analog_routing[4]),
         .heichips26_instance_small_6_analog_2 (analog_routing[5]),
 
-
+        .heichips26_instance_tiny_1_1_analog_0 (analog_routing[0]),
+        .heichips26_instance_tiny_1_1_analog_1 (analog_routing[1]),
+        .heichips26_instance_tiny_1_1_analog_2 (analog_routing[2]),
 
         // I/Os FPGA
         .fabric_io_in_i     (fpga_io_PAD2CORE),
