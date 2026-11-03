@@ -284,6 +284,10 @@ RSZ_DONT_TOUCH_RX: "analog_routing"
 
 CTS_APPLY_NDR: none #full
 
+# Increase hold margin slightly
+PL_RESIZER_HOLD_SLACK_MARGIN: 0.15
+GRT_RESIZER_HOLD_SLACK_MARGIN: 0.8
+
 ERROR_ON_PDN_VIOLATIONS: false
 
 # Override bondpad name
