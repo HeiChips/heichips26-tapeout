@@ -8,16 +8,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1792224803,
-        "narHash": "sha256-ESrLNYiXVE6iBddaUVnon7WTFxk3+zv6oRaPzpmY4dA=",
+        "lastModified": 1792594071,
+        "narHash": "sha256-IEeNYjmA7geiHCVzjadDzy77STbbWmie47HF63bqMqk=",
         "owner": "fossi-foundation",
         "repo": "ciel",
-        "rev": "e180507a4190462d65cdded4448eb4f7bd2f30fa",
+        "rev": "d2eb3cf1c43f0f8522e93c537f8fca50781216d5",
         "type": "github"
       },
       "original": {
         "owner": "fossi-foundation",
-        "ref": "3.1.0",
+        "ref": "3.2.0",
         "repo": "ciel",
         "type": "github"
       }
@@ -68,16 +68,16 @@
         "nix-eda": "nix-eda"
       },
       "locked": {
-        "lastModified": 1792736967,
-        "narHash": "sha256-C6lVfwW4FlFaZMTBmpB3kWE/OOkgeBjJ72IzZBxrqiU=",
+        "lastModified": 1793692187,
+        "narHash": "sha256-3+eaD09qGhY7BYnJuVTqhCip38edMCuArdPOl9ISSLo=",
         "owner": "librelane",
         "repo": "librelane",
-        "rev": "19596af157c9daf30a8463a6897c26b5a15ec3be",
+        "rev": "4756642d8289188507dcbb33cbaa435df967cd9f",
         "type": "github"
       },
       "original": {
         "owner": "librelane",
-        "ref": "dev",
+        "ref": "donn/openroad_26q4",
         "repo": "librelane",
         "type": "github"
       }
