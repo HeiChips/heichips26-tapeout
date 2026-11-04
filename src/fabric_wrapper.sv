@@ -44,6 +44,10 @@ module fabric_wrapper #(
     inout wire heichips26_instance_small_6_analog_1, // heichips26_FAIf analog_1
     inout wire heichips26_instance_small_6_analog_2, // heichips26_FAIf analog_2
 
+    inout wire heichips26_instance_tiny_1_1_analog_0, // heichips26_sramcell_test analog_0
+    inout wire heichips26_instance_tiny_1_1_analog_1, // heichips26_sramcell_test analog_1
+    inout wire heichips26_instance_tiny_1_1_analog_2, // heichips26_sramcell_test analog_2
+
     // I/Os North
     input  [FABRIC_NUM_IO_NORTH-1:0]      io_north_in_i,
     output [FABRIC_NUM_IO_NORTH-1:0]      io_north_out_o,
@@ -1672,7 +1676,7 @@ module fabric_wrapper #(
             .CTRL (tt_project_17_enable_power && configured_i && enable_pgs_i)
     );
 
-    (* keep *) heichips26_example_tiny heichips26_instance_tiny_1_1 (
+    (* keep *) heichips26_sramcell_test heichips26_instance_tiny_1_1 (
             .clk        (tt_project_17_clk),
             .rst_n      (tt_project_17_rst_n),
             .ena        (tt_project_17_ena),

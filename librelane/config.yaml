@@ -42,7 +42,7 @@ HEICHIPS_SLOTS:
     'X5Y6': [["RM_IHPSG13_1P_1024x32_c2_bm_bist", "heichips26_instance_sram_0"]]
     'X5Y7': [['heichips26_FAIf', 'heichips26_instance_small_6']]
     'X5Y8': [['heichips26_daftASIC', 'heichips26_instance_small_7']]
-    'X5Y9': [['heichips26_heiscore', 'heichips26_instance_tiny_1_0'], ['heichips26_example_tiny', 'heichips26_instance_tiny_1_1']]
+    'X5Y9': [['heichips26_heiscore', 'heichips26_instance_tiny_1_0'], ['heichips26_sramcell_test', 'heichips26_instance_tiny_1_1']]
 
 PAD_CFG: dir::pad_cfg.tcl
 
@@ -283,6 +283,10 @@ DRT_ASSIGN_NDR:
 RSZ_DONT_TOUCH_RX: "analog_routing"
 
 CTS_APPLY_NDR: none #full
+
+# Increase hold margin slightly
+PL_RESIZER_HOLD_SLACK_MARGIN: 0.15
+GRT_RESIZER_HOLD_SLACK_MARGIN: 0.8
 
 ERROR_ON_PDN_VIOLATIONS: false
 

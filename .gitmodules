@@ -46,3 +46,6 @@
 [submodule "ip/user_projects/heichips26-multimode_dll"]
 	path = ip/user_projects/heichips26-multimode_dll
 	url = ../../HeiChips/heichips26-multimode_dll.git
+[submodule "ip/user_projects/heichips26-sramcell-test"]
+	path = ip/user_projects/heichips26-sramcell-test
+	url = ../../HeiChips/heichips26-sramcell-test
