@@ -268,7 +268,15 @@ def custom_pdn(instances, reader):
         assert project_inst
         assert pg_lv_inst
         assert pg_hv_inst
-        
+
+        # Check LEF origin is (0, 0)
+        assert project_inst.getMaster().getOrigin()[0] == 0
+        assert project_inst.getMaster().getOrigin()[1] == 0
+        assert pg_lv_inst.getMaster().getOrigin()[0] == 0
+        assert pg_lv_inst.getMaster().getOrigin()[1] == 0
+        assert pg_hv_inst.getMaster().getOrigin()[0] == 0
+        assert pg_hv_inst.getMaster().getOrigin()[1] == 0
+
         x_min = project_inst.getBBox().xMin()
         y_min = project_inst.getBBox().yMin()
         x_max = project_inst.getBBox().xMax()
