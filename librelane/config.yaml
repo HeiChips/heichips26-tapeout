@@ -570,22 +570,6 @@ MAGIC_EXT_ABSTRACT_CELLS:
 - heichips26_daftASIC
 - heichips26_heiscore
 - heichips26_example_tiny
-- ^heichips26_event_snn$
-- ^heichips26_ballmer_peak_detector$
-- ^heichips26_dna_sequencer$
-- ^heichips26_noise_gen$
-- ^heichips26_e2spike$
-- ^heichips26_RiMaX$
-- ^heichips26_dram_replica$
-- ^heichips26_minimal_multicore_processor$
-- ^heichips26_ook_top$
-- ^heichips26_vcr$
-- ^heichips26_example_small$
-- ^RM_IHPSG13_1P_1024x32_c2_bm_bist$
-- ^heichips26_FAIf$
-- ^heichips26_daftASIC$
-- ^heichips26_heiscore$
-- ^heichips26_example_tiny$
 
 # Image render settings
 KLAYOUT_RENDER_RESOLUTION: 4096

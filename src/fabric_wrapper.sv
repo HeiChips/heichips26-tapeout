@@ -1684,7 +1684,10 @@ module fabric_wrapper #(
             .uio_in     (tt_project_17_uio_in),
             .uo_out     (tt_project_17_1_uo_out),
             .uio_out    (tt_project_17_1_uio_out),
-            .uio_oe     (tt_project_17_1_uio_oe)
+            .uio_oe     (tt_project_17_1_uio_oe),
+            .analog_0 (heichips26_instance_tiny_1_1_analog_0),
+            .analog_1 (heichips26_instance_tiny_1_1_analog_1),
+            .analog_2 (heichips26_instance_tiny_1_1_analog_2)
     );
 
     (* keep *) hm_pg_lv_17x200 heichips26_instance_tiny_1_1_pg_lv (
@@ -1693,7 +1696,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_17_enable_power && configured_i && enable_pgs_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
     (* keep *) hm_pg_hv_17x200 heichips26_instance_tiny_1_1_pg_hv (
@@ -1703,7 +1706,7 @@ module fabric_wrapper #(
             .GND   (VGND),
             .GPWR  (),
             `endif
-            .CTRL (tt_project_17_enable_power && configured_i && enable_pgs_i)
+            .CTRL (tt_project_2_enable_power && configured_i && enable_pgs_i)
     );
 
 

@@ -13,13 +13,16 @@ classifiers = [
 ]
 
 include = [
-    "scripts/custom_pdn.py",
+    "scripts/check_power_grid.tcl",
+    "scripts/connect_ioring.py",
+    "scripts/connect_iovdd.py",
     "scripts/convert_oasis.py",
+    "scripts/custom_pdn.py",
 ]
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-librelane = ">=2.0.0"
+librelane = ">=3.0.0"
 
 [build-system]
 requires = ["poetry-core"]

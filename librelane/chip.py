@@ -760,8 +760,17 @@ module fabric_wrapper #(
             .uio_in     (tt_project_{i}_uio_in),
             .uo_out     (tt_project_{i}_1_uo_out),
             .uio_out    (tt_project_{i}_1_uio_out),
-            .uio_oe     (tt_project_{i}_1_uio_oe)""")
-                            print(f"""    );\n""")
+            .uio_oe     (tt_project_{i}_1_uio_oe)""", end="")
+            
+                            if module in user_projects_metadata:
+                                if user_projects_metadata[module]["analog-pins"] > 0:
+                                    print(",")
+                                    for i in range(user_projects_metadata[module]["analog-pins"]):
+                                        print(f"            .analog_{i} ({instance}_analog_{i})", end="")
+                                        if i < user_projects_metadata[module]["analog-pins"]-1:
+                                            print(",")
+            
+                            print(f"""\n    );\n""")
 
                             print(f"""    (* keep *) {pg_lv} {instance}_pg_lv (
             `ifdef USE_POWER_PINS

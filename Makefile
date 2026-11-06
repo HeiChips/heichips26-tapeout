@@ -5,7 +5,7 @@ TOP = heichips26_top
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/IHP-Open-PDK
 PDK ?= ihp-sg13cmos5l
-PDK_HASH ?= 7048727554150e9e6fcfbd46d5d1f3c3c8e1a6b1
+PDK_HASH ?= 408802277be939b8991c799880a2f6cdd6e51826
 
 PDK_BRANCH ?= heichips26
 
@@ -150,3 +150,11 @@ precheck:
 	PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 ${PDK_ROOT}/${PDK}/libs.tech/klayout/tech/drc/run_drc.py \
 	--minimum_drc --no_recommended --mp=$$(nproc) --density_thr=$$(nproc) --path=final/gds/${TOP}.gds
 .PHONY: precheck
+
+extract:
+	cd scripts; bash run_extract.sh
+.PHONY: precheck
+
+lvs:
+	cd scripts; bash run_lvs.sh
+.PHONY: lvs

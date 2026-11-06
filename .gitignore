@@ -21,11 +21,14 @@ __pycache__/
 extract_script.tcl
 extraction/
 feedback.txt
+scripts/heichips26_top.spice
+scripts/extfiles
 
 lvs_script.tcl
 netgen_lvs.json
 netgen_lvs.rpt
 out.def
+scripts/comp_heichips26_top.out
 
 !bitStreamSpec.bin
 

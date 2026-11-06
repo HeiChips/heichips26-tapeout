@@ -7,7 +7,7 @@
 }:
 let
   self = buildPythonPackage {
-    name = "librelane_plugin_greyhound";
+    name = "librelane_plugin_heichips";
 
     version = (builtins.fromTOML (builtins.readFile ./pyproject.toml)).tool.poetry.version;
 
