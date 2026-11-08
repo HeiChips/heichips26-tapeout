@@ -1,11 +1,11 @@
-# HeiChips 2026 Tapeout [WIP!]
+# HeiChips 2026 Tapeout
 
 ![heichips26.jpg](img/heichips26.jpg)
 
-This repository contains the chip for the [HeiChips Summer School 2026](https://heichips.github.io/) targeting [SG13CMOS5L](https://dk.ihp-microelectronics.com/OpenSourceRequest.php) from IHP. It includes several designs created during the Hackathon all connected to a common eFPGA fabric in the center.
+This repository contains the chip for the [HeiChips Summer School 2026](https://heichips.github.io/), targeting [SG13CMOS5L](https://dk.ihp-microelectronics.com/OpenSourceRequest.php) from IHP. It includes several designs created during the Hackathon, all of which are connected to a central eFPGA fabric.
 Thanks to [FABulous](https://github.com/FPGA-Research/FABulous), the user bitstream for the FPGA can be generated using the [Yosys](https://github.com/YosysHQ/yosys) and [nextpnr](https://github.com/YosysHQ/nextpnr) toolchain.
 
-The chip is designed with open source EDA tools and the [IHP Open Source PDK](https://github.com/IHP-GmbH/IHP-Open-PDK).
+The chip has been designed using open-source EDA tools and the [IHP Open Source PDK](https://github.com/IHP-GmbH/IHP-Open-PDK).
 
 <p align="center">
   <a href="img/heichips26_top.png">
@@ -15,7 +15,7 @@ The chip is designed with open source EDA tools and the [IHP Open Source PDK](ht
 
 ## Feature Overview
 
-The chip includes several user submitted designs from the HeiChips 2026 Hackathon. In the center of the chip is an eFPGA which allows the user projects to connect to each other, utilize the SRAM, or connect to the external I/Os.
+The chip includes numerous user-submitted designs from the HeiChips 2026 Hackathon. An eFPGA is located in the center of the chip and allows user projects to connect to each other, utilize the SRAM, or access external I/Os.
 
 - FABulous eFPGA
   - 32x `IOBUF`
@@ -808,27 +808,29 @@ If passive SPI mode is selected, the bitstream can be supplied via an external S
 
 ## Specification
 
-The IO voltage (IOVDD) should be 3.3V.
+The I/O voltage (IOVDD) should be 3.3V.
 The core voltage (VDD) should be 1.2V.
 
-The top level, including the configuration logic, was implemented for the following corners at 80MHz and is free of setup and hold violations.
+The top level, including the configuration logic, is setup and hold violation free at up to 55.5MHz for the following corners:
 
-- nom_typ_1p20V_25C
-- nom_fast_1p32V_m40C
-- nom_slow_1p08V_125C
-- nom_typ_1p50V_25C
-- nom_fast_1p65V_m40C
-- nom_slow_1p35V_125C
+- `nom_typ_1p20V_25C`
+- `nom_fast_1p32V_m40C`
+- `nom_slow_1p08V_125C`
+- `nom_typ_1p50V_25C`
+- `nom_fast_1p65V_m40C`
+- `nom_slow_1p35V_125C`
 
-Using a core voltage higher than 1.65V (while remaining within the safe operating area) may still work, but could lead to hold violations in the configuration logic. If that happens, you can try increasing the voltage after configuration of the FPGA is complete.
+Using a core voltage higher than 1.65V (while remaining within the safe operating area) may still work, but could lead to hold violations in the configuration logic. If that happens, you can try increasing the voltage *after* configuration of the FPGA is complete.
 
 ## Pinout
 
+<!--
 <p align="center">
   <a href="img/heichips26_bonding.png">
     <img src="img/heichips26_bonding.png" alt="bonding diagram" width=65%>
   </a>
 </p>
+-->
 
 | Pin name                | Description                   |
 |-------------------------|-------------------------------|
@@ -844,10 +846,13 @@ Using a core voltage higher than 1.65V (while remaining within the safe operatin
 | fpga_miso               | SPI: controller in, peripheral out. |
 | fpga_config_trigger     | If high, trigger a reconfiguration in active mode from one of 16 slots of the SPI flash. |
 | fpga_config_slot[3:0]   | Set selected slot for the FPGA configuration. |
-| analog[2:0]             | Analog pins of `instance_small_3`. |
-| analog[5:3]             | Analog pins of `instance_small_4`. |
-| analog[8:6]             | Analog pins of `instance_small_5`. |
-| analog[16:9]            | Currently unused. |
+| analog[15:13]           | Analog pins of `heichips26_ook_top`. |
+| analog[12:10]           | Analog pins of `heichips26_vcr`. |
+| analog[9:7]             | Analog pins of `heichips26_multimode_dll`. |
+| analog[5:3]             | Analog pins of `heichips26_FAIf`. |
+| analog[2:0]             | Analog pins of `heichips26_sramcell_test`. |
+| analog[6]               | Unused. |
+| analog[16]              | Unused. |
 | fpga_io[31:0]           | I/O pins which can be controlled by the FPGA user project. |
 
 ## Building User Designs for the eFPGA
@@ -965,8 +970,8 @@ The chip is licensed under the Apache 2.0 license. This license may *not* apply 
 
 ## Acknowledgements
 
-The chip was designed by Leo Moser for the HeiChips Summer School 2026.
+This chip was designed by Leo Moser for the HeiChips Summer School 2026.
 
-The power gates for the user projects were designed by Daniel Arevalos Ortiz based on the TT power gates designed by Sylvain Munaut.
+The power gates for the user projects were designed by Daniel Arevalos Ortiz and are based on the TT power gates designed by Sylvain Munaut.
 
 Thanks to [Heidelberg University](https://www.uni-heidelberg.de/en), [BMFTR](https://www.bmftr.bund.de/) and [Chipdesign Germany](https://www.chipdesign-germany.de/en/) for their financial support, which enabled the tapeout of the chip.
