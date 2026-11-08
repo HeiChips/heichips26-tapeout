@@ -9,7 +9,7 @@ The chip has been designed using open-source EDA tools and the [IHP Open Source 
 
 <p align="center">
   <a href="img/heichips26_top.png">
-    <img src="img/heichips26_top_small.png" alt="chip layout" width=40%>
+    <img src="img/heichips26_top_small.png" alt="chip layout" width=55%>
   </a>
 </p>
 
