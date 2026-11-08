@@ -185,7 +185,7 @@ GRT_ALLOW_CONGESTION: true
 # Clock
 CLOCK_PORT: fpga_clk_PAD
 CLOCK_NET: fpga_clk/p2c
-CLOCK_PERIOD: 15 # 15ns = ~66 MHz
+CLOCK_PERIOD: 18 # 18ns = 55.5 MHz
 
 # Add additional corners
 CELL_LIBS:
