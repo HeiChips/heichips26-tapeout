@@ -27,7 +27,18 @@ readnet spice sg13cmos5l_io.spice \$circuit2
 readnet spice ${PDK_ROOT}/${PDK}/libs.ref/sg13cmos5l_sram/cdl/RM_IHPSG13_1P_1024x32_c2_bm_bist.cdl \$circuit2
 
 # Here also the layout has been replaced with an abstract view, read in for the pins
-readnet spice ../fabrics/classic_fabric_heichips26/macro/ihp-sg13cmos5l/spice/classic_fabric_heichips26.spice \$circuit2
+### readnet spice ../fabrics/classic_fabric_heichips26/macro/ihp-sg13cmos5l/spice/classic_fabric_heichips26.spice \$circuit2
+
+# Power gates
+readnet spice ../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/spice/hm_pg_hv_17x200.spice \$circuit2
+readnet spice ../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/spice/hm_pg_hv_17x415.spice \$circuit2
+readnet spice ../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/spice/hm_pg_lv_17x200.spice \$circuit2
+readnet spice ../ip/hm-openpdk-library/ihp-sg13cmos5l/libs.ref/hm_pg/spice/hm_pg_lv_17x415.spice \$circuit2
+
+property sg13_hv_nmos delete mm_ok
+property sg13_lv_nmos delete mm_ok
+property sg13_hv_pmos delete mm_ok
+property sg13_lv_pmos delete mm_ok
 
 readnet verilog ../final/pnl/${PROJECT}.pnl.v \$circuit2
 
