@@ -185,7 +185,7 @@ GRT_ALLOW_CONGESTION: true
 # Clock
 CLOCK_PORT: fpga_clk_PAD
 CLOCK_NET: fpga_clk/p2c
-CLOCK_PERIOD: 15 # 15ns = ~66 MHz
+CLOCK_PERIOD: 18 # 18ns = 55.5 MHz
 
 # Add additional corners
 CELL_LIBS:
@@ -278,6 +278,9 @@ DRT_ASSIGN_NDR:
   # Analog traces for internal project
   #"^internal_analog_pin0_PADRES$": NDR_0p4
   "analog_routing": NDR_analog
+
+DRT_DISABLE_AUTO_TAPER:
+- "analog_routing"
 
 # Analog traces for internal project
 RSZ_DONT_TOUCH_RX: "analog_routing"
