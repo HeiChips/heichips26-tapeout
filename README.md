@@ -32,6 +32,12 @@ The chip includes numerous user-submitted designs from the HeiChips 2026 Hackath
 
 The following user projects are included:
 
+<p align="center">
+  <a href="img/heichips26_projects.png">
+    <img src="img/heichips26_projects.png" alt="heichips projects" width=90%>
+  </a>
+</p>
+
 <!--- project_table_start -->
 
 | Project       | Size          | Location      | Description  | Link |
@@ -824,13 +830,13 @@ Using a core voltage higher than 1.65V (while remaining within the safe operatin
 
 ## Pinout
 
-<!--
+
 <p align="center">
   <a href="img/heichips26_bonding.png">
     <img src="img/heichips26_bonding.png" alt="bonding diagram" width=65%>
   </a>
 </p>
--->
+
 
 | Pin name                | Description                   |
 |-------------------------|-------------------------------|
