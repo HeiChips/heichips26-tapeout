@@ -832,8 +832,8 @@ Using a core voltage higher than 1.65V (while remaining within the safe operatin
 
 
 <p align="center">
-  <a href="img/heichips26_bonding.png">
-    <img src="img/heichips26_bonding.png" alt="bonding diagram" width=65%>
+  <a href="img/heichips26_bonding_diagram.png">
+    <img src="img/heichips26_bonding_diagram.png" alt="bonding diagram" width=65%>
   </a>
 </p>
 
